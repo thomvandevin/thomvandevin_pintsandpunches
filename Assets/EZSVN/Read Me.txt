@@ -1,0 +1,5 @@
+All functions are in Assets/SVN menu. 
+<Action> All menus do the action for the whole project folder, For example commit all will commit the whole project.
+<action> menus will do the action just on the selected itme in project folder. For example Commit will only commit selected item in project view.
+
+email your questions to info@mindhammergames.com
