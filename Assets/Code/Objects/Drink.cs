@@ -13,7 +13,6 @@ public class Drink : MonoBehaviour {
     public Vector2 velocity;
     public float gravity;
     //public SoundEffect sfx_drink_floor;
-    private bool doOnce;
 
     private bool isGrabbed;
     public bool IsGrabbed { get { return isGrabbed; } set { isGrabbed = value; } }
@@ -48,7 +47,6 @@ public class Drink : MonoBehaviour {
         }
 
         //sfx_drink_floor = Engine.Loader.SoundEffects["Drink_floor_" + Engine.Rand.Next(1, 4).ToString()];
-        doOnce = true;
 
         //flare = new Flare(transform.position);
         showFlare = false;
