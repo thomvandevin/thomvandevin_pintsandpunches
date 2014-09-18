@@ -22,16 +22,21 @@ public class Entity : MonoBehaviour {
     public bool IsDead { get { return isDead; } set { isDead = value; } }
 
 	// Use this for initialization
-	public Entity (Vector2 pos, int maxHP) 
+	public Entity () 
+    {
+
+	}
+
+    public void SetEntity(Vector2 pos, int maxHP)
     {
         maxHealth = maxHP;
         health = maxHealth;
 
         isPlayer = false;
         isDead = false;
-	}
+    }
 
-    public Entity(Vector2 pos, string tex, int maxHp, bool isPlayer)
+    public void SetEntity(Vector2 pos, string tex, int maxHp, bool isPlayer)
     {
         maxHealth = maxHp;
         health = maxHealth;

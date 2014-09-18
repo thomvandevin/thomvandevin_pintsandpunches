@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using GamepadInput;
 
 public class Leprechaun : Entity {
-
-    [HideInInspector]
 
     public enum PlayerStates
     {
@@ -27,8 +26,12 @@ public class Leprechaun : Entity {
         NONE
     }
 
+    [HideInInspector]
+
     public Dictionary<string, bool> dicStringBool;
     public Dictionary<string, PlayerStates> dicStringState;
+    public Dictionary<int, GamePad.Index> controllerIndex;
+    public GamePad.Index gamePadIndex;
 
     public Player playerObject;
     public PlayerStates playerState;
@@ -46,12 +49,18 @@ public class Leprechaun : Entity {
     //public RespawnButton respawnButton;
     //public DrunkBubbles drunkBubbles;
 
-    public Leprechaun(Vector2 pos, int controllerNumber, int chosenCharacter, Player playerobject, int killsAmount)
-        :base(pos, "filler", 30, true) 
+    public Animator animator;
+    
+    public Leprechaun()
     {
-        this.controllerNumber = controllerNumber;
 
-        playerObject = playerobject;
+    }
+
+    public void SetLeprechaun(Vector2 pos, int controllerNumber, int chosenCharacter, Player playerObject, int killsAmount)
+    {
+        this.controllerNumber = 1;
+
+        //playerObject = playerobject;
         kills = killsAmount;
 
         this.chosenCharacter = chosenCharacter;
@@ -61,7 +70,7 @@ public class Leprechaun : Entity {
         gravity = 0.5f;
         resistance = 2f;
         velocity = new Vector2(0, 5);
-        maxVelocity = new Vector2(3, 20);
+        maxVelocity = new Vector2(6, 20);
         lastVelocity = new Vector2(0, 5);
         skipNextMove = false;
         fallTroughBar = false;
@@ -89,6 +98,10 @@ public class Leprechaun : Entity {
         //respawnButton = new RespawnButton(rbuttonPos);
         //drunkBubbles = new DrunkBubbles(GetPosition, chosenPlayerIndex);
 
+        animator = GetComponent<Animator>();
+        transform.position = pos;
+        SetEntity(pos, "filler", 30, true);
+
         isJumping = false;
         isFalling = false;
         isWalking = false;
@@ -101,6 +114,7 @@ public class Leprechaun : Entity {
         isIdle = true;
 
         SetDictionary();
+        gamePadIndex = controllerIndex[controllerNumber];
 
     }
 
@@ -125,13 +139,19 @@ public class Leprechaun : Entity {
         dicStringState.Add("IsDead", PlayerStates.DEAD);
         dicStringState.Add("isBlocking", PlayerStates.BLOCKING);
         dicStringState.Add("isDrinking", PlayerStates.DRINKING);
+
+        controllerIndex.Add(0, GamePad.Index.Any);
+        controllerIndex.Add(1, GamePad.Index.One);
+        controllerIndex.Add(2, GamePad.Index.Two);
+        controllerIndex.Add(3, GamePad.Index.Three);
+        controllerIndex.Add(4, GamePad.Index.Four);
     }
 	
 	// Update is called once per frame
 	public void Update () 
     {
-        if (Global.XboxInput.GetButtonDown(1,7))
-            Global.GAME_RESET = true;
+        //if (Global.XboxInput.GetButtonDown(1,0))
+        //    Global.GAME_RESET = true;
 
         if (kills >= 5)
         {
@@ -144,7 +164,7 @@ public class Leprechaun : Entity {
         {
             #region ATTACKING CODE
 
-            if (Global.XboxInput.GetButtonDown(controllerNumber, 2))
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex))
             {
                 foreach (Drink d in Global.drinks)
                 {
@@ -164,7 +184,7 @@ public class Leprechaun : Entity {
                 punchTimer--;
             else
             {
-                if (Global.XboxInput.GetButtonDown(controllerNumber, 2) && !isJumping && !isDashing && attackOnce == 0 && !isDrinking)
+                if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && !isJumping && !isDashing && attackOnce == 0 && !isDrinking)
                 {
                     //playerState = PlayerStates.ATTACKING;
                     isAttacking = true;
@@ -184,7 +204,7 @@ public class Leprechaun : Entity {
 
                     if (!didHit)
                     {
-                        //sfx_punch_miss = Engine.Loader.SoundEffects["Punch_Miss_0" + Engine.Rand.Next(1, 6).ToString()];
+                        //sfx_punch_miss = Engine.Loader.SoundEfisJumoingfects["Punch_Miss_0" + Engine.Rand.Next(1, 6).ToString()];
                         //sfx_punch_miss.Play();
                     }
                     else
@@ -195,7 +215,7 @@ public class Leprechaun : Entity {
                 }
             }
 
-            if (Global.XboxInput.GetButtonUp(controllerNumber, 2))
+            if (GamePad.GetButtonUp(GamePad.Button.X, gamePadIndex))
             {
                 if (attackOnce >= 1)
                     attackOnce = 0;
@@ -207,20 +227,20 @@ public class Leprechaun : Entity {
 
             #region BLOCKING CODE
 
-            if (Global.XboxInput.GetButtonDown(controllerNumber, 1) && !isJumping && !isDashing && !isAttacking && !isDrinking)
+            if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isJumping && !isDashing && !isAttacking && !isDrinking)
             {
                 isBlocking = true;
                 if (isWalking)
                     isWalking = false;
             }
 
-            if (Global.XboxInput.GetButtonUp(controllerNumber, 1))
+            if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
                 isBlocking = false;
 
             #endregion
 
             #region DASHING CODE
-            if ((Global.XboxInput.GetAxis(controllerNumber, "3rd") > 0.1 || Global.XboxInput.GetAxis(controllerNumber, "6th") > 0.1)
+            if ((GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, gamePadIndex) > 0.1 || GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, gamePadIndex) > 0.1)
                 && !isDashing && !isDashCooldown)
             {
                 isDashing = true;
@@ -252,7 +272,6 @@ public class Leprechaun : Entity {
             #endregion
         }
 
-        Movement();
         ManageDrunkness();
 
         if (IsDead)
@@ -268,62 +287,76 @@ public class Leprechaun : Entity {
 
 	}
 
+    void FixedUpdate()
+    {
+        Movement();
+    }
+
     public void Movement()
     {
-        float time = (float)Time.deltaTime * 70;
 
-        if (!isAttacking && !isBlocking && !playerStateBool)
-        {
-            if (!IsDead && !isAttacking && !isDrinking)
-            {
-                // right
-                if (Global.XboxInput.GetAxis(controllerNumber, "7th") > .5 || Global.XboxInput.GetAxis(controllerNumber, "X") > .5)
-                {
-                    isWalking = true;
-                    velocity.x += .2f * time;
-                    velocity.x = Mathf.Clamp(velocity.x, 0, maxVelocity.x);
-                    Direction = Facing.RIGHT;
-                    mirrored = false;
-                }
-                else if (Global.XboxInput.GetAxis(controllerNumber, "7th") < -.5 || Global.XboxInput.GetAxis(controllerNumber, "X") < -.5)
-                {
-                    isWalking = true;
-                    velocity.x -= .2f * time;
-                    velocity.x = Mathf.Clamp(velocity.x, -maxVelocity.x, 0);
-                    Direction = Facing.LEFT;
-                    mirrored = true;
-                }
-                else
-                {
-                    if (Mathf.Abs(lastVelocity.x) + (Mathf.Abs(velocity.x) + .2f * time) > Mathf.Abs(velocity.x) && isWalking)
-                    {
-                        Move(new Vector2(velocity.x, 0));
-                        //animation.GetAnimation.FrameTime = 0.1f / (Math.Abs(velocity.X) / maxVelocity.X);
-                        velocity.x /= (time * resistance);
+        #region OLDCODE
+        //float time = (float)Time.deltaTime * 70;
 
-                        if (Mathf.Abs(velocity.x) < .1f)
-                            isWalking = false;
-                    }
-                }
-            }
-            else
-                isWalking = false;
+        //if (!isAttacking && !isBlocking && !playerStateBool)
+        //{
+        //    if (!IsDead && !isAttacking && !isDrinking)
+        //    {
+        //        // right
+        //        if (Global.XboxInput.GetAxis(controllerNumber, "7th") > .5 || Global.XboxInput.GetAxis(controllerNumber, "X") > .5)
+        //        {
+        //            isWalking = true;
+        //            velocity.x += .2f * time;
+        //            velocity.x = Mathf.Clamp(velocity.x, 0, maxVelocity.x);
+        //            Direction = Facing.RIGHT;
+        //            mirrored = false;
+        //        }
+        //        else if (Global.XboxInput.GetAxis(controllerNumber, "7th") < -.5 || Global.XboxInput.GetAxis(controllerNumber, "X") < -.5)
+        //        {
+        //            isWalking = true;
+        //            velocity.x -= .2f * time;
+        //            velocity.x = Mathf.Clamp(velocity.x, -maxVelocity.x, 0);
+        //            Direction = Facing.LEFT;
+        //            mirrored = true;
+        //        }
+        //        else
+        //        {
+        //            if (Mathf.Abs(lastVelocity.x) + (Mathf.Abs(velocity.x) + .2f * time) > Mathf.Abs(velocity.x) && isWalking)
+        //            {
+        //                Move(new Vector2(velocity.x, 0));
+        //                //animation.GetAnimation.FrameTime = 0.1f / (Math.Abs(velocity.X) / maxVelocity.X);
+        //                velocity.x /= (time * resistance);
 
-            if (isWalking)
-            {
-                Move(new Vector2(velocity.x, 0));
-                //animation.GetAnimation.FrameTime = 0.1f / (Math.Abs(velocity.X) / maxVelocity.X);
-            }
-            else if (!isWalking)
-                velocity.x /= (time * resistance);
+        //                if (Mathf.Abs(velocity.x) < .1f)
+        //                    isWalking = false;
+        //            }
+        //        }
+        //    }
+        //    else
+        //        isWalking = false;
 
-            lastVelocity = velocity;
-        }
-        else if (isAttacking) { }
-        else
-        {
-            velocity.x /= (time * resistance);
-        }
+        //    if (isWalking)
+        //    {
+        //        Move(new Vector2(velocity.x, 0));
+        //        //animation.GetAnimation.FrameTime = 0.1f / (Math.Abs(velocity.X) / maxVelocity.X);
+        //    }
+        //    else if (!isWalking)
+        //        velocity.x /= (time * resistance);
+
+        //    lastVelocity = velocity;
+        //}
+        //else if (isAttacking) { }
+        //else
+        //{
+        //    velocity.x /= (time * resistance);
+        //}
+
+        #endregion
+
+        float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex);
+        animator.SetFloat("Speed", Mathf.Abs(move));
+        rigidbody2D.velocity = new Vector2(move * (float)maxVelocity.x, rigidbody2D.velocity.y);
+
     }
 
     public void ManageDrunkness()
@@ -375,7 +408,7 @@ public class Leprechaun : Entity {
 
         if (dashType == DashTypes.TRIGGER)
         {
-            if (Global.XboxInput.GetAxis(controllerNumber, "6th") > 0.1)
+            if (GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, gamePadIndex) > 0.1)
             {
                 if (Direction == Facing.LEFT)
                     base.Move(new Vector2(20, 0));
@@ -383,7 +416,7 @@ public class Leprechaun : Entity {
                     base.Move(new Vector2(10, 0));
             }
 
-            if (Global.XboxInput.GetAxis(controllerNumber, "3rd") > 0.1)
+            if (GamePad.GetTrigger(GamePad.Trigger.RightTrigger, gamePadIndex) > 0.1)
             {
                 if (Direction == Facing.RIGHT)
                     base.Move(new Vector2(-20, 0));

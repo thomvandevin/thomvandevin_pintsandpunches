@@ -11,18 +11,23 @@ public class World : MonoBehaviour {
     public int drinkTileRand;
     private int drinkTimer;
 
+    public GameObject player1Object;
+    public Player player1Script;
+
 	// Use this for initialization
     void Start()
     {
-
         drinkTimer = Random.Range(200, 300);
-
+        player1Object = Instantiate(Resources.Load("Entities/Player_1")) as GameObject;
+        player1Object.AddComponent<Player>();
+        player1Script = player1Object.GetComponent<Player>();
+        player1Script.SetPlayer(1, 1, player1Object);
     }
 	
 	// Update is called once per frame
 	void Update () 
     {
-        
+        player1Script.Update();
 
 	}
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using GamepadInput;
 
 public class Global : MonoBehaviour {
 
@@ -30,7 +31,6 @@ public class Global : MonoBehaviour {
     public static List<Drink> drinks;
 
     public static World WorldObject;
-    public static XboxController XboxInput;
 
     void Awake()
     {
@@ -38,7 +38,7 @@ public class Global : MonoBehaviour {
         Reset();
     }
     
-    public static void Reset()
+    public void Reset()
     {
         
         GAME_RESET = false;
@@ -47,7 +47,7 @@ public class Global : MonoBehaviour {
         players = new List<Leprechaun>();
         drinks = new List<Drink>();
 
-        XboxInput = new XboxController();
+        WorldObject = gameObject.AddComponent<World>();
 
     }
 

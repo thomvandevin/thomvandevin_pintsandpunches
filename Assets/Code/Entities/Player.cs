@@ -6,8 +6,6 @@ public class Player : MonoBehaviour {
 
     [HideInInspector]
 
-    public Leprechaun leprechaun;
-
     public int controllerNumber, chosenCharacter;
     public bool RESET;
     public Vector2 playerStartPosition;
@@ -19,24 +17,37 @@ public class Player : MonoBehaviour {
     //public Point GetGridPosition { get { return gridPos; } }
 
     //private RespawnFlare respawnFlare;
+    
+    public GameObject leprechaunObject;
+    public Leprechaun leprechaunScript;
 
-    public Player(int controllerNumber, int chosenCharacter)
+    public Player()
+    {
+
+    }
+
+    public void SetPlayer(int controllerNumber, int chosenCharacter, GameObject playerObject)
     {
         this.controllerNumber = controllerNumber;
         this.chosenCharacter = chosenCharacter;
+        this.leprechaunObject = playerObject;
         RESET = false;
 
         playerStartPosition = new Vector2(75 * controllerNumber * 3, 456);
-        leprechaun = new Leprechaun(playerStartPosition, controllerNumber, chosenCharacter, this, 0);
-        Global.players.Add(leprechaun);
+
+        leprechaunObject.AddComponent<Leprechaun>();
+        leprechaunScript = leprechaunObject.GetComponent<Leprechaun>();
+        leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, this, 0);
+        //Global.players.Add(leprechaun);
 
         //gridPos = leprechaun.GetGridPosition();
         //respawnFlare = new RespawnFlare(leprechaun.GetPosition, controllerNumber);
+
     }
 
     public void Update()
     {
-        leprechaun.Update();
+        //leprechaunScript.Update();
         //respawnFlare.Update();
     }
 
