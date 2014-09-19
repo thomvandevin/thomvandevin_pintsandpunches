@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
         this.leprechaunObject = playerObject;
         RESET = false;
 
-        playerStartPosition = new Vector2(75 * controllerNumber * 3, 456);
+        playerStartPosition = new Vector2(.1f * controllerNumber, 0);
 
         leprechaunObject.AddComponent<Leprechaun>();
         leprechaunScript = leprechaunObject.GetComponent<Leprechaun>();

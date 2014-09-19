@@ -58,7 +58,7 @@ public class Leprechaun : Entity {
 
     public void SetLeprechaun(Vector2 pos, int controllerNumber, int chosenCharacter, Player playerObject, int killsAmount)
     {
-        this.controllerNumber = 1;
+        this.controllerNumber = controllerNumber;
 
         //playerObject = playerobject;
         kills = killsAmount;
@@ -70,8 +70,8 @@ public class Leprechaun : Entity {
         gravity = 0.5f;
         resistance = 2f;
         velocity = new Vector2(0, 5);
-        maxVelocity = new Vector2(6, 20);
-        lastVelocity = new Vector2(0, 5);
+        maxVelocity = new Vector2(3, 6);
+        lastVelocity = new Vector2(0, 2);
         skipNextMove = false;
         fallTroughBar = false;
         underBar = false;
@@ -114,12 +114,12 @@ public class Leprechaun : Entity {
         isIdle = true;
 
         SetDictionary();
-        gamePadIndex = controllerIndex[controllerNumber];
 
     }
 
     public void SetDictionary()
     {
+        dicStringBool = new Dictionary<string, bool>();
         dicStringBool.Add("isWalking", isWalking);
         dicStringBool.Add("isJumping", isJumping);
         dicStringBool.Add("isIdle", isIdle);
@@ -129,7 +129,8 @@ public class Leprechaun : Entity {
         dicStringBool.Add("IsDead", IsDead);
         dicStringBool.Add("isBlocking", isBlocking);
         dicStringBool.Add("isDrinking", isDrinking);
-
+        
+        dicStringState = new Dictionary<string, PlayerStates>();
         dicStringState.Add("isWalking", PlayerStates.WALKING);
         dicStringState.Add("isJumping", PlayerStates.JUMPING);
         dicStringState.Add("isIdle", PlayerStates.IDLE);
@@ -140,11 +141,13 @@ public class Leprechaun : Entity {
         dicStringState.Add("isBlocking", PlayerStates.BLOCKING);
         dicStringState.Add("isDrinking", PlayerStates.DRINKING);
 
+        controllerIndex = new Dictionary<int, GamePad.Index>();
         controllerIndex.Add(0, GamePad.Index.Any);
         controllerIndex.Add(1, GamePad.Index.One);
         controllerIndex.Add(2, GamePad.Index.Two);
         controllerIndex.Add(3, GamePad.Index.Three);
         controllerIndex.Add(4, GamePad.Index.Four);
+        gamePadIndex = controllerIndex[controllerNumber];
     }
 	
 	// Update is called once per frame
@@ -353,7 +356,7 @@ public class Leprechaun : Entity {
 
         #endregion
 
-        float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex);
+        float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
         animator.SetFloat("Speed", Mathf.Abs(move));
         rigidbody2D.velocity = new Vector2(move * (float)maxVelocity.x, rigidbody2D.velocity.y);
 
