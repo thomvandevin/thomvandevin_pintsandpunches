@@ -35,8 +35,8 @@ public class Leprechaun : Entity {
     public PlayerStates playerState;
     public DashTypes dashType;
     public Global.SortOfDrink sortOfDrink;
-    public bool mirrored, isDashCooldown, onGround, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer;
-    public bool isWalking, isDashing, isIdle, isJumping, isAttacking, isHit, isFalling, isBlocking, isDrinking, checkForState;
+    public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer;
+    public bool onGround, isHit, isDrinking, isBlocking, isDashing, isAttacking;
     public int controllerNumber, chosenCharacter, dashTimer, dashCooldown, punchTimer, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
     public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide;
     public string hitDirection, playerStateString;
@@ -105,16 +105,11 @@ public class Leprechaun : Entity {
         transform.position = pos;
         SetEntity(pos, "filler", 30, true);
 
-        isJumping = false;
-        isFalling = false;
-        isWalking = false;
-        isDashing = false;
-        isJumping = false;
-        isAttacking = false;
         isHit = false;
+        isAttacking = false;
         isBlocking = false;
+        isDashing = false;
         isDrinking = false;
-        isIdle = true;
 
         SetDictionary();
 
@@ -122,28 +117,6 @@ public class Leprechaun : Entity {
 
     public void SetDictionary()
     {
-        dicStringBool = new Dictionary<string, bool>();
-        dicStringBool.Add("isWalking", isWalking);
-        dicStringBool.Add("isJumping", isJumping);
-        dicStringBool.Add("isIdle", isIdle);
-        dicStringBool.Add("isDashing", isDashing);
-        dicStringBool.Add("isAttacking", isAttacking);
-        dicStringBool.Add("isHit", isHit);
-        dicStringBool.Add("IsDead", IsDead);
-        dicStringBool.Add("isBlocking", isBlocking);
-        dicStringBool.Add("isDrinking", isDrinking);
-        
-        dicStringState = new Dictionary<string, PlayerStates>();
-        dicStringState.Add("isWalking", PlayerStates.WALKING);
-        dicStringState.Add("isJumping", PlayerStates.JUMPING);
-        dicStringState.Add("isIdle", PlayerStates.IDLE);
-        dicStringState.Add("isDashing", PlayerStates.DASHING);
-        dicStringState.Add("isAttacking", PlayerStates.ATTACKING);
-        dicStringState.Add("isHit", PlayerStates.HIT);
-        dicStringState.Add("IsDead", PlayerStates.DEAD);
-        dicStringState.Add("isBlocking", PlayerStates.BLOCKING);
-        dicStringState.Add("isDrinking", PlayerStates.DRINKING);
-
         controllerIndex = new Dictionary<int, GamePad.Index>();
         controllerIndex.Add(0, GamePad.Index.Any);
         controllerIndex.Add(1, GamePad.Index.One);
@@ -155,7 +128,7 @@ public class Leprechaun : Entity {
 
     void FixedUpdate()
     {
-        Movement();
+        Movement(); 
     }
 
 	// Update is called once per frame
@@ -169,7 +142,6 @@ public class Leprechaun : Entity {
             //Global.WorldObject.gameWon = true;
             //Global.WorldObject.winnerIndex = chosenPlayerIndex;
         }
-
 
         if (!IsDead && !isDrinking)
         {
@@ -195,10 +167,10 @@ public class Leprechaun : Entity {
                 punchTimer--;
             else
             {
-                if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && !isJumping && !isDashing && attackOnce == 0 && !isDrinking)
+                if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && animator.GetBool("grounded") && attackOnce == 0 && !isDrinking)
                 {
                     //playerState = PlayerStates.ATTACKING;
-                    isAttacking = true;
+                    //isAttacking = true;
                     punchTimer = 24;
                     attackOnce++;
 
@@ -231,22 +203,22 @@ public class Leprechaun : Entity {
                 if (attackOnce >= 1)
                     attackOnce = 0;
 
-                isAttacking = false;
+                //isAttacking = false;
             }
 
             #endregion
 
             #region BLOCKING CODE
 
-            if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isJumping && !isDashing && !isAttacking && !isDrinking)
-            {
-                isBlocking = true;
-                if (isWalking)
-                    isWalking = false;
-            }
+            //if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isJumping && !isDashing && !isAttacking && !isDrinking)
+            //{
+            //    isBlocking = true;
+            //    if (isWalking)
+            //        isWalking = false;
+            //}
 
-            if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
-                isBlocking = false;
+            //if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
+            //    isBlocking = false;
 
             #endregion
 
