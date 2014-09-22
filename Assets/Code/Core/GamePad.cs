@@ -197,6 +197,21 @@ namespace GamepadInput
             return KeyCode.None;
         }
 
+        public static bool GetKeyboardKey(KeyCode keyCode)
+        {
+            return Input.GetKey(keyCode);
+        }
+
+        public static bool GetKeyboardKeyDown(KeyCode keyCode)
+        {
+            return Input.GetKeyDown(keyCode);
+        }
+
+        public static bool GetKeyboardKeyUp(KeyCode keyCode)
+        {
+            return Input.GetKeyUp(keyCode);
+        }
+
         public static GamepadState GetState(Index controlIndex, bool raw = false)
         {
             GamepadState state = new GamepadState();

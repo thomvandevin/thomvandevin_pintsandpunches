@@ -284,7 +284,7 @@ public class Leprechaun : Entity {
 
             #region JUMPING CODE
 
-            if (onGround && GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex))
+            if (onGround && (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space)))
             {
                 animator.SetBool("grounded", false);
                 rigidbody2D.AddForce(new Vector2(0, maxVelocity.y / 3f));
@@ -317,6 +317,11 @@ public class Leprechaun : Entity {
         animator.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
         float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
+        if (GamePad.GetKeyboardKey(KeyCode.LeftArrow))
+            move = -1;
+        else if (GamePad.GetKeyboardKey(KeyCode.RightArrow))
+            move = 1;
+
         animator.SetFloat("hSpeed", Mathf.Abs(move));
         rigidbody2D.velocity = new Vector2(move * (float)maxVelocity.x, rigidbody2D.velocity.y);
 
