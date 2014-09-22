@@ -42,8 +42,10 @@ public class Leprechaun : Entity {
     public int controllerNumber, chosenCharacter, dashTimer, dashCooldown, punchTimer, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
     public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide;
     public string hitDirection, playerStateString;
-    public float gravity, gravityCorrection, resistance, drunknessF, damageMultiplayer;
+    public float gravity, gravityCorrection, resistance, drunknessF, damageMultiplayer, groundRadius;
     public Vector2 startingPosition, velocity, previousPosition, maxVelocity, lastVelocity, drunkVelocity, respawnButtonPos;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
     //public SoundEffect sfx_punch_hit, sfx_punch_miss, sfx_jump_down, sfx_jump, sfx_knockout, sfx_drink, sfx_drink_whiskey;
     //public SoundEffectInstance sfx_drink_whiskey_inst;
     //public RespawnButton respawnButton;
@@ -67,10 +69,13 @@ public class Leprechaun : Entity {
         startingPosition = pos;
         mirrored = false;
         onGround = false;
+        groundRadius = 0.2f;
+        groundCheck = GameObject.FindGameObjectWithTag("GroundCheck_player").transform;
+        groundLayer = LayerMask.GetMask("Nothing");
         gravity = 0.5f;
         resistance = 2f;
         velocity = new Vector2(0, 5);
-        maxVelocity = new Vector2(3, 6);
+        maxVelocity = new Vector2(3, 700f);
         lastVelocity = new Vector2(0, 2);
         skipNextMove = false;
         fallTroughBar = false;
@@ -149,7 +154,12 @@ public class Leprechaun : Entity {
         controllerIndex.Add(4, GamePad.Index.Four);
         gamePadIndex = controllerIndex[controllerNumber];
     }
-	
+
+    void FixedUpdate()
+    {
+        Movement();
+    }
+
 	// Update is called once per frame
 	public void Update () 
     {
@@ -273,9 +283,20 @@ public class Leprechaun : Entity {
                     isDashCooldown = false;
             }
             #endregion
+
+            #region JUMPING CODE
+
+            if (onGround && GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex))
+            {
+                animator.SetBool("grounded", false);
+                rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
+            }
+
+            #endregion
+
         }
 
-        ManageDrunkness();
+        //ManageDrunkness();
 
         if (IsDead)
         {
@@ -290,77 +311,23 @@ public class Leprechaun : Entity {
 
 	}
 
-    void FixedUpdate()
-    {
-        Movement();
-    }
-
     public void Movement()
     {
+        onGround = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
+        animator.SetBool("grounded", onGround);
 
-        #region OLDCODE
-        //float time = (float)Time.deltaTime * 70;
-
-        //if (!isAttacking && !isBlocking && !playerStateBool)
-        //{
-        //    if (!IsDead && !isAttacking && !isDrinking)
-        //    {
-        //        // right
-        //        if (Global.XboxInput.GetAxis(controllerNumber, "7th") > .5 || Global.XboxInput.GetAxis(controllerNumber, "X") > .5)
-        //        {
-        //            isWalking = true;
-        //            velocity.x += .2f * time;
-        //            velocity.x = Mathf.Clamp(velocity.x, 0, maxVelocity.x);
-        //            Direction = Facing.RIGHT;
-        //            mirrored = false;
-        //        }
-        //        else if (Global.XboxInput.GetAxis(controllerNumber, "7th") < -.5 || Global.XboxInput.GetAxis(controllerNumber, "X") < -.5)
-        //        {
-        //            isWalking = true;
-        //            velocity.x -= .2f * time;
-        //            velocity.x = Mathf.Clamp(velocity.x, -maxVelocity.x, 0);
-        //            Direction = Facing.LEFT;
-        //            mirrored = true;
-        //        }
-        //        else
-        //        {
-        //            if (Mathf.Abs(lastVelocity.x) + (Mathf.Abs(velocity.x) + .2f * time) > Mathf.Abs(velocity.x) && isWalking)
-        //            {
-        //                Move(new Vector2(velocity.x, 0));
-        //                //animation.GetAnimation.FrameTime = 0.1f / (Math.Abs(velocity.X) / maxVelocity.X);
-        //                velocity.x /= (time * resistance);
-
-        //                if (Mathf.Abs(velocity.x) < .1f)
-        //                    isWalking = false;
-        //            }
-        //        }
-        //    }
-        //    else
-        //        isWalking = false;
-
-        //    if (isWalking)
-        //    {
-        //        Move(new Vector2(velocity.x, 0));
-        //        //animation.GetAnimation.FrameTime = 0.1f / (Math.Abs(velocity.X) / maxVelocity.X);
-        //    }
-        //    else if (!isWalking)
-        //        velocity.x /= (time * resistance);
-
-        //    lastVelocity = velocity;
-        //}
-        //else if (isAttacking) { }
-        //else
-        //{
-        //    velocity.x /= (time * resistance);
-        //}
-
-        #endregion
+        animator.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
         float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
-        animator.SetFloat("Speed", Mathf.Abs(move));
+        animator.SetFloat("hSpeed", Mathf.Abs(move));
         rigidbody2D.velocity = new Vector2(move * (float)maxVelocity.x, rigidbody2D.velocity.y);
 
+        if (move > 0 && Direction == Facing.LEFT)
+            Flip();
+        else if (move < 0 && Direction == Facing.RIGHT)
+            Flip();
     }
+
 
     public void ManageDrunkness()
     {

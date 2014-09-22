@@ -57,6 +57,18 @@ public class Entity : MonoBehaviour {
 
     }
 
+    public void Flip()
+    {
+        if (Direction == Facing.LEFT)
+            Direction = Facing.RIGHT;
+        else if (Direction == Facing.RIGHT)
+            Direction = Facing.LEFT;
+
+        Vector3 playerScale = transform.localScale;
+        playerScale.x *= -1;
+        transform.localScale = playerScale;
+    }
+
     public void Damage(int value)
     {
         if (health > 0)
