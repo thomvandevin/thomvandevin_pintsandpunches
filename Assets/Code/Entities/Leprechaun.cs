@@ -26,8 +26,6 @@ public class Leprechaun : Entity {
         NONE
     }
 
-    [HideInInspector]
-
     public Dictionary<string, bool> dicStringBool;
     public Dictionary<string, PlayerStates> dicStringState;
     public Dictionary<int, GamePad.Index> controllerIndex;
@@ -71,11 +69,11 @@ public class Leprechaun : Entity {
         onGround = false;
         groundRadius = 0.2f;
         groundCheck = GameObject.FindGameObjectWithTag("GroundCheck_player").transform;
-        groundLayer = LayerMask.GetMask("Nothing");
+        groundLayer = gameObject.GetComponent<LayerMaskPass>().GetLayerMask();
         gravity = 0.5f;
         resistance = 2f;
         velocity = new Vector2(0, 5);
-        maxVelocity = new Vector2(3, 700f);
+        maxVelocity = new Vector2(3, 900f);
         lastVelocity = new Vector2(0, 2);
         skipNextMove = false;
         fallTroughBar = false;
@@ -289,7 +287,7 @@ public class Leprechaun : Entity {
             if (onGround && GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex))
             {
                 animator.SetBool("grounded", false);
-                rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
+                rigidbody2D.AddForce(new Vector2(0, maxVelocity.y / 3f));
             }
 
             #endregion
