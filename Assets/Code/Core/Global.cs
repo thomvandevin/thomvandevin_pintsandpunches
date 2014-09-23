@@ -5,6 +5,8 @@ using GamepadInput;
 
 public class Global : MonoBehaviour {
 
+    public const int NumberOfPlayers = 2;
+
     [HideInInspector]
 
     public enum SortOfDrink
@@ -27,7 +29,8 @@ public class Global : MonoBehaviour {
     public static bool GAME_END;
     public static bool GAME_RESET = false;
 
-    public static List<Leprechaun> players;
+    public static List<GameObject> players;
+    public static List<Leprechaun> leprechauns;
     public static List<Drink> drinks;
 
     public static World WorldObject;
@@ -44,11 +47,20 @@ public class Global : MonoBehaviour {
         GAME_RESET = false;
         GAME_END = false;
 
-        players = new List<Leprechaun>();
+        players = new List<GameObject>();
+        leprechauns = new List<Leprechaun>();
         drinks = new List<Drink>();
 
         WorldObject = gameObject.AddComponent<World>();
 
+    }
+
+    static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
+    {
+        //Author: Isaac Dart, June-13.
+        Transform[] ts = fromGameObject.transform.GetComponentsInChildren<Transform>(true);
+        foreach (Transform t in ts) if (t.gameObject.name == withName) return t.gameObject;
+        return null;
     }
 
 }

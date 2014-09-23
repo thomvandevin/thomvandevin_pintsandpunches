@@ -33,12 +33,12 @@ public class Player : MonoBehaviour {
         this.leprechaunObject = playerObject;
         RESET = false;
 
-        playerStartPosition = new Vector2(.1f * controllerNumber, -1);
+        playerStartPosition = new Vector2(-10 + (4 * controllerNumber), -1);
 
         leprechaunObject.AddComponent<Leprechaun>();
         leprechaunScript = leprechaunObject.GetComponent<Leprechaun>();
-        leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, this, 0);
-        //Global.players.Add(leprechaun);
+        leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, playerObject, 0);
+        Global.leprechauns.Add(leprechaunScript);
 
         //gridPos = leprechaun.GetGridPosition();
         //respawnFlare = new RespawnFlare(leprechaun.GetPosition, controllerNumber);

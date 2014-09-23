@@ -56,7 +56,7 @@ public class Leprechaun : Entity {
 
     }
 
-    public void SetLeprechaun(Vector2 pos, int controllerNumber, int chosenCharacter, Player playerObject, int killsAmount)
+    public void SetLeprechaun(Vector2 pos, int controllerNumber, int chosenCharacter, GameObject playerObject, int killsAmount)
     {
         this.controllerNumber = controllerNumber;
 
@@ -68,7 +68,7 @@ public class Leprechaun : Entity {
         mirrored = false;
         onGround = false;
         groundRadius = 0.2f;
-        groundCheck = GameObject.FindGameObjectWithTag("GroundCheck_player").transform;
+        groundCheck = Global.getChildGameObject(playerObject, "GroundCheck").transform;
         groundLayer = gameObject.GetComponent<LayerMaskPass>().GetLayerMask();
         gravity = 0.5f;
         resistance = 2f;
@@ -170,13 +170,14 @@ public class Leprechaun : Entity {
                 if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && animator.GetBool("grounded") && attackOnce == 0 && !isDrinking)
                 {
                     //playerState = PlayerStates.ATTACKING;
-                    //isAttacking = true;
+                    isAttacking = true;
+                    animator.SetBool("isAttacking", true);
                     punchTimer = 24;
                     attackOnce++;
 
                     bool didHit = false;
 
-                    foreach (Leprechaun lep in Global.players)
+                    foreach (Leprechaun lep in Global.leprechauns)
                     {
                         //if (playerCollision_attack.Intersects(lep.playerCollision_main) && lep != this)
                         //{
@@ -203,7 +204,8 @@ public class Leprechaun : Entity {
                 if (attackOnce >= 1)
                     attackOnce = 0;
 
-                //isAttacking = false;
+                isAttacking = false;
+                animator.SetBool("isAttacking", false);
             }
 
             #endregion

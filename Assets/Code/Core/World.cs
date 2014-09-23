@@ -11,23 +11,35 @@ public class World : MonoBehaviour {
     public int drinkTileRand;
     private int drinkTimer;
 
-    public GameObject player1Object;
-    public Player player1Script;
+    public int numberOfPlayers = Global.NumberOfPlayers;
+
+    private Player player;
 
 	// Use this for initialization
     void Start()
     {
+
+        for(int i = 1; i <= numberOfPlayers; i++)
+        {
+            GameObject playerObject = Instantiate(Resources.Load("Entities/Player_1")) as GameObject;
+            playerObject.AddComponent<Player>();
+            Player playerScript = playerObject.GetComponent<Player>();
+            playerScript.SetPlayer(i, 1, playerObject);
+            playerObject.layer = 7 + i;
+            playerObject.name = "Player " + i.ToString();
+            Global.players.Add(playerObject);
+        }
+
         drinkTimer = Random.Range(200, 300);
-        player1Object = Instantiate(Resources.Load("Entities/Player_1")) as GameObject;
-        player1Object.AddComponent<Player>();
-        player1Script = player1Object.GetComponent<Player>();
-        player1Script.SetPlayer(1, 1, player1Object);
     }
 	
 	// Update is called once per frame
 	void Update () 
     {
-        player1Script.Update();
+        foreach (GameObject p in Global.players)
+        {
+            p.GetComponent<Player>().Update();
+        }
 
 	}
 
