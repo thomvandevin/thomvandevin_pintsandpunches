@@ -264,6 +264,10 @@ public class Leprechaun : Entity {
 
         //ManageDrunkness();
 
+        if (GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
+            GotHit(new Vector2(0, 0), 1, Global.PlayerIndex.PLAYER2);
+
+
         if (IsDead)
         {
             //rbuttonPos = new Vector2(GetPosition.X + Global.PLAYER_SIZE / 2 + 10, GetPosition.Y + 40);
@@ -299,9 +303,6 @@ public class Leprechaun : Entity {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x / 4, rigidbody2D.velocity.y);
         else
             rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
-
-        if (GamePad.GetKeyboardKeyDown(KeyCode.Space))
-            GotHit(new Vector2(0, 0), 1, Global.PlayerIndex.PLAYER2);
 
         if (move > 0 && Direction == Facing.LEFT)
             Flip();
