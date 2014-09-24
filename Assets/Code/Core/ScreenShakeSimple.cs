@@ -6,8 +6,7 @@ public class ScreenShakeSimple : MonoBehaviour
     public float returnHardness;
 
     private Camera mainCamera;
-
-    Vector3 originalCameraPosition;
+    private Vector3 originalCameraPosition;
 
     float shakeAmt = 0;
     Vector2 shakeDirection = new Vector2(0, 0);

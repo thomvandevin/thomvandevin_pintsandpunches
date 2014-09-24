@@ -499,7 +499,8 @@ public class Leprechaun : Entity {
 
     void Screenshake(Vector2 punchDirection, float hardness)
     {
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeSimple>().StartShaking(punchDirection, hardness);
+        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeSimple>().StartShaking(punchDirection, hardness);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeGeneric>().StartShaking(hardness);
 
     }
 
