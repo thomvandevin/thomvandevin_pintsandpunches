@@ -313,7 +313,6 @@ public class Leprechaun : Entity {
 
     public void ManageDrunkness()
     {
-        float time = (float)Time.deltaTime * (drunkTimeMultiplier * (1 + drunkness / 100));
 
         if (!isDrinking)
         {
@@ -326,7 +325,7 @@ public class Leprechaun : Entity {
             }
             else
             {
-                drunknessF -= time;
+                drunknessF -= Time.deltaTime;
                 maxDrunk = false;
             }
 
@@ -443,7 +442,7 @@ public class Leprechaun : Entity {
                 hitDirection = "Back";
         }
         velocity.x = punchDirection.x * 10;
-        Screenshake(punchDirection, 5);
+        Screenshake(punchDirection, 10*damageM, .2f * (damageM/4));
 
         if (!isBlocking && !IsDead && ((int)(1 * damageM)) >= GetHealth)
         {
@@ -452,16 +451,16 @@ public class Leprechaun : Entity {
             switch (player)
             {
                 case Global.PlayerIndex.PLAYER1:
-                    //Global.WorldObject.GetPlayer1.leprechaun.kills += 1;
+                    Global.leprechauns[0].kills += 1;
                     break;
                 case Global.PlayerIndex.PLAYER2:
-                    //Global.WorldObject.GetPlayer2.leprechaun.kills += 1;
+                    Global.leprechauns[1].kills += 1;
                     break;
                 case Global.PlayerIndex.PLAYER3:
-                    //Global.WorldObject.GetPlayer3.leprechaun.kills += 1;
+                    Global.leprechauns[2].kills += 1;
                     break;
                 case Global.PlayerIndex.PLAYER4:
-                    //Global.WorldObject.GetPlayer4.leprechaun.kills += 1;
+                    Global.leprechauns[3].kills += 1;
                     break;
                 default:
                     break;
@@ -497,10 +496,12 @@ public class Leprechaun : Entity {
 
     }
 
-    void Screenshake(Vector2 punchDirection, float hardness)
+    public void Screenshake(Vector2 punchDirection, float hardness, float time)
     {
         //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeSimple>().StartShaking(punchDirection, hardness);
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeGeneric>().StartShaking(hardness);
+        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeGeneric>().StartShaking(hardness);
+        punchDirection = (punchDirection / 20)*hardness;
+        iTween.ShakePosition(GameObject.FindGameObjectWithTag("MainCamera"), punchDirection, time);
 
     }
 
