@@ -21,8 +21,10 @@ public class AdvancedCameraFollower : MonoBehaviour {
     {
         if(on)
         {
-            transform.position = Vector3.MoveTowards(transform.position, cameraLead.transform.position, moveHardness * Time.deltaTime);
-            cameraScript.orthographicSize = 3.5f + scaleHardness * Mathf.Abs(Vector3.Distance(transform.position, cameraLead.transform.position));
+            Vector3 pp = Vector3.MoveTowards(transform.position, cameraLead.transform.position, moveHardness * Time.deltaTime);
+            pp.z = -10;
+            transform.position = pp;
+            //cameraScript.orthographicSize = 3.5f + scaleHardness * Mathf.Abs(Vector3.Distance(transform.position, cameraLead.transform.position));
         }
             
 	}

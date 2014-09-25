@@ -72,8 +72,8 @@ public class Leprechaun : Entity {
         groundLayer = gameObject.GetComponent<LayerMaskPass>().GetLayerMask();
         gravity = 0.5f;
         resistance = 2f;
-        velocity = new Vector2(0, 5);
-        maxVelocity = new Vector2(3, 900f);
+        velocity = new Vector2(0, 60);
+        maxVelocity = new Vector2(6, 600);
         lastVelocity = new Vector2(0, 2);
         skipNextMove = false;
         fallTroughBar = false;
@@ -127,7 +127,8 @@ public class Leprechaun : Entity {
 
     void FixedUpdate()
     {
-        Movement(); 
+        Movement();
+        KeepOnScreen();
     }
 
 	// Update is called once per frame
@@ -253,10 +254,10 @@ public class Leprechaun : Entity {
 
             #region JUMPING CODE
 
-            if (onGround && (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space)))
+            if (onGround && (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space)) && !isAttacking)
             {
                 animator.SetBool("grounded", false);
-                rigidbody2D.AddForce(new Vector2(0, maxVelocity.y / 3f));
+                rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
             }
 
             #endregion
@@ -442,7 +443,7 @@ public class Leprechaun : Entity {
                 hitDirection = "Back";
         }
         velocity.x = punchDirection.x * 10;
-        Screenshake(punchDirection, 10*damageM, .2f * (damageM/4));
+        Screenshake(punchDirection, 10*damageM, .1f * (damageM/4));
 
         if (!isBlocking && !IsDead && ((int)(1 * damageM)) >= GetHealth)
         {
@@ -496,12 +497,23 @@ public class Leprechaun : Entity {
 
     }
 
+    private void KeepOnScreen()
+    {
+        Vector3 pp = transform.position;
+
+        if (pp.x > 9)
+            pp.x = 9;
+        else if (pp.x < -9)
+            pp.x = -9;
+
+        transform.position = pp;
+
+    }
+
     public void Screenshake(Vector2 punchDirection, float hardness, float time)
     {
-        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeSimple>().StartShaking(punchDirection, hardness);
-        //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScreenShakeGeneric>().StartShaking(hardness);
-        punchDirection = (punchDirection / 20)*hardness;
-        iTween.ShakePosition(GameObject.FindGameObjectWithTag("MainCamera"), punchDirection, time);
+        punchDirection = (punchDirection / 10)*hardness;
+        iTween.PunchPosition(GameObject.FindGameObjectWithTag("MainCamera"), punchDirection, time);
 
     }
 

@@ -5,7 +5,7 @@ using GamepadInput;
 
 public class Global : MonoBehaviour {
 
-    public const int NumberOfPlayers = 3;
+    public const int NumberOfPlayers = 4;
 
     [HideInInspector]
 
