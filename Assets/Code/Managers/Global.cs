@@ -5,7 +5,7 @@ using GamepadInput;
 
 public class Global : MonoBehaviour {
 
-    public const int NumberOfPlayers = 4;
+    public const int NumberOfPlayers = 2;
 
     [HideInInspector]
 
@@ -17,14 +17,6 @@ public class Global : MonoBehaviour {
         WHISKEY,
         NONE
     };
-
-    public enum PlayerIndex
-    {
-        PLAYER1,
-        PLAYER2,
-        PLAYER3,
-        PLAYER4
-    }
 
     public static bool GAME_END;
     public static bool GAME_RESET = false;

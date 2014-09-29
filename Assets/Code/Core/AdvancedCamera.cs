@@ -30,12 +30,16 @@ public class AdvancedCamera : MonoBehaviour {
 
             playerList.OrderBy(p => p.transform.position);
             Vector3 highestValue = playerList[0].transform.position;
-            print(highestValue);
             Vector3 lowestValue = playerList[Global.players.Count - 1].transform.position;
-            print(lowestValue);
 
             newPosition += highestValue + lowestValue;
-            newPosition.z = -20;
+            newPosition.z = -20; 
+
+            if (newPosition.x > 0)
+                newPosition.x += playerWidth;
+            else if (newPosition.x < 0)
+                newPosition.x -= playerWidth;
+
             if (newPosition.x > 4)
                 newPosition.x = 4;
             if (newPosition.x < -4)

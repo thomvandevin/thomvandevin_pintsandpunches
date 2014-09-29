@@ -17,7 +17,7 @@ public class KeyButton : MonoBehaviour {
     {
         if (GUI.Button(new Rect(20, 40, 80, 20), "Button"))
         {
-            Global.leprechauns[0].Screenshake(new Vector2(-.1f, .1f), 10, .5f);
+            Global.leprechauns[0].PunchShake(new Vector2(.1f, .1f), 10, .5f);
         }
     }
 }

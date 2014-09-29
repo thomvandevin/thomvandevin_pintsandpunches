@@ -8,12 +8,11 @@ public class AdvancedCameraFollower : MonoBehaviour {
     public float scaleHardness = .5f;
 
     private bool on = true;
-    private Camera cameraScript;
 
 	// Use this for initialization
 	void Start ()
     {
-        cameraScript = gameObject.GetComponent<Camera>();
+
 	}
 	
 	// Update is called once per frame
@@ -24,7 +23,7 @@ public class AdvancedCameraFollower : MonoBehaviour {
             Vector3 pp = Vector3.MoveTowards(transform.position, cameraLead.transform.position, moveHardness * Time.deltaTime);
             pp.z = -10;
             transform.position = pp;
-            //cameraScript.orthographicSize = 3.5f + scaleHardness * Mathf.Abs(Vector3.Distance(transform.position, cameraLead.transform.position));
+            //cameraScript.orthographicSize = 5f + scaleHardness * Mathf.Abs(Vector3.Distance(transform.position, cameraLead.transform.position));
         }
             
 	}
