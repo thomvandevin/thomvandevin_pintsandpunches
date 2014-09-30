@@ -35,14 +35,14 @@ public class Leprechaun : Entity {
     public PlayerStates playerState;
     public DashTypes dashType;
     public Global.SortOfDrink sortOfDrink;
-    public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer;
+    public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer, collidingWithWall;
     public bool onGround, isHit, isDrinking, isBlocking, isDashing, isAttacking;
     public int controllerNumber, chosenCharacter, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
     public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide;
     public string hitDirection, playerStateString;
     public float gravity, gravityCorrection, resistance, drunknessF, damageMultiplayer, groundRadius;
     public Vector2 startingPosition, velocity, previousPosition, maxVelocity, lastVelocity, drunkVelocity, respawnButtonPos;
-    public GameObject groundCheck, punchCheck, bodyCheck;
+    public GameObject groundCheck, punchCheck, bodyCheck, wallCheck;
     public LayerMask groundLayer;
     //public SoundEffect sfx_punch_hit, sfx_punch_miss, sfx_jump_down, sfx_jump, sfx_knockout, sfx_drink, sfx_drink_whiskey;
     //public SoundEffectInstance sfx_drink_whiskey_inst;
@@ -72,10 +72,13 @@ public class Leprechaun : Entity {
         groundLayer = gameObject.GetComponent<LayerMaskPass>().GetLayerMask();
         punchCheck = Global.getChildGameObject(playerObject, "PunchCheck");
         bodyCheck = Global.getChildGameObject(playerObject, "BodyCheck");
+        wallCheck = Global.getChildGameObject(playerObject, "WallCheck");
+        collidingWithWall = false;
         gravity = 0.5f;
         resistance = 2f;
         velocity = new Vector2(0, 60);
-        maxVelocity = new Vector2(70, 750);
+        //maxVelocity = new Vector2(70, 750); //OLD
+        maxVelocity = new Vector2(40, 530);
         lastVelocity = new Vector2(0, 2);
         skipNextMove = false;
         fallTroughBar = false;
@@ -131,11 +134,12 @@ public class Leprechaun : Entity {
     {
         Movement();
         KeepOnScreen();
+        base.Update();
 
     }
 
 	// Update is called once per frame
-	public void Update () 
+	public override void Update () 
     {
         //if (Global.XboxInput.GetButtonDown(1,0))
         //    Global.GAME_RESET = true;
@@ -183,6 +187,7 @@ public class Leprechaun : Entity {
                         lep.GotHit(this.transform.position, damageMultiplayer, controllerIndex[controllerNumber]);
                         didHit = true;
                         lep.isHit = true;
+                        lep.animator.SetBool("isHit", true);
                         lep.Invoke("NotHit", .15f);
                     }
                 }
@@ -272,6 +277,7 @@ public class Leprechaun : Entity {
 
         if (IsDead)
         {
+            print("i be dead yo");
             //rbuttonPos = new Vector2(GetPosition.X + Global.PLAYER_SIZE / 2 + 10, GetPosition.Y + 40);
             //respawnButton.GetPosition = rbuttonPos;
             //respawnButton.Update();
@@ -292,7 +298,7 @@ public class Leprechaun : Entity {
 
         float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
 
-        if (!isHit)
+        if (!isHit && !collidingWithWall)
         {
             if (GamePad.GetKeyboardKey(KeyCode.LeftArrow))
                 move = -1;
@@ -310,6 +316,10 @@ public class Leprechaun : Entity {
             else if (move < 0 && Direction == Facing.RIGHT)
                 Flip();
         }
+        else if (collidingWithWall && onGround)
+            collidingWithWall = false;
+
+
     }
 
 
@@ -433,21 +443,17 @@ public class Leprechaun : Entity {
         else if (punchPosition.x < transform.position.x)
             punchDirection.x = -1;
 
-
         if (!isBlocking)
         {
             isHit = true;
-            if (punchDirection.x <= -.5 && Direction == Facing.LEFT)
-                hitDirection = "Back";
-            else if (punchDirection.x >= .5 && Direction == Facing.LEFT)
-                hitDirection = "Front";
+            if (punchDirection.x >= .5 && Direction == Facing.LEFT)
+                Flip();
             else if (punchDirection.x <= -.5 && Direction == Facing.RIGHT)
-                hitDirection = "Front";
-            else if (punchDirection.x >= .5 && Direction == Facing.RIGHT)
-                hitDirection = "Back";
+                Flip();
+
         }
-        gameObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 10, 5f));
-        PunchShake(punchDirection, 1, .5f);
+        gameObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, 100f));
+        PunchShake(punchDirection, 1.7f, .4f, false);
         
         if (!isBlocking && !IsDead && ((int)(1 * damageM)) >= GetHealth)
         {
@@ -474,16 +480,17 @@ public class Leprechaun : Entity {
         else if (!isBlocking && !IsDead)
             Damage((int)(1 * damageM));
 
-        //Console.WriteLine(IsDead);
-
     }
 
     public void NotHit()
     {
-        if (rigidbody2D.velocity.x > 10)
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x / 6, rigidbody2D.velocity.y);
+        if (Mathf.Abs(rigidbody2D.velocity.x) > 10)
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x / 10, rigidbody2D.velocity.y);
         else
+        {
             isHit = false;
+            animator.SetBool("isHit", false);
+        }
     }
 
     public void GetDrunk(Global.SortOfDrink sortOfDrink)
@@ -511,21 +518,32 @@ public class Leprechaun : Entity {
 
     private void KeepOnScreen()
     {
-        Vector3 pp = transform.position;
+        //GameObject wallRight = GameObject.FindGameObjectWithTag("Collision_right");
+        //GameObject wallLeft = GameObject.FindGameObjectWithTag("Collision_left");
 
-        if (pp.x > 9)
-            pp.x = 9;
-        else if (pp.x < -9)
-            pp.x = -9;
+        //if (wallCheck.transform.position.x > wallRight.transform.position.x)
+        //    collidingWithWall = true;
+        //else if(wallCheck.transform.position.x < wallLeft.transform.position.x)
+        //    collidingWithWall = true;
+    }
 
-        transform.position = pp;
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Collision_left" || coll.gameObject.tag == "Collision_right")
+            collidingWithWall = true;
 
     }
 
-    public void PunchShake(Vector2 punchDirection, float hardness, float time)
+    public void PunchShake(Vector2 punchDirection, float hardness, float time, bool motionB)
     {
         punchDirection = (punchDirection/10)*hardness;
         iTween.PunchPosition(GameObject.FindGameObjectWithTag("MainCamera"), punchDirection, time);
+        if(motionB)
+        {
+            MotionBlur motionBlur = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MotionBlur>();
+            motionBlur.blurAmount = .4f;
+            motionBlur.Invoke("StopBlur", .2f);
+        }
 
     }
 

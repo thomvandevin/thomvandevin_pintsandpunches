@@ -6,6 +6,7 @@ using System.Linq;
 public class AdvancedCamera : MonoBehaviour {
 
     public float playerWidth;
+    public float margin;
 
     private Vector3 newPosition;
     private bool on = true;
@@ -35,19 +36,19 @@ public class AdvancedCamera : MonoBehaviour {
             newPosition += highestValue + lowestValue;
             newPosition.z = -20; 
 
-            if (newPosition.x > 0)
-                newPosition.x += playerWidth;
-            else if (newPosition.x < 0)
-                newPosition.x -= playerWidth;
+            //if (newPosition.x > 0)
+            //    newPosition.x += playerWidth;
+            //else if (newPosition.x < 0)
+            //    newPosition.x -= playerWidth;
 
-            if (newPosition.x > 4)
-                newPosition.x = 4;
-            if (newPosition.x < -4)
-                newPosition.x = -4; 
-            if (newPosition.y > 2)
-                newPosition.y = 2; 
-            if (newPosition.y < -2)
-                newPosition.y = -2;
+            if (newPosition.x > margin)
+                newPosition.x = margin;
+            if (newPosition.x < -margin)
+                newPosition.x = -margin; 
+            if (newPosition.y > margin/2)
+                newPosition.y = margin/2; 
+            if (newPosition.y < -(margin/2))
+                newPosition.y = -(margin/2);
 
             transform.position = newPosition / 2;
         }
