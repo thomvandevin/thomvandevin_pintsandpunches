@@ -15,9 +15,13 @@ public class KeyButton : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 40, 80, 20), "Button"))
+        if (GUI.Button(new Rect(20, 40, 120, 30), "PunchShake"))
         {
             Global.leprechauns[0].PunchShake(new Vector2(.1f, .1f), 10, .5f, false);
+        } 
+        if (GUI.Button(new Rect(20, 80, 120, 30), "Damage"))
+        {
+            Global.leprechauns[1].Damage(5);
         }
     }
 }

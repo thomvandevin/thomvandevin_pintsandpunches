@@ -35,10 +35,12 @@ public class Leprechaun : Entity {
     public PlayerStates playerState;
     public DashTypes dashType;
     public Global.SortOfDrink sortOfDrink;
-    public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer, collidingWithWall, attackDone;
+    public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer;
+    public bool collidingWithWall, attackDone;
     public bool onGround, isHit, isDrinking, isBlocking, isDashing, isAttacking;
     public int controllerNumber, chosenCharacter, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
     public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide, attackCooldown;
+    public int deathUpdateCounter;
     public string hitDirection, playerStateString;
     public float gravity, gravityCorrection, resistance, drunknessF, damageMultiplayer, groundRadius;
     public Vector2 startingPosition, velocity, previousPosition, maxVelocity, lastVelocity, drunkVelocity, respawnButtonPos;
@@ -104,6 +106,7 @@ public class Leprechaun : Entity {
         checkDrunkTimer = true;
         drunkVelocity = new Vector2(0, 0);
         respawnButtonPos = new Vector2(transform.position.x, transform.position.y - 40);
+        deathUpdateCounter = 0;
         //respawnButton = new RespawnButton(rbuttonPos);
         //drunkBubbles = new DrunkBubbles(GetPosition, chosenPlayerIndex);
 
@@ -134,10 +137,13 @@ public class Leprechaun : Entity {
 
     void FixedUpdate()
     {
-        Movement();
-        KeepOnScreen();
-        base.Update();
+        if(!IsDead)
+        {
+            Movement();
+            KeepOnScreen();
+        }
 
+        base.Update();
     }
 
 	// Update is called once per frame
@@ -177,8 +183,6 @@ public class Leprechaun : Entity {
                 animator.GetBool("grounded") == true && attackOnce == -1 && 
                 !isDrinking && attackCooldown == 0)
             {
-
-                print("swag");
                 //playerState = PlayerStates.ATTACKING;
                 isAttacking = true;
                 animator.SetBool("isAttacking", true);
@@ -288,7 +292,20 @@ public class Leprechaun : Entity {
 
         //ManageDrunkness();
 
-        if (IsDead)
+        if (IsDead && deathUpdateCounter == 0)
+        {
+            deathUpdateCounter++;
+            animator.SetBool("isHit", false);
+            animator.SetBool("isAttacking", false);
+            animator.SetBool("isDead", true);
+            iTween.Stab(gameObject, Resources.Load("Audio/SFX/Knockout") as AudioClip, 0f);
+        }
+        else if (IsDead && deathUpdateCounter == 1)
+        {
+            deathUpdateCounter++;
+            animator.SetBool("isDead", false);
+        }
+        else if (IsDead)
         {
             print("i be dead yo");
             //rbuttonPos = new Vector2(GetPosition.X + Global.PLAYER_SIZE / 2 + 10, GetPosition.Y + 40);
