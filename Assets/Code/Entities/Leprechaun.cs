@@ -35,10 +35,10 @@ public class Leprechaun : Entity {
     public PlayerStates playerState;
     public DashTypes dashType;
     public Global.SortOfDrink sortOfDrink;
-    public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer, collidingWithWall;
+    public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer, collidingWithWall, attackDone;
     public bool onGround, isHit, isDrinking, isBlocking, isDashing, isAttacking;
     public int controllerNumber, chosenCharacter, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
-    public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide;
+    public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide, attackCooldown;
     public string hitDirection, playerStateString;
     public float gravity, gravityCorrection, resistance, drunknessF, damageMultiplayer, groundRadius;
     public Vector2 startingPosition, velocity, previousPosition, maxVelocity, lastVelocity, drunkVelocity, respawnButtonPos;
@@ -88,6 +88,8 @@ public class Leprechaun : Entity {
         dashType = DashTypes.FORWARD;
         jumpOnce = 0;
         attackOnce = 0;
+        attackCooldown = 0;
+        attackDone = false;
         hitDirection = "JAWAT";
         sortOfDrink = Global.SortOfDrink.NONE;
         drinkAnimCounter = 0;
@@ -171,12 +173,13 @@ public class Leprechaun : Entity {
             }
 
 
-            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && animator.GetBool("grounded") && attackOnce == 0 && !isDrinking)
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && animator.GetBool("grounded") && attackOnce == -1 && !isDrinking && attackCooldown == 0)
             {
                 //playerState = PlayerStates.ATTACKING;
                 isAttacking = true;
                 animator.SetBool("isAttacking", true);
                 attackOnce = 1;
+                attackCooldown = Random.Range(38, 48);
 
                 bool didHit = false;
 
@@ -202,18 +205,23 @@ public class Leprechaun : Entity {
                     //sfx_punch_hit = Engine.Loader.SoundEffects["Punch_Hit_0" + Engine.Rand.Next(1, 6).ToString()];
                     //sfx_punch_hit.Play();
                 }
+
             }
-            
 
-            if (GamePad.GetButtonUp(GamePad.Button.X, gamePadIndex))
+            if (attackOnce >= 1)
+                attackOnce -= 1;
+            else if(attackOnce == 0)
             {
-                if (attackOnce >= 1)
-                    attackOnce = 0;
+                attackOnce = -1;
 
+                attackDone = false;
                 isAttacking = false;
                 animator.SetBool("isAttacking", false);
             }
 
+            if (attackCooldown > 0)
+                attackCooldown--;
+            
             #endregion
 
             #region BLOCKING CODE
@@ -289,6 +297,7 @@ public class Leprechaun : Entity {
 
 	}
 
+
     public void Movement()
     {
         onGround = Physics2D.OverlapCircle(groundCheck.transform.position, groundRadius, groundLayer);
@@ -318,8 +327,7 @@ public class Leprechaun : Entity {
         }
         else if (collidingWithWall && onGround)
             collidingWithWall = false;
-
-
+        
     }
 
 
@@ -356,17 +364,18 @@ public class Leprechaun : Entity {
 
         if (dashType == DashTypes.FORWARD)
         {
+            if (Direction == Facing.LEFT)
+            {
+                rigidbody2D.AddForce(new Vector2(-(10 * maxVelocity.x), 1));
+                mirrored = true;
+            }
+
             if (Direction == Facing.RIGHT)
             {
                 rigidbody2D.AddForce(new Vector2(10 * maxVelocity.x, 1));
                 mirrored = false;
             }
 
-            if (Direction == Facing.LEFT)
-            {
-                base.Move(new Vector2(-10, 0));
-                mirrored = true;
-            }
         }
 
         if (dashType == DashTypes.TRIGGER)
@@ -493,6 +502,7 @@ public class Leprechaun : Entity {
         }
     }
 
+
     public void GetDrunk(Global.SortOfDrink sortOfDrink)
     {
         switch (sortOfDrink)
@@ -526,7 +536,7 @@ public class Leprechaun : Entity {
         //else if(wallCheck.transform.position.x < wallLeft.transform.position.x)
         //    collidingWithWall = true;
     }
-
+    
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Collision_left" || coll.gameObject.tag == "Collision_right")
@@ -541,7 +551,7 @@ public class Leprechaun : Entity {
         if(motionB)
         {
             MotionBlur motionBlur = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MotionBlur>();
-            motionBlur.blurAmount = .4f;
+            motionBlur.blurAmount = .8f;
             motionBlur.Invoke("StopBlur", .2f);
         }
 
