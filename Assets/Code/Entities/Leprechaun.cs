@@ -173,13 +173,17 @@ public class Leprechaun : Entity {
             }
 
 
-            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && animator.GetBool("grounded") && attackOnce == -1 && !isDrinking && attackCooldown == 0)
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && 
+                animator.GetBool("grounded") == true && attackOnce == -1 && 
+                !isDrinking && attackCooldown == 0)
             {
+
+                print("swag");
                 //playerState = PlayerStates.ATTACKING;
                 isAttacking = true;
                 animator.SetBool("isAttacking", true);
                 attackOnce = 1;
-                attackCooldown = Random.Range(38, 48);
+                attackCooldown = Random.Range(40, 48);
 
                 bool didHit = false;
 
@@ -197,15 +201,14 @@ public class Leprechaun : Entity {
 
                 if (!didHit)
                 {
-                    //sfx_punch_miss = Engine.Loader.SoundEfisJumoingfects["Punch_Miss_0" + Engine.Rand.Next(1, 6).ToString()];
-                    //sfx_punch_miss.Play();
+                    int i = Random.Range(1, 6);
+                    iTween.Stab(gameObject, Resources.Load("Audio/SFX/Punch_Miss_" + i.ToString()) as AudioClip, 0f);
                 }
                 else
                 {
-                    //sfx_punch_hit = Engine.Loader.SoundEffects["Punch_Hit_0" + Engine.Rand.Next(1, 6).ToString()];
-                    //sfx_punch_hit.Play();
+                    int i = Random.Range(1, 6);
+                    iTween.Stab(gameObject, Resources.Load("Audio/SFX/Punch_Hit_" + i.ToString()) as AudioClip, 0f);
                 }
-
             }
 
             if (attackOnce >= 1)
@@ -221,6 +224,8 @@ public class Leprechaun : Entity {
 
             if (attackCooldown > 0)
                 attackCooldown--;
+            else if (attackCooldown < 0)
+                attackCooldown = 0;
             
             #endregion
 

@@ -21,7 +21,7 @@ public class World : MonoBehaviour {
 
         for(int i = 1; i <= numberOfPlayers; i++)
         {
-            GameObject playerObject = Instantiate(Resources.Load("Entities/Player_1")) as GameObject;
+            GameObject playerObject = Instantiate(Resources.Load("Prefabs/Entities/Player_1")) as GameObject;
             playerObject.AddComponent<Player>();
             Player playerScript = playerObject.GetComponent<Player>();
             playerScript.SetPlayer(i, 1, playerObject);
