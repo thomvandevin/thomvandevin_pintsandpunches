@@ -14,6 +14,8 @@ public class Drink : MonoBehaviour {
     public float gravity;
     //public SoundEffect sfx_drink_floor;
 
+    public GameObject drinkCollision;
+
     private bool isGrabbed;
     public bool IsGrabbed { get { return isGrabbed; } set { isGrabbed = value; } }
 
@@ -25,6 +27,7 @@ public class Drink : MonoBehaviour {
         velocity = new Vector2(0, 4);
         gravity = 0.8f;
 
+        drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision");
         //drinkCollision_main = new Rectangle((int)GetPosition.X - 16, (int)GetPosition.Y - 32, 32, 64);
 
         switch (randomDrink)

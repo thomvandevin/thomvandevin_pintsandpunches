@@ -149,8 +149,8 @@ public class Leprechaun : Entity {
 	// Update is called once per frame
 	public override void Update () 
     {
-        //if (Global.XboxInput.GetButtonDown(1,0))
-        //    Global.GAME_RESET = true;
+        if (GamePad.GetButtonDown(GamePad.Button.Start, controllerIndex[1]))
+            Global.GAME_RESET = true;
 
         if (kills >= 5)
         {
@@ -164,17 +164,19 @@ public class Leprechaun : Entity {
 
             if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex))
             {
-                foreach (Drink d in Global.drinks)
+                foreach (GameObject d in Global.drinks)
                 {
-                    //if (playerCollision_main.Intersects(d.drinkCollision_main))
-                    //{
-                    //    sortOfDrink = d.drinkType;
-                    //    //sortOfDrink = Global.SortOfDrink.ALE;
-                    //    GetDrunk(sortOfDrink);
-                    //    Global.drinks.Remove(d);
-                    //    isDrinking = true;
-                    //    velocity.X = 0f;
-                    //}
+                    Drink drinkScript = d.GetComponent<Drink>();
+
+                    if (bodyCheck.collider2D.bounds.Intersects(drinkScript.drinkCollision.collider2D.bounds))
+                    {
+                        print("doshit");
+                        //sortOfDrink = drinkScript.drinkType;
+                        //sortOfDrink = Global.SortOfDrink.ALE;
+                        //GetDrunk(sortOfDrink);
+                        //Global.drinks.Remove(d);
+                        //isDrinking = true;
+                    }
                 }
             }
 
@@ -195,7 +197,7 @@ public class Leprechaun : Entity {
                 {
                     if (punchCheck.collider2D.bounds.Intersects(lep.bodyCheck.collider2D.bounds) && lep != this)
                     {
-                        lep.GotHit(this.transform.position, damageMultiplayer, controllerIndex[controllerNumber]);
+                        lep.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                         didHit = true;
                         lep.isHit = true;
                         lep.animator.SetBool("isHit", true);
@@ -235,48 +237,50 @@ public class Leprechaun : Entity {
 
             #region BLOCKING CODE
 
-            //if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isJumping && !isDashing && !isAttacking && !isDrinking)
-            //{
-            //    isBlocking = true;
-            //    if (isWalking)
-            //        isWalking = false;
-            //}
+            if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isDashing && !isAttacking && !isDrinking)
+            {
+                isBlocking = true;
+                animator.SetBool("isBlocking", true);
+            }
 
-            //if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
-            //    isBlocking = false;
+            if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
+            {
+                isBlocking = false;
+                animator.SetBool("isBlocking", false);
+            }
 
             #endregion
 
             #region DASHING CODE
-            if ((GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, gamePadIndex) > 0.1 || GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, gamePadIndex) > 0.1)
-                && !isDashing && !isDashCooldown)
-            {
-                isDashing = true;
-                dashTimer = 0;
-                //animation.GetAnimation.Start();
-            }
+            //if ((GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, gamePadIndex) > 0.1 || GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, gamePadIndex) > 0.1)
+            //    && !isDashing && !isDashCooldown)
+            //{
+            //    isDashing = true;
+            //    dashTimer = 0;
+            //    //animation.GetAnimation.Start();
+            //}
 
-            if (isDashing)
-            {
-                if (dashTimer > 10)
-                {
-                    dashCooldown = 120;
-                    isDashCooldown = true;
-                    isDashing = false;
-                }
+            //if (isDashing)
+            //{
+            //    if (dashTimer > 10)
+            //    {
+            //        dashCooldown = 120;
+            //        isDashCooldown = true;
+            //        isDashing = false;
+            //    }
 
-                //playerState = PlayerStates.DASHING;
-                dashTimer++;
-                Dash();
-            }
+            //    //playerState = PlayerStates.DASHING;
+            //    dashTimer++;
+            //    Dash();
+            //}
 
-            if (isDashCooldown)
-            {
-                if (dashCooldown > 0)
-                    dashCooldown--;
-                else
-                    isDashCooldown = false;
-            }
+            //if (isDashCooldown)
+            //{
+            //    if (dashCooldown > 0)
+            //        dashCooldown--;
+            //    else
+            //        isDashCooldown = false;
+            //}
             #endregion
 
             #region JUMPING CODE
@@ -297,6 +301,8 @@ public class Leprechaun : Entity {
             deathUpdateCounter++;
             animator.SetBool("isHit", false);
             animator.SetBool("isAttacking", false);
+            animator.SetBool("isBlocking", false);
+            animator.SetBool("grounded", true);
             animator.SetBool("isDead", true);
             iTween.Stab(gameObject, Resources.Load("Audio/SFX/Knockout") as AudioClip, 0f);
         }
@@ -329,7 +335,7 @@ public class Leprechaun : Entity {
 
         float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
 
-        if (!isHit && !collidingWithWall)
+        if (!isHit && !collidingWithWall && !isBlocking)
         {
             if (GamePad.GetKeyboardKey(KeyCode.LeftArrow))
                 move = -1;

@@ -23,7 +23,7 @@ public class Global : MonoBehaviour {
 
     public static List<GameObject> players;
     public static List<Leprechaun> leprechauns;
-    public static List<Drink> drinks;
+    public static List<GameObject> drinks;
 
     public static World WorldObject;
 
@@ -41,7 +41,7 @@ public class Global : MonoBehaviour {
 
         players = new List<GameObject>();
         leprechauns = new List<Leprechaun>();
-        drinks = new List<Drink>();
+        drinks = new List<GameObject>();
 
         WorldObject = gameObject.AddComponent<World>();
 

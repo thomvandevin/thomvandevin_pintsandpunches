@@ -8,7 +8,7 @@ public class World : MonoBehaviour {
 
 
     public Vector2 drinkPos;
-    public int drinkTileRand;
+    //public int drinkTileRand;
     private int drinkTimer;
 
     public int numberOfPlayers = Global.NumberOfPlayers;
@@ -32,7 +32,7 @@ public class World : MonoBehaviour {
 
         drinkTimer = Random.Range(200, 300);
     }
-	
+
 	// Update is called once per frame
 	void Update () 
     {
@@ -41,13 +41,21 @@ public class World : MonoBehaviour {
             p.GetComponent<Player>().Update();
         }
 
+        if (Global.drinks.Count < 4)
+        {
+            drinkTimer--;
+            if (drinkTimer <= 0)
+                SpawnDrink();
+        }
+
 	}
 
     public void SpawnDrink()
     {
-        drinkTileRand = Random.Range(0,4);
-        //drinkPos = Global.tiles_Spawn[drinkTileRand].GetPosition;
-        //Drink drink = new Drink(drinkPos);
-        //Global.drinks.Add(drink);
+        //drinkTileRand = Random.Range(0,4);
+        drinkPos = new Vector2(Random.Range(-5, 5), 0);
+        GameObject drink = Instantiate(Resources.Load("Prefabs/Objects/Drinks/Pickup_Drink_Ale"), drinkPos, Quaternion.identity) as GameObject;
+        Global.drinks.Add(drink);
+        drinkTimer = Random.Range(400, 500);
     }
 }
