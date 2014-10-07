@@ -55,6 +55,8 @@ public class World : MonoBehaviour {
         //drinkTileRand = Random.Range(0,4);
         drinkPos = new Vector2(Random.Range(-5, 5), 0);
         GameObject drink = Instantiate(Resources.Load("Prefabs/Objects/Drinks/Pickup_Drink_Ale"), drinkPos, Quaternion.identity) as GameObject;
+        Vector2 randomForce = new Vector2(Random.Range(-200,200), Random.Range(100, 200));
+        drink.rigidbody2D.AddForce(randomForce);
         Global.drinks.Add(drink);
         drinkTimer = Random.Range(400, 500);
     }

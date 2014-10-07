@@ -491,6 +491,16 @@ public class Leprechaun : Entity {
         }
         gameObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, 100f));
         PunchShake(punchDirection, 1.7f, .4f, false);
+
+        GameObject particles = Instantiate(Resources.Load("Prefabs/Objects/Particles/Particles_BloodAndGore"), transform.position - (punchDirection/1.3f), Quaternion.identity) as GameObject;
+        if (punchDirection.x == 1)
+        {
+            Vector3 rot = particles.transform.localEulerAngles;
+            rot.z += 180;
+            particles.transform.localEulerAngles = rot;
+        }
+        Destroy(particles.gameObject, 1f);
+
         
         if (!isBlocking && !IsDead && ((int)(1 * damageM)) >= GetHealth)
         {
