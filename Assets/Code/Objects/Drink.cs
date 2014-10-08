@@ -28,7 +28,6 @@ public class Drink : MonoBehaviour {
         gravity = 0.8f;
 
         drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision");
-        //drinkCollision_main = new Rectangle((int)GetPosition.X - 16, (int)GetPosition.Y - 32, 32, 64);
 
         switch (randomDrink)
         {
@@ -54,9 +53,13 @@ public class Drink : MonoBehaviour {
         //flare = new Flare(transform.position);
         showFlare = false;
 	}
+
+    public void SetDrink()
+    {
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 
         if (showFlare)
         {
@@ -86,4 +89,10 @@ public class Drink : MonoBehaviour {
         //else
         //  flare.renderer.enabled = false;
 	}
+
+    public void Remove()
+    {
+        Global.drinks.Remove(this.gameObject);
+        Destroy(this.gameObject);
+    }
 }

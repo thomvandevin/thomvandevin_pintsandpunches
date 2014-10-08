@@ -10,12 +10,6 @@ public class Player : MonoBehaviour {
     public bool RESET;
     public Vector2 playerStartPosition;
 
-    private Vector2 position;
-    //public Vector2 GetPosition { get { return leprechaun.GetPosition; } set { position = value; } }
-
-    //private Point gridPos;
-    //public Point GetGridPosition { get { return gridPos; } }
-
     //private RespawnFlare respawnFlare;
     
     public GameObject leprechaunObject;

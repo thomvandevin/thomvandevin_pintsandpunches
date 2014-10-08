@@ -162,27 +162,28 @@ public class Leprechaun : Entity {
         {
             #region ATTACKING CODE
 
-            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex))
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex)
+                && onGround && !isDrinking)
             {
-                foreach (GameObject d in Global.drinks)
+                foreach (GameObject d in Global.drinks.ToArray())
                 {
                     Drink drinkScript = d.GetComponent<Drink>();
 
                     if (bodyCheck.collider2D.bounds.Intersects(drinkScript.drinkCollision.collider2D.bounds))
                     {
-                        print("doshit");
                         //sortOfDrink = drinkScript.drinkType;
                         //sortOfDrink = Global.SortOfDrink.ALE;
                         //GetDrunk(sortOfDrink);
                         //Global.drinks.Remove(d);
                         //isDrinking = true;
+                        drinkScript.Remove();
                     }
                 }
             }
 
 
             if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && 
-                animator.GetBool("grounded") == true && attackOnce == -1 && 
+                onGround && attackOnce == -1 && 
                 !isDrinking && attackCooldown == 0)
             {
                 //playerState = PlayerStates.ATTACKING;
@@ -193,7 +194,7 @@ public class Leprechaun : Entity {
 
                 bool didHit = false;
 
-                foreach (Leprechaun lep in Global.leprechauns)
+                foreach (Leprechaun lep in Global.leprechauns.ToArray())
                 {
                     if (punchCheck.collider2D.bounds.Intersects(lep.bodyCheck.collider2D.bounds) && lep != this)
                     {
@@ -470,6 +471,7 @@ public class Leprechaun : Entity {
 
         // MAAK DAT DE SPELER LANGZAMER / SNELLER LOOPT OM DE ZOVEEL TIJD
         // BAZEER DE INTERVAL OP DRUNKNESS
+
     }
 
     public void GotHit(Vector2 punchPosition, float damageM, GamePad.Index player)
