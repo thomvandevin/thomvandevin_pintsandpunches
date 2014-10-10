@@ -51,7 +51,7 @@ public class Leprechaun : Entity {
     //public RespawnButton respawnButton;
     //public DrunkBubbles drunkBubbles;
 
-    public Animator animator;
+    private Animator top_animator, bottom_animator;
     
     public Leprechaun()
     {
@@ -110,7 +110,8 @@ public class Leprechaun : Entity {
         //respawnButton = new RespawnButton(rbuttonPos);
         //drunkBubbles = new DrunkBubbles(GetPosition, chosenPlayerIndex);
 
-        animator = GetComponent<Animator>();
+        top_animator = Global.getChildGameObject(gameObject, "Animation_top").GetComponent<Animator>();
+        bottom_animator = Global.getChildGameObject(gameObject, "Animation_bottom").GetComponent<Animator>();
         transform.position = pos;
         SetEntity(pos, "filler", 30, true);
 
@@ -188,7 +189,7 @@ public class Leprechaun : Entity {
             {
                 //playerState = PlayerStates.ATTACKING;
                 isAttacking = true;
-                animator.SetBool("isAttacking", true);
+                SetAnimation("isAttacking", true);
                 attackOnce = 1;
                 attackCooldown = Random.Range(40, 48);
 
@@ -201,7 +202,7 @@ public class Leprechaun : Entity {
                         lep.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                         didHit = true;
                         lep.isHit = true;
-                        lep.animator.SetBool("isHit", true);
+                        lep.SetAnimation("isHit", true);
                         lep.Invoke("NotHit", .15f);
                     }
                 }
@@ -226,7 +227,7 @@ public class Leprechaun : Entity {
 
                 attackDone = false;
                 isAttacking = false;
-                animator.SetBool("isAttacking", false);
+                SetAnimation("isAttacking", false);
             }
 
             if (attackCooldown > 0)
@@ -241,13 +242,13 @@ public class Leprechaun : Entity {
             if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isDashing && !isAttacking && !isDrinking)
             {
                 isBlocking = true;
-                animator.SetBool("isBlocking", true);
+                SetAnimation("isBlocking", true);
             }
 
             if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
             {
                 isBlocking = false;
-                animator.SetBool("isBlocking", false);
+                SetAnimation("isBlocking", false);
             }
 
             #endregion
@@ -288,7 +289,7 @@ public class Leprechaun : Entity {
 
             if (onGround && (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space)) && !isAttacking && !isHit)
             {
-                animator.SetBool("grounded", false);
+                SetAnimation("grounded", false);
                 rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
             }
 
@@ -300,17 +301,17 @@ public class Leprechaun : Entity {
         if (IsDead && deathUpdateCounter == 0)
         {
             deathUpdateCounter++;
-            animator.SetBool("isHit", false);
-            animator.SetBool("isAttacking", false);
-            animator.SetBool("isBlocking", false);
-            animator.SetBool("grounded", true);
-            animator.SetBool("isDead", true);
+            SetAnimation("isHit", false);
+            SetAnimation("isAttacking", false);
+            SetAnimation("isBlocking", false);
+            SetAnimation("grounded", true);
+            SetAnimation("isDead", true);
             iTween.Stab(gameObject, Resources.Load("Audio/SFX/Knockout") as AudioClip, 0f);
         }
         else if (IsDead && deathUpdateCounter == 1)
         {
             deathUpdateCounter++;
-            animator.SetBool("isDead", false);
+            SetAnimation("isDead", false);
         }
         else if (IsDead)
         {
@@ -330,9 +331,9 @@ public class Leprechaun : Entity {
     public void Movement()
     {
         onGround = Physics2D.OverlapCircle(groundCheck.transform.position, groundRadius, groundLayer);
-        animator.SetBool("grounded", onGround);
+        SetAnimation("grounded", onGround);
 
-        animator.SetFloat("vSpeed", rigidbody2D.velocity.y);
+        SetAnimation("vSpeed", rigidbody2D.velocity.y);
 
         float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
 
@@ -345,7 +346,7 @@ public class Leprechaun : Entity {
 
             if (!isAttacking)
             {
-                animator.SetFloat("hSpeed", Mathf.Abs(move));
+                SetAnimation("hSpeed", Mathf.Abs(move));
                 rigidbody2D.velocity = new Vector2(move * (float)maxVelocity.x / 8, rigidbody2D.velocity.y);
             }
 
@@ -538,7 +539,7 @@ public class Leprechaun : Entity {
         else
         {
             isHit = false;
-            animator.SetBool("isHit", false);
+            SetAnimation("isHit", false);
         }
     }
 
@@ -596,5 +597,25 @@ public class Leprechaun : Entity {
         }
 
     }
+
+    #region SET ANIMATION STUFF
+
+    private void SetAnimation(string name, int value)
+    {
+        top_animator.SetInteger(name, value);
+        bottom_animator.SetInteger(name, value);
+    }
+    private void SetAnimation(string name, float value)
+    {
+        top_animator.SetFloat(name, value);
+        bottom_animator.SetFloat(name, value);
+    }
+    private void SetAnimation(string name, bool value)
+    {
+        top_animator.SetBool(name, value);
+        bottom_animator.SetBool(name, value);
+    }
+
+    #endregion
 
 }
