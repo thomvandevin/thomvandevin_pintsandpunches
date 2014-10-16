@@ -60,7 +60,7 @@ public class World : MonoBehaviour {
         //drinkTileRand = Random.Range(0,4);
         drinkPos = new Vector2(Random.Range(-5, 5), 0);
 
-        GameObject drink = Instantiate(Resources.Load("Prefabs/Objects/Drinks/Pickup_Drink_Ale"), drinkPos, Quaternion.identity) as GameObject;
+        GameObject drink = Instantiate(Resources.Load("Prefabs/Objects/Drinks/Pickup_Drink"), drinkPos, Quaternion.identity) as GameObject;
         Global.drinks.Add(drink);
         
         Vector2 randomForce = new Vector2(Random.Range(-200, 200), Random.Range(100, 200));

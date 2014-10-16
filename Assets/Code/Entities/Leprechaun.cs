@@ -203,7 +203,7 @@ public class Leprechaun : Entity {
                         didHit = true;
                         lep.isHit = true;
                         lep.SetAnimation("isHit", true);
-                        lep.Invoke("NotHit", .15f);
+                        lep.Invoke("NotHit", .2f);
                     }
                 }
 
@@ -492,7 +492,7 @@ public class Leprechaun : Entity {
                 Flip();
 
         }
-        gameObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, 100f));
+        gameObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, maxVelocity.y/3.5f));
         PunchShake(punchDirection, 1.7f, .4f, false);
 
         GameObject particles = Instantiate(Resources.Load("Prefabs/Objects/Particles/Particles_BloodAndGore"), transform.position - (punchDirection/1.3f), Quaternion.identity) as GameObject;
