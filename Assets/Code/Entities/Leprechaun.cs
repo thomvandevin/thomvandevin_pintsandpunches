@@ -34,10 +34,10 @@ public class Leprechaun : Entity {
     public Player playerObject;
     public PlayerStates playerState;
     public DashTypes dashType;
-    public Global.SortOfDrink sortOfDrink;
+    public Drink.SortOfDrink sortOfDrink;
     public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer;
     public bool collidingWithWall, attackDone;
-    public bool onGround, isHit, isDrinking, isBlocking, isDashing, isAttacking;
+    public bool onGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
     public int controllerNumber, chosenCharacter, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
     public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide, attackCooldown;
     public int deathUpdateCounter;
@@ -93,7 +93,7 @@ public class Leprechaun : Entity {
         attackCooldown = 0;
         attackDone = false;
         hitDirection = "JAWAT";
-        sortOfDrink = Global.SortOfDrink.NONE;
+        sortOfDrink = Drink.SortOfDrink.NONE;
         drinkAnimCounter = 0;
         drunkness = 0;
         drunknessF = 0f;
@@ -172,12 +172,15 @@ public class Leprechaun : Entity {
 
                     if (bodyCheck.collider2D.bounds.Intersects(drinkScript.drinkCollision.collider2D.bounds))
                     {
-                        //sortOfDrink = drinkScript.drinkType;
-                        //sortOfDrink = Global.SortOfDrink.ALE;
-                        //GetDrunk(sortOfDrink);
-                        //Global.drinks.Remove(d);
-                        //isDrinking = true;
+                        sortOfDrink = drinkScript.drinkType;
+                        GetDrunk(sortOfDrink);
                         drinkScript.Remove();
+
+                        isDrinking = true;
+                        SetAnimation("isDrinking", true);
+                        SetAnimation("typeOfDrink", drinkScript.drinkNumber);
+                        //Invoke("NotDrinking", .4f);
+
                     }
                 }
             }
@@ -294,6 +297,13 @@ public class Leprechaun : Entity {
             }
 
             #endregion
+        }
+        else if (isDrinking)
+        {
+            if (bottom_animator.GetCurrentAnimatorStateInfo(0).IsName("Drink") &&
+                bottom_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 &&
+                !bottom_animator.IsInTransition(0))
+                NotDrinking();
         }
 
         //ManageDrunkness();
@@ -543,21 +553,27 @@ public class Leprechaun : Entity {
         }
     }
 
+    public void NotDrinking()
+    {
+        isDrinking = false;
+        SetAnimation("isDrinking", false);
+    }
 
-    public void GetDrunk(Global.SortOfDrink sortOfDrink)
+
+    public void GetDrunk(Drink.SortOfDrink sortOfDrink)
     {
         switch (sortOfDrink)
         {
-            case Global.SortOfDrink.ALE:
+            case Drink.SortOfDrink.ALE:
                 drunknessF += 80;
                 break;
-            case Global.SortOfDrink.CIDER:
+            case Drink.SortOfDrink.CIDER:
                 drunknessF += 60;
                 break;
-            case Global.SortOfDrink.STOUT:
+            case Drink.SortOfDrink.STOUT:
                 drunknessF += 120;
                 break;
-            case Global.SortOfDrink.WHISKEY:
+            case Drink.SortOfDrink.WHISKEY:
                 drunknessF += 150;
                 break;
             default:

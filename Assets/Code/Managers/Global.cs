@@ -9,15 +9,6 @@ public class Global : MonoBehaviour {
 
     [HideInInspector]
 
-    public enum SortOfDrink
-    {
-        ALE,
-        CIDER,
-        STOUT,
-        WHISKEY,
-        NONE
-    };
-
     public static bool GAME_END;
     public static bool GAME_RESET = false;
 

@@ -2,12 +2,20 @@
 using System.Collections;
 
 public class Drink : MonoBehaviour {
-
-    public Global.SortOfDrink drinkType;
-
+    
+    public enum SortOfDrink
+    {
+        ALE,
+        CIDER,
+        STOUT,
+        WHISKEY,
+        NONE
+    };
+    public SortOfDrink drinkType;
+    
     //public DrinkFlare flare;
     public bool showFlare;
-    public int randomDrink, flareTimer;
+    public int drinkNumber, flareTimer;
     public string flareType;
 
     public Vector2 velocity;
@@ -21,7 +29,7 @@ public class Drink : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        randomDrink = Random.Range(0,4);
+        drinkNumber = Random.Range(0,4);
         flareTimer = Random.Range(20, 100);
 
         velocity = new Vector2(0, 4);
@@ -29,24 +37,26 @@ public class Drink : MonoBehaviour {
 
         drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision");
 
-        switch (randomDrink)
+        switch (drinkNumber)
         {
             case 0:
-                drinkType = Global.SortOfDrink.ALE;
+                drinkType = SortOfDrink.ALE;
                 break;
             case 1:
-                drinkType = Global.SortOfDrink.CIDER;
+                drinkType = SortOfDrink.CIDER;
                 break;
             case 2:
-                drinkType = Global.SortOfDrink.STOUT;
+                drinkType = SortOfDrink.STOUT;
                 break;
             case 3:
-                drinkType = Global.SortOfDrink.WHISKEY;
+                drinkType = SortOfDrink.WHISKEY;
                 break;
             default:
-                drinkType = Global.SortOfDrink.ALE;
+                drinkType = SortOfDrink.ALE;
                 break;
         }
+
+        gameObject.GetComponent<Animator>().SetInteger("drinkType", drinkNumber);
 
         //sfx_drink_floor = Engine.Loader.SoundEffects["Drink_floor_" + Engine.Rand.Next(1, 4).ToString()];
 
@@ -54,9 +64,6 @@ public class Drink : MonoBehaviour {
         showFlare = false;
 	}
 
-    public void SetDrink()
-    {
-    }
 	
 	// Update is called once per frame
 	public void Update () {

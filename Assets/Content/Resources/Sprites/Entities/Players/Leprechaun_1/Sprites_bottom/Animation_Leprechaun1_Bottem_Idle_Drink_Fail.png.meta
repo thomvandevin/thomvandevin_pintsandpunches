@@ -1,13 +1,12 @@
 fileFormatVersion: 2
-guid: c7d28c8ff1219d44d944bf5b3d70bcb7
+guid: a1af830053fc62b43bb02503a853b25f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_0
-    21300002: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_1
-    21300004: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_2
-    21300006: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_3
-    21300008: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_4
-    21300010: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_5
+    21300000: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_0
+    21300002: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_1
+    21300004: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_2
+    21300006: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_3
+    21300008: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -28,7 +27,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: 0
     aniso: 1
@@ -49,7 +48,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_0
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_0
       rect:
         serializedVersion: 2
         x: 0
@@ -59,7 +58,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_1
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_1
       rect:
         serializedVersion: 2
         x: 192
@@ -69,7 +68,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_2
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_2
       rect:
         serializedVersion: 2
         x: 384
@@ -79,7 +78,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_3
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_3
       rect:
         serializedVersion: 2
         x: 576
@@ -89,20 +88,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_4
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Fail_4
       rect:
         serializedVersion: 2
         x: 768
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_5
-      rect:
-        serializedVersion: 2
-        x: 960
         y: 0
         width: 192
         height: 192

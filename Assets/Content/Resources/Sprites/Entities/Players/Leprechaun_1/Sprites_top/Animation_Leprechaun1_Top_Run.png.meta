@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8ab854f4f30bd344eb6eb9a390d370ca
+guid: 0a425c91a4d01474a9e95378ed2b2041
 TextureImporter:
   fileIDToRecycleName:
     21300000: Animation_Leprechaun1_Top_Run_0
@@ -30,7 +30,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: 0
     aniso: 1
@@ -55,7 +55,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 192
         width: 192
         height: 192
       alignment: 0
@@ -65,7 +65,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
+        y: 192
         width: 192
         height: 192
       alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 0
+        y: 192
         width: 192
         height: 192
       alignment: 0
@@ -85,7 +85,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 576
-        y: 0
+        y: 192
         width: 192
         height: 192
       alignment: 0
@@ -94,7 +94,7 @@ TextureImporter:
     - name: Animation_Leprechaun1_Top_Run_4
       rect:
         serializedVersion: 2
-        x: 768
+        x: 0
         y: 0
         width: 192
         height: 192
@@ -104,7 +104,7 @@ TextureImporter:
     - name: Animation_Leprechaun1_Top_Run_5
       rect:
         serializedVersion: 2
-        x: 960
+        x: 192
         y: 0
         width: 192
         height: 192
@@ -114,7 +114,7 @@ TextureImporter:
     - name: Animation_Leprechaun1_Top_Run_6
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 384
         y: 0
         width: 192
         height: 192
@@ -124,7 +124,7 @@ TextureImporter:
     - name: Animation_Leprechaun1_Top_Run_7
       rect:
         serializedVersion: 2
-        x: 1344
+        x: 576
         y: 0
         width: 192
         height: 192

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34e0c54f89b8e7f41ae6fcf3cfd494da
+guid: 1a505eda78198c24d994bef78bc32e24
 TextureImporter:
   fileIDToRecycleName:
     21300000: Animation_Leprechaun1_Top_Run_Begin_0
@@ -25,7 +25,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: 0
     aniso: 1

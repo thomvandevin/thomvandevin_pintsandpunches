@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 945ff66166f392e4eb270c69a4f6f53f
+guid: ebf15944fb2bea84ab43de51a1debc5f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_0
-    21300002: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_1
-    21300004: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_2
-    21300006: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_3
-    21300008: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_4
-    21300010: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_5
+    21300000: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_0
+    21300002: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_1
+    21300004: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_2
+    21300006: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_3
+    21300008: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_4
+    21300010: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -28,7 +28,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: 0
     aniso: 1
@@ -49,7 +49,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_0
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_0
       rect:
         serializedVersion: 2
         x: 0
@@ -59,7 +59,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_1
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_1
       rect:
         serializedVersion: 2
         x: 192
@@ -69,7 +69,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_2
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_2
       rect:
         serializedVersion: 2
         x: 384
@@ -79,7 +79,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_3
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_3
       rect:
         serializedVersion: 2
         x: 576
@@ -89,7 +89,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_4
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_4
       rect:
         serializedVersion: 2
         x: 768
@@ -99,7 +99,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Stout_Succes_5
+    - name: Animation_Leprechaun1_Bottem_Idle_Drink_Succes_5
       rect:
         serializedVersion: 2
         x: 960
