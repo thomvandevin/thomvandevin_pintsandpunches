@@ -140,7 +140,11 @@ public class Leprechaun : Entity {
     {
         if(!IsDead)
         {
-            Movement();
+            if(!isDrinking)
+            {
+                Movement();
+            }
+
             KeepOnScreen();
         }
 
@@ -177,7 +181,9 @@ public class Leprechaun : Entity {
                         drinkScript.Remove();
 
                         isDrinking = true;
-                        SetAnimation("isDrinking", true);
+                        gameObject.rigidbody2D.velocity = Vector2.zero;
+                        SetAnimation("isDrinking_1", true);
+                        SetAnimation("isDrinking_2", true);
                         SetAnimation("typeOfDrink", drinkScript.drinkNumber);
                         //Invoke("NotDrinking", .4f);
 
@@ -213,12 +219,12 @@ public class Leprechaun : Entity {
                 if (!didHit)
                 {
                     int i = Random.Range(1, 6);
-                    iTween.Stab(gameObject, Resources.Load("Audio/SFX/Punch_Miss_" + i.ToString()) as AudioClip, 0f);
+                    gameObject.Stab(Resources.Load("Audio/SFX/Punch_Miss_" + i.ToString()) as AudioClip, 1f, 1f, 0f);
                 }
                 else
                 {
                     int i = Random.Range(1, 6);
-                    iTween.Stab(gameObject, Resources.Load("Audio/SFX/Punch_Hit_" + i.ToString()) as AudioClip, 0f);
+                    gameObject.Stab(Resources.Load("Audio/SFX/Punch_Hit_" + i.ToString()) as AudioClip, 1f, 1f, 0f);
                 }
             }
 
@@ -303,7 +309,12 @@ public class Leprechaun : Entity {
             if (bottom_animator.GetCurrentAnimatorStateInfo(0).IsName("Drink") &&
                 bottom_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 &&
                 !bottom_animator.IsInTransition(0))
-                NotDrinking();
+                NotDrinking(1, false);
+
+            if (bottom_animator.GetCurrentAnimatorStateInfo(0).IsName("Drink") &&
+                bottom_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 &&
+                !bottom_animator.IsInTransition(0))
+                NotDrinking(2, true);
         }
 
         //ManageDrunkness();
@@ -316,7 +327,7 @@ public class Leprechaun : Entity {
             SetAnimation("isBlocking", false);
             SetAnimation("grounded", true);
             SetAnimation("isDead", true);
-            iTween.Stab(gameObject, Resources.Load("Audio/SFX/Knockout") as AudioClip, 0f);
+            gameObject.Stab(Resources.Load("Audio/SFX/Knockout") as AudioClip, 1f, 1f, 0f);
         }
         else if (IsDead && deathUpdateCounter == 1)
         {
@@ -369,7 +380,6 @@ public class Leprechaun : Entity {
             collidingWithWall = false;
         
     }
-
 
     public void ManageDrunkness()
     {
@@ -553,10 +563,12 @@ public class Leprechaun : Entity {
         }
     }
 
-    public void NotDrinking()
+    public void NotDrinking(int number, bool end)
     {
-        isDrinking = false;
-        SetAnimation("isDrinking", false);
+        SetAnimation("isDrinking_"+number.ToString(), false);
+        if (end)
+            isDrinking = false;
+
     }
 
 
