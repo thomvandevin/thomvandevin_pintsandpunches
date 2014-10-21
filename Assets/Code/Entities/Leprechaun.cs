@@ -192,9 +192,8 @@ public class Leprechaun : Entity {
             }
 
 
-            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && 
-                onGround && attackOnce == -1 && 
-                !isDrinking && attackCooldown == 0)
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && onGround &&
+                attackOnce == -1 && !isDrinking && attackCooldown == 0)
             {
                 //playerState = PlayerStates.ATTACKING;
                 isAttacking = true;
@@ -233,8 +232,8 @@ public class Leprechaun : Entity {
             else if(attackOnce == 0)
             {
                 attackOnce = -1;
-
                 attackDone = false;
+
                 isAttacking = false;
                 SetAnimation("isAttacking", false);
             }
