@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: 87b299f0198a74c4f901b5d39e2e3e04
+guid: 574429e849f2412419f7575994e769c7
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Animations_Respawn_Button_0
-    21300002: Animations_Respawn_Button_1
-    21300004: Animations_Respawn_Button_2
+    21300000: Animation_Leprechaun1_Top_UpperCut_0
+    21300002: Animation_Leprechaun1_Top_UpperCut_1
+    21300004: Animation_Leprechaun1_Top_UpperCut_2
+    21300006: Animation_Leprechaun1_Top_UpperCut_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,7 +26,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 128
+  maxTextureSize: 1024
   textureSettings:
     filterMode: 0
     aniso: 1
@@ -40,39 +41,49 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 40
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Animations_Respawn_Button_0
+    - name: Animation_Leprechaun1_Top_UpperCut_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animations_Respawn_Button_1
+    - name: Animation_Leprechaun1_Top_UpperCut_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 192
         y: 0
-        width: 32
-        height: 32
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animations_Respawn_Button_2
+    - name: Animation_Leprechaun1_Top_UpperCut_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 384
         y: 0
-        width: 32
-        height: 32
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun1_Top_UpperCut_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

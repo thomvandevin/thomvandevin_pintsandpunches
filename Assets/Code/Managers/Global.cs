@@ -5,7 +5,7 @@ using GamepadInput;
 
 public class Global : MonoBehaviour {
 
-    public const int NumberOfPlayers = 2;
+    public const int NumberOfPlayers = 3;
 
     [HideInInspector]
 
@@ -37,6 +37,7 @@ public class Global : MonoBehaviour {
         WorldObject = gameObject.AddComponent<World>();
 
     }
+
 
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
     {

@@ -34,27 +34,32 @@ public class Drink : MonoBehaviour {
 
         velocity = new Vector2(0, 4);
         gravity = 0.8f;
-
-        drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision");
-
+        
         switch (drinkNumber)
         {
             case 0:
                 drinkType = SortOfDrink.ALE;
+                drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision_big");
                 break;
             case 1:
                 drinkType = SortOfDrink.CIDER;
+                drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision_big");
                 break;
             case 2:
                 drinkType = SortOfDrink.STOUT;
+                drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision_big");
                 break;
             case 3:
                 drinkType = SortOfDrink.WHISKEY;
+                drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision_small");
                 break;
             default:
                 drinkType = SortOfDrink.ALE;
+                drinkCollision = Global.getChildGameObject(this.gameObject, "Drink_Collision_big");
                 break;
         }
+
+        drinkCollision.SetActive(true);
 
         gameObject.GetComponent<Animator>().SetInteger("drinkType", drinkNumber);
 

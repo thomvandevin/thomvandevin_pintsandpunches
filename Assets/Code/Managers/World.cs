@@ -24,7 +24,7 @@ public class World : MonoBehaviour {
             GameObject playerObject = Instantiate(Resources.Load("Prefabs/Entities/Player_1")) as GameObject;
             playerObject.AddComponent<Player>();
             Player playerScript = playerObject.GetComponent<Player>();
-            playerScript.SetPlayer(i, 1, playerObject);
+            playerScript.SetPlayer(i, 1);
             playerObject.layer = 7 + i;
             playerObject.name = "Player " + i.ToString();
             Global.players.Add(playerObject);

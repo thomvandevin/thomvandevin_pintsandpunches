@@ -15,24 +15,31 @@ public class Player : MonoBehaviour {
     public GameObject leprechaunObject;
     public Leprechaun leprechaunScript;
 
+    public GameObject playerIndicatorObject;
+    public PlayerIndicator playerIndicatorScript;
+
     public Player()
     {
 
     }
 
-    public void SetPlayer(int controllerNumber, int chosenCharacter, GameObject playerObject)
+    public void SetPlayer(int controllerNumber, int chosenCharacter)
     {
         this.controllerNumber = controllerNumber;
         this.chosenCharacter = chosenCharacter;
-        this.leprechaunObject = playerObject;
+        this.leprechaunObject = gameObject;
         RESET = false;
 
         playerStartPosition = new Vector2(-10 + (4 * controllerNumber), -1);
 
         leprechaunObject.AddComponent<Leprechaun>();
         leprechaunScript = leprechaunObject.GetComponent<Leprechaun>();
-        leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, playerObject, 0);
+        leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject, 0);
         Global.leprechauns.Add(leprechaunScript);
+
+        playerIndicatorObject = Instantiate(Resources.Load("Prefabs/Objects/HUD/Controller_indicator"), new Vector3(transform.position.x, transform.position.y + 1, 0), Quaternion.identity) as GameObject;
+        playerIndicatorScript = playerIndicatorObject.GetComponent<PlayerIndicator>();
+        playerIndicatorScript.SetIndicator(gameObject, controllerNumber);
 
         //gridPos = leprechaun.GetGridPosition();
         //respawnFlare = new RespawnFlare(leprechaun.GetPosition, controllerNumber);
@@ -43,6 +50,13 @@ public class Player : MonoBehaviour {
     {
         //leprechaunScript.Update();
         //respawnFlare.Update();
+    }
+
+    public void ResetPlayer(GameObject deadLeprechaun, int kills)
+    {
+        Destroy(gameObject.GetComponent<Leprechaun>());
+        leprechaunScript = leprechaunObject.GetComponent<Leprechaun>();
+        leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject, kills);
     }
 
     public void LateUpdate()
