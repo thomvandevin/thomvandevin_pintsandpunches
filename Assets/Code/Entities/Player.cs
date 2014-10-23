@@ -5,8 +5,18 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 
     [HideInInspector]
+    public enum Character
+    {
+        LEPRECHAUN_01,
+        LEPRECHAUN_USA,
+        CLURICHAUN,
+        FAR_DARRIG
+    }
 
-    public int controllerNumber, chosenCharacter;
+    private Character chosenCharacter;
+    private string loadCharacterString;
+
+    public int controllerNumber;
     public bool RESET;
     public Vector2 playerStartPosition;
 
@@ -23,17 +33,37 @@ public class Player : MonoBehaviour {
 
     }
 
-    public void SetPlayer(int controllerNumber, int chosenCharacter)
+    public void SetPlayer(int controlNumber, Character chosenChar)
     {
-        this.controllerNumber = controllerNumber;
-        this.chosenCharacter = chosenCharacter;
-        this.leprechaunObject = gameObject;
+        controllerNumber = controlNumber;
+        chosenCharacter = chosenChar;
+        switch (chosenCharacter)
+        {
+            case Character.LEPRECHAUN_01:
+                loadCharacterString = "Prefabs/Entities/Leprechaun_01";
+                break;
+            case Character.LEPRECHAUN_USA:
+                loadCharacterString = "Prefabs/Entities/Leprechaun_usa";
+                break;
+            case Character.CLURICHAUN:
+                loadCharacterString = "Prefabs/Entities/Clurichaun_01";
+                break;
+            case Character.FAR_DARRIG:
+                loadCharacterString = "Prefabs/Entities/FarDarrig_01";
+                break;
+            default:
+                loadCharacterString = "Prefabs/Entities/Leprechaun_01";
+                break;
+        }
+
         RESET = false;
 
         playerStartPosition = new Vector2(-10 + (4 * controllerNumber), -1);
+        gameObject.transform.position = playerStartPosition;
 
-        leprechaunObject.AddComponent<Leprechaun>();
-        leprechaunScript = leprechaunObject.GetComponent<Leprechaun>();
+        leprechaunObject = Instantiate(Resources.Load(loadCharacterString), transform.position, Quaternion.identity) as GameObject;
+        leprechaunObject.transform.parent = gameObject.transform;
+        leprechaunScript = leprechaunObject.AddComponent<Leprechaun>();
         leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject, 0);
         Global.leprechauns.Add(leprechaunScript);
 
@@ -54,9 +84,16 @@ public class Player : MonoBehaviour {
 
     public void ResetPlayer(GameObject deadLeprechaun, int kills)
     {
-        Destroy(gameObject.GetComponent<Leprechaun>());
-        leprechaunScript = leprechaunObject.GetComponent<Leprechaun>();
-        leprechaunScript.SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject, kills);
+        Vector3 deadLepPosition = deadLeprechaun.transform.position;
+        Destroy(deadLeprechaun);
+
+        gameObject.transform.position = deadLepPosition;
+        leprechaunObject = Instantiate(Resources.Load(loadCharacterString), transform.position, Quaternion.identity) as GameObject;
+
+        leprechaunObject.transform.parent = gameObject.transform;
+        leprechaunScript = leprechaunObject.AddComponent<Leprechaun>();
+        leprechaunScript.SetLeprechaun(transform.position, controllerNumber, chosenCharacter, gameObject, kills);
+        Global.leprechauns.Add(leprechaunScript);
     }
 
     public void LateUpdate()

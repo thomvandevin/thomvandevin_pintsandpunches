@@ -6,25 +6,18 @@ public class World : MonoBehaviour {
 
     [HideInInspector]
 
-
     public Vector2 drinkPos;
-    //public int drinkTileRand;
     private int drinkTimer;
-
-    public int numberOfPlayers = Global.NumberOfPlayers;
-
-    private Player player;
 
 	// Use this for initialization
     void Start()
     {
 
-        for(int i = 1; i <= numberOfPlayers; i++)
+        for (int i = 1; i <= Global.NumberOfPlayers; i++)
         {
-            GameObject playerObject = Instantiate(Resources.Load("Prefabs/Entities/Player_1")) as GameObject;
-            playerObject.AddComponent<Player>();
-            Player playerScript = playerObject.GetComponent<Player>();
-            playerScript.SetPlayer(i, 1);
+            GameObject playerObject = Instantiate(Resources.Load("Prefabs/Entities/Player")) as GameObject;
+            Player playerScript = playerObject.AddComponent<Player>();
+            playerScript.SetPlayer(i, Player.Character.LEPRECHAUN_01);
             playerObject.layer = 7 + i;
             playerObject.name = "Player " + i.ToString();
             Global.players.Add(playerObject);
@@ -54,6 +47,11 @@ public class World : MonoBehaviour {
         }
 
 	}
+
+    public void GameWon(int controllerNumber)
+    {
+        print("Player " + controllerNumber.ToString() + " won!");
+    }
 
     public void SpawnDrink()
     {

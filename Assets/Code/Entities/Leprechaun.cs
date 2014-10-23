@@ -38,13 +38,14 @@ public class Leprechaun : Entity {
     public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer;
     public bool collidingWithWall, attackDone;
     public bool onGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
-    public int controllerNumber, chosenCharacter, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
+    public int controllerNumber, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
     public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide, attackCooldown;
     public int deathCounter;
+    public Player.Character chosenCharacter;
     public string hitDirection, playerStateString;
     public float gravity, gravityCorrection, resistance, drunknessF, damageMultiplayer, groundRadius;
     public Vector2 startingPosition, velocity, previousPosition, maxVelocity, lastVelocity, drunkVelocity, respawnButtonPos;
-    public GameObject groundCheck, punchCheck, bodyCheck, wallCheck;
+    public GameObject playerObject, respawnButton, groundCheck, punchCheck, bodyCheck, wallCheck;
     public LayerMask groundLayer;
     //public SoundEffect sfx_punch_hit, sfx_punch_miss, sfx_jump_down, sfx_jump, sfx_knockout, sfx_drink, sfx_drink_whiskey;
     //public SoundEffectInstance sfx_drink_whiskey_inst;
@@ -58,7 +59,7 @@ public class Leprechaun : Entity {
 
     }
 
-    public void SetLeprechaun(Vector2 pos, int controllerNumber, int chosenCharacter, GameObject playerObject, int killsAmount)
+    public void SetLeprechaun(Vector2 pos, int controllerNumber, Player.Character chosenCharacter, GameObject playerObject, int killsAmount)
     {
         this.controllerNumber = controllerNumber;
 
@@ -70,11 +71,12 @@ public class Leprechaun : Entity {
         mirrored = false;
         onGround = false;
         groundRadius = 0.2f;
-        groundCheck = Global.getChildGameObject(playerObject, "GroundCheck");
-        groundLayer = gameObject.GetComponent<LayerMaskPass>().GetLayerMask();
-        punchCheck = Global.getChildGameObject(playerObject, "PunchCheck");
-        bodyCheck = Global.getChildGameObject(playerObject, "BodyCheck");
-        wallCheck = Global.getChildGameObject(playerObject, "WallCheck");
+        this.playerObject = playerObject;
+        groundCheck = Global.getChildGameObject(gameObject, "GroundCheck");
+        groundLayer = playerObject.GetComponent<LayerMaskPass>().GetLayerMask();
+        punchCheck = Global.getChildGameObject(gameObject, "PunchCheck");
+        bodyCheck = Global.getChildGameObject(gameObject, "BodyCheck");
+        wallCheck = Global.getChildGameObject(gameObject, "WallCheck");
         collidingWithWall = false;
         gravity = 0.5f;
         resistance = 2f;
@@ -159,7 +161,7 @@ public class Leprechaun : Entity {
 
         if (kills >= 5)
         {
-            //Global.WorldObject.gameWon = true;
+            Global.WorldObject.GameWon(controllerNumber);
             //Global.WorldObject.winnerIndex = chosenPlayerIndex;
         }
 
@@ -181,7 +183,7 @@ public class Leprechaun : Entity {
                         drinkScript.Remove();
 
                         isDrinking = true;
-                        gameObject.rigidbody2D.velocity = Vector2.zero;
+                        playerObject.rigidbody2D.velocity = Vector2.zero;
                         SetAnimation("isDrinking_1", true);
                         SetAnimation("isDrinking_2", true);
                         SetAnimation("typeOfDrink", drinkScript.drinkNumber);
@@ -298,7 +300,7 @@ public class Leprechaun : Entity {
             if (onGround && (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space)) && !isAttacking && !isHit)
             {
                 SetAnimation("grounded", false);
-                rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
+                playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
             }
 
             #endregion
@@ -349,7 +351,10 @@ public class Leprechaun : Entity {
         else if (IsDead && deathCounter == 3)
         { 
             if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex))
+            {
+                respawnButton.GetComponent<RespawnButton>().RemoveRespawnButton();
                 playerScript.ResetPlayer(gameObject, kills);
+            }
         }
 
 	}
@@ -360,7 +365,7 @@ public class Leprechaun : Entity {
         onGround = Physics2D.OverlapCircle(groundCheck.transform.position, groundRadius, groundLayer);
         SetAnimation("grounded", onGround);
 
-        SetAnimation("vSpeed", rigidbody2D.velocity.y);
+        SetAnimation("vSpeed", playerObject.rigidbody2D.velocity.y);
 
         float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
 
@@ -374,7 +379,7 @@ public class Leprechaun : Entity {
             if (!isAttacking)
             {
                 SetAnimation("hSpeed", Mathf.Abs(move));
-                rigidbody2D.velocity = new Vector2(move * (float)maxVelocity.x / 8, rigidbody2D.velocity.y);
+                playerObject.rigidbody2D.velocity = new Vector2(move * (float)maxVelocity.x / 8, playerObject.rigidbody2D.velocity.y);
             }
 
             if (move > 0 && Direction == Facing.LEFT)
@@ -422,13 +427,13 @@ public class Leprechaun : Entity {
         {
             if (Direction == Facing.LEFT)
             {
-                rigidbody2D.AddForce(new Vector2(-(10 * maxVelocity.x), 1));
+                playerObject.rigidbody2D.AddForce(new Vector2(-(10 * maxVelocity.x), 1));
                 mirrored = true;
             }
 
             if (Direction == Facing.RIGHT)
             {
-                rigidbody2D.AddForce(new Vector2(10 * maxVelocity.x, 1));
+                playerObject.rigidbody2D.AddForce(new Vector2(10 * maxVelocity.x, 1));
                 mirrored = false;
             }
 
@@ -518,7 +523,7 @@ public class Leprechaun : Entity {
                 Flip();
 
         }
-        gameObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, maxVelocity.y/3.5f));
+        playerObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, maxVelocity.y/3.5f));
         PunchShake(punchDirection, 1.7f, .4f, false);
 
         GameObject particles = Instantiate(Resources.Load("Prefabs/Objects/Particles/Particles_BloodAndGore"), transform.position - (punchDirection/1.3f), Quaternion.identity) as GameObject;
@@ -560,8 +565,8 @@ public class Leprechaun : Entity {
 
     public void NotHit()
     {
-        if (Mathf.Abs(rigidbody2D.velocity.x) > 10)
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x / 10, rigidbody2D.velocity.y);
+        if (Mathf.Abs(playerObject.rigidbody2D.velocity.x) > 10)
+            playerObject.rigidbody2D.velocity = new Vector2(playerObject.rigidbody2D.velocity.x / 10, rigidbody2D.velocity.y);
         else
         {
             isHit = false;
@@ -579,8 +584,8 @@ public class Leprechaun : Entity {
 
     private void RespawnButton()
     {
-        GameObject respawnButtton = Instantiate(Resources.Load("Prefabs/Objects/HUD/Respawn_Button"), new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity) as GameObject;
-        respawnButtton.GetComponent<RespawnButton>().SetRespawnButton(gameObject);
+        respawnButton = Instantiate(Resources.Load("Prefabs/Objects/HUD/Respawn_Button"), new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity) as GameObject;
+        respawnButton.GetComponent<RespawnButton>().SetRespawnButton(playerObject);
     }
 
     public void GetDrunk(Drink.SortOfDrink sortOfDrink)
