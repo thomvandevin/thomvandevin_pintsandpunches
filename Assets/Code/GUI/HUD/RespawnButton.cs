@@ -18,6 +18,7 @@ public class RespawnButton : MonoBehaviour {
     {
         playerTransform = playerObject.transform;
         target = new Vector3(playerTransform.position.x, playerTransform.position.y + .3f, playerTransform.position.z);
+        
     }
 
     public void RemoveRespawnButton()

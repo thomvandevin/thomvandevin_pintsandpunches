@@ -18,8 +18,8 @@ public class ClockBehaviour : MonoBehaviour {
     {
         hour = System.DateTime.Now.Hour;
         minute = System.DateTime.Now.Minute;
-        
-        hourRotation = -((360/12) * hour + 225);
+
+        hourRotation = -((360 / 12) * hour + 225 + ((360 / 60) * minute / 12));
         minuteRotation = -((360 / 60) * minute + 315);
 
         hours.RotateTo(new Vector3(0, 0, hourRotation), 0, 0);

@@ -87,6 +87,9 @@ public class Player : MonoBehaviour {
         Vector3 deadLepPosition = deadLeprechaun.transform.position;
         Destroy(deadLeprechaun);
 
+        GameObject RespawnAnimation = Instantiate(Resources.Load("Prefabs/Objects/HUD/Respawn_Animation"), transform.position, Quaternion.identity) as GameObject;
+        RespawnAnimation.GetComponent<RespawnAnimation>().SetRespawnAnimation(gameObject);
+
         gameObject.transform.position = deadLepPosition;
         leprechaunObject = Instantiate(Resources.Load(loadCharacterString), transform.position, Quaternion.identity) as GameObject;
 
@@ -94,6 +97,8 @@ public class Player : MonoBehaviour {
         leprechaunScript = leprechaunObject.AddComponent<Leprechaun>();
         leprechaunScript.SetLeprechaun(transform.position, controllerNumber, chosenCharacter, gameObject, kills);
         Global.leprechauns.Add(leprechaunScript);
+
+
     }
 
     public void LateUpdate()

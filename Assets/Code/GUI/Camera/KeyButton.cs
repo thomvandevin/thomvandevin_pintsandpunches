@@ -3,6 +3,8 @@ using System.Collections;
 
 public class KeyButton : MonoBehaviour {
 
+    Rect position;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -15,13 +17,22 @@ public class KeyButton : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 40, 120, 30), "PunchShake"))
+        if (GUI.Button(RectanglePos(1), "PunchShake"))
         {
             Global.leprechauns[0].PunchShake(new Vector2(.1f, .1f), 10, .5f, false);
-        } 
-        if (GUI.Button(new Rect(20, 80, 120, 30), "Damage"))
-        {
-            Global.leprechauns[1].Damage(5);
         }
+        if (GUI.Button(RectanglePos(2), "Damage 1"))
+        {
+            GameObject.Find("Player 1").GetComponentInChildren<Leprechaun>().Damage(5);
+        }
+        if (GUI.Button(RectanglePos(3), "Damage 2"))
+        {
+            GameObject.Find("Player 2").GetComponentInChildren<Leprechaun>().Damage(5);
+        }
+    }
+
+    Rect RectanglePos(int button)
+    {
+        return new Rect(20, 40 * button, 120, 30);
     }
 }

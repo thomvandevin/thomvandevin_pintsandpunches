@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
+using UnityEditor;
 
 public class Global : MonoBehaviour {
 
-    public const int NumberOfPlayers = 3;
+    public const int NumberOfPlayers = 2;
 
     [HideInInspector]
 
@@ -29,12 +30,15 @@ public class Global : MonoBehaviour {
         
         GAME_RESET = false;
         GAME_END = false;
+        
+        if(EditorApplication.currentScene == "PintsAndPunches_MainGame")
+        {
+            players = new List<GameObject>();
+            leprechauns = new List<Leprechaun>();
+            drinks = new List<GameObject>();
 
-        players = new List<GameObject>();
-        leprechauns = new List<Leprechaun>();
-        drinks = new List<GameObject>();
-
-        WorldObject = gameObject.AddComponent<World>();
+            WorldObject = gameObject.AddComponent<World>();
+        }
 
     }
 
