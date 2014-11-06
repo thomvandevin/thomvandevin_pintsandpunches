@@ -30,8 +30,8 @@ public class Global : MonoBehaviour {
         
         GAME_RESET = false;
         GAME_END = false;
-        
-        if(EditorApplication.currentScene == "PintsAndPunches_MainGame")
+
+        if (EditorApplication.currentScene == "Assets/Content/Resources/Scenes/PintsAndPunches_MainGame.unity")
         {
             players = new List<GameObject>();
             leprechauns = new List<Leprechaun>();
