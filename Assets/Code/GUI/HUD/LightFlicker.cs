@@ -4,6 +4,7 @@ using System.Collections;
 public class LightFlicker : MonoBehaviour {
 
     public float hardness = 1;
+    public float offset = 0;
 
     Light light;
 
@@ -15,6 +16,6 @@ public class LightFlicker : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        light.range += Mathf.Sin(Time.time * hardness);
+        light.range += Mathf.Sin(Time.time * hardness + offset);
 	}
 }
