@@ -6,7 +6,7 @@ public class LightFlicker : MonoBehaviour {
     public float hardness = 1;
     public float offset = 0;
 
-    Light light;
+    private Light light;
 
 	// Use this for initialization
 	void Start () {
