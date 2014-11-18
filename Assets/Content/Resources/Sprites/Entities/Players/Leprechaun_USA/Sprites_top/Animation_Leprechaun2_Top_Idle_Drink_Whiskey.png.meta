@@ -1,7 +1,14 @@
 fileFormatVersion: 2
 guid: d86f8daa8c4a3b54d9c47ea3de4f0281
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_0
+    21300002: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_1
+    21300004: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_2
+    21300006: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_3
+    21300008: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_4
+    21300010: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_5
+    21300012: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,9 +32,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -42,6 +49,76 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_4
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
