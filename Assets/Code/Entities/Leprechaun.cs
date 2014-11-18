@@ -82,7 +82,7 @@ public class Leprechaun : Entity {
         resistance = 2f;
         velocity = new Vector2(0, 60);
         //maxVelocity = new Vector2(40, 530); //OLD //gravity op 30
-        maxVelocity = new Vector2(40, 840);
+        maxVelocity = new Vector2(80, 840);
         lastVelocity = new Vector2(0, 2);
         skipNextMove = false;
         fallTroughBar = false;
