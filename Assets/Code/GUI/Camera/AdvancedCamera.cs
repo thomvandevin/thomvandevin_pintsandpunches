@@ -24,10 +24,14 @@ public class AdvancedCamera : MonoBehaviour {
         {
             newPosition = Vector3.zero;
 
-            foreach (GameObject p in Global.players)
+            if (Global.players.Count > 0)
             {
-                playerList.Add(p);
+                foreach (GameObject p in Global.players)
+                {
+                    playerList.Add(p);
+                }
             }
+
 
             playerList.OrderBy(p => p.transform.position);
             Vector3 highestValue = playerList[0].transform.position;

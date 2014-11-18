@@ -6,7 +6,8 @@ using UnityEditor;
 
 public class Global : MonoBehaviour {
 
-    public const int NumberOfPlayers = 2;
+    public static int NumberOfPlayers;
+    public static bool enableDrinks = false;
 
     [HideInInspector]
 
@@ -19,27 +20,38 @@ public class Global : MonoBehaviour {
 
     public static World WorldObject;
 
+    public static int Screen_CharacterSelect = 0, Screen_MainGame = 1;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
         Reset();
     }
-    
-    public void Reset()
+
+    void OnLevelWasLoaded()
     {
-        
+        Reset();
+    }
+    
+    static public void Reset()
+    {        
         GAME_RESET = false;
         GAME_END = false;
 
-        if (EditorApplication.currentScene == "Assets/Content/Resources/Scenes/PintsAndPunches_MainGame.unity")
+        if (Application.loadedLevel == Global.Screen_MainGame)
         {
             players = new List<GameObject>();
             leprechauns = new List<Leprechaun>();
             drinks = new List<GameObject>();
 
-            WorldObject = gameObject.AddComponent<World>();
+            WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
         }
 
+    }
+
+    static public void SetNumberOfPlayers(int nr)
+    {
+        Global.NumberOfPlayers = nr;
     }
 
 

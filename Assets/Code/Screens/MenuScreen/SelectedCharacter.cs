@@ -2,6 +2,7 @@
 using System.Collections;
 using GamepadInput;
 using System;
+using System.Linq;
 
 public class SelectedCharacter : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class SelectedCharacter : MonoBehaviour {
     public float numberOfCharacters, hardness = 1.1f;
 
     public GamePad.Index player;
+    private int playerIndexInt;
+    public int GetPlayer { get { return playerIndexInt; } set { playerIndexInt = value; } }
 
     private Vector2 offset_temp;
     private Vector2 scale_temp;
@@ -43,6 +46,30 @@ public class SelectedCharacter : MonoBehaviour {
         selectButton = Instantiate(Resources.Load("Prefabs/Screens/MenuScreen/Character_Select_SelectButton"), new Vector3(transform.position.x, transform.position.y, -.5f), Quaternion.identity) as GameObject;
         selectButton.transform.parent = gameObject.transform.parent;
         selectButton.SetActive(false);
+
+        switch (player)
+        {
+            case GamePad.Index.Any:
+                playerIndexInt = 0;
+                break;
+            case GamePad.Index.One:
+                playerIndexInt = 1;
+                break;
+            case GamePad.Index.Two:
+                playerIndexInt = 2;
+                break;
+            case GamePad.Index.Three:
+                playerIndexInt = 3;
+                break;
+            case GamePad.Index.Four:
+                playerIndexInt = 4;
+                break;
+            default:
+                playerIndexInt = 0;
+                break;
+        }
+
+        GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter.Add(0);
 
 	}
 	
@@ -102,6 +129,9 @@ public class SelectedCharacter : MonoBehaviour {
         {
             selectButton.SetActive(false);
             characterSelected = false;
+            GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt-1] = 0;
+
+        
         }
 
         sprite.mainTextureOffset = offset;
@@ -126,6 +156,7 @@ public class SelectedCharacter : MonoBehaviour {
 
     private void SelectCharacter()
     {
+        GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt-1] = selectedCharacter;
         scale_temp = new Vector2((1 / numberOfCharacters) - .05f, .6f);
         offset_temp = new Vector2(offset.x + .025f, offset.y + .3f);
         colorFlash.FlashToColor(new Color(2000, 2000, 2000, 1000), 0.0f, .1f);

@@ -34,17 +34,22 @@ public class World : MonoBehaviour {
             p.GetComponent<Player>().Update();
         }
 
-        foreach (GameObject d in Global.drinks)
+        if(Global.enableDrinks)
         {
-            d.GetComponent<Drink>().Update();
+            foreach (GameObject d in Global.drinks)
+            {
+                d.GetComponent<Drink>().Update();
+            }
+
+            if (Global.drinks.Count < 4)
+            {
+                drinkTimer--;
+                if (drinkTimer <= 0)
+                    SpawnDrink();
+            }
         }
 
-        if (Global.drinks.Count < 4)
-        {
-            drinkTimer--;
-            if (drinkTimer <= 0)
-                SpawnDrink();
-        }
+
 
 	}
 
