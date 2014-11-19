@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RandomBottle : MonoBehaviour {
-
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -13,6 +13,6 @@ public class RandomBottle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-
+		
 	}
 }
