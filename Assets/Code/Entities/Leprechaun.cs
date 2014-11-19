@@ -65,13 +65,13 @@ public class Leprechaun : Entity {
         this.controllerNumber = controllerNumber;
 
         playerScript = playerObject.GetComponent<Player>();
+        this.playerObject = playerObject;
 
         this.chosenCharacter = chosenCharacter;
         startingPosition = pos;
         mirrored = false;
         onGround = false;
         groundRadius = 0.2f;
-        this.playerObject = playerObject;
         groundCheck = Global.getChildGameObject(gameObject, "GroundCheck");
         groundLayer = playerObject.GetComponent<LayerMaskPass>().GetLayerMask();
         punchCheck = Global.getChildGameObject(gameObject, "PunchCheck");
@@ -608,8 +608,11 @@ public class Leprechaun : Entity {
     public void NotHit()
     {
         if (Mathf.Abs(playerObject.rigidbody2D.velocity.x) > 10)
-            playerObject.rigidbody2D.velocity = new Vector2(playerObject.rigidbody2D.velocity.x / 10, rigidbody2D.velocity.y);
-        else
+        {
+            playerObject.rigidbody2D.velocity = new Vector2(playerObject.rigidbody2D.velocity.x / 10, playerObject.rigidbody2D.velocity.y);
+            Invoke("NotHit", .1f);
+        }
+           else
         {
             isHit = false;
             SetAnimation("isHit", false);
