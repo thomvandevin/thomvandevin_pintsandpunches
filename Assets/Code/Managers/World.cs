@@ -49,8 +49,6 @@ public class World : MonoBehaviour {
             }
         }
 
-
-
 	}
 
     public void GameWon(int controllerNumber)
