@@ -1,0 +1,267 @@
+fileFormatVersion: 2
+guid: e48b6ee6590ac7944aa28e3b426acecb
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Bottem_Rollerskate_0
+    21300002: Animation_Leprechaun2_Bottem_Rollerskate_1
+    21300004: Animation_Leprechaun2_Bottem_Rollerskate_2
+    21300006: Animation_Leprechaun2_Bottem_Rollerskate_3
+    21300008: Animation_Leprechaun2_Bottem_Rollerskate_4
+    21300010: Animation_Leprechaun2_Bottem_Rollerskate_5
+    21300012: Animation_Leprechaun2_Bottem_Rollerskate_6
+    21300014: Animation_Leprechaun2_Bottem_Rollerskate_7
+    21300016: Animation_Leprechaun2_Bottem_Rollerskate_8
+    21300018: Animation_Leprechaun2_Bottem_Rollerskate_9
+    21300020: Animation_Leprechaun2_Bottem_Rollerskate_10
+    21300022: Animation_Leprechaun2_Bottem_Rollerskate_11
+    21300024: Animation_Leprechaun2_Bottem_Rollerskate_12
+    21300026: Animation_Leprechaun2_Bottem_Rollerskate_13
+    21300028: Animation_Leprechaun2_Bottem_Rollerskate_14
+    21300030: Animation_Leprechaun2_Bottem_Rollerskate_15
+    21300032: Animation_Leprechaun2_Bottem_Rollerskate_16
+    21300034: Animation_Leprechaun2_Bottem_Rollerskate_17
+    21300036: Animation_Leprechaun2_Bottem_Rollerskate_18
+    21300038: Animation_Leprechaun2_Bottem_Rollerskate_19
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_8
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_13
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_18
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Leprechaun2_Bottem_Rollerskate_19
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
