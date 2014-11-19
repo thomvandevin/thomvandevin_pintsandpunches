@@ -159,7 +159,7 @@ public class Leprechaun : Entity {
         if (GamePad.GetButtonDown(GamePad.Button.Start, controllerIndex[1]))
             Global.GAME_RESET = true;
 
-        if (gameObject.GetComponent<Player>().kills >= 5)
+        if (gameObject.transform.parent.gameObject.GetComponent<Player>().kills >= 5)
         {
             Global.WorldObject.GameWon(controllerNumber);
             //Global.WorldObject.winnerIndex = chosenPlayerIndex;
@@ -207,48 +207,48 @@ public class Leprechaun : Entity {
 
                 foreach (GameObject lep in Global.leprechauns.ToArray())
                 {
-
-                    if (punchCheck.collider2D.bounds.Intersects(lep.GetComponent<Player>().GetCollisionObject("bodyCheck",lep).collider2D.bounds) && lep != this)
+                    Player p = lep.gameObject.transform.parent.GetComponent<Player>();
+                    if (punchCheck.collider2D.bounds.Intersects(p.GetCollisionObject("bodyCheck",lep).collider2D.bounds) && lep != this)
                     {
-                        if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Leprechaun))
+                        if (p.GetLeprechaunScriptType().GetType() == typeof(Leprechaun))
                         {
-                            Leprechaun lepScript = (Leprechaun)lep.GetComponent<Player>().leprechaunScript;
+                            Leprechaun lepScript = (Leprechaun)p.leprechaunScript;
                             lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
                             lepScript.Invoke("NotHit", .2f);
                         }
-                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Leprechaun_USA))
+                        else if (p.GetLeprechaunScriptType().GetType() == typeof(Leprechaun_USA))
                         {
-                            Leprechaun_USA lepScript = (Leprechaun_USA)lep.GetComponent<Player>().leprechaunScript;
+                            Leprechaun_USA lepScript = (Leprechaun_USA)p.leprechaunScript;
                             lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
                             lepScript.Invoke("NotHit", .2f);
                         }
-                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Cluirichaun))
+                        else if (p.GetLeprechaunScriptType().GetType() == typeof(Cluirichaun))
                         {
-                            Cluirichaun lepScript = (Cluirichaun)lep.GetComponent<Player>().leprechaunScript;
+                            Cluirichaun lepScript = (Cluirichaun)p.leprechaunScript;
                             lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
                             lepScript.Invoke("NotHit", .2f);
                         }
-                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(FarDarrig))
+                        else if (p.GetLeprechaunScriptType().GetType() == typeof(FarDarrig))
                         {
-                            FarDarrig lepScript = (FarDarrig)lep.GetComponent<Player>().leprechaunScript;
+                            FarDarrig lepScript = (FarDarrig)p.leprechaunScript;
                             lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
                             lepScript.Invoke("NotHit", .2f);
                         }
-                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Fairy))
+                        else if (p.GetLeprechaunScriptType().GetType() == typeof(Fairy))
                         {
-                            Fairy lepScript = (Fairy)lep.GetComponent<Player>().leprechaunScript;
+                            Fairy lepScript = (Fairy)p.leprechaunScript;
                             lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
@@ -585,16 +585,16 @@ public class Leprechaun : Entity {
             switch (player)
             {
                 case GamePad.Index.One:
-                    Global.leprechauns[0].gameObject.GetComponent<Player>().kills += 1;
+                    Global.leprechauns[0].gameObject.transform.parent.gameObject.GetComponent<Player>().kills += 1;
                     break;
                 case GamePad.Index.Two:
-                    Global.leprechauns[1].gameObject.GetComponent<Player>().kills += 1;
+                    Global.leprechauns[1].gameObject.transform.parent.gameObject.GetComponent<Player>().kills += 1;
                     break;
                 case GamePad.Index.Three:
-                    Global.leprechauns[2].gameObject.GetComponent<Player>().kills += 1;
+                    Global.leprechauns[2].gameObject.transform.parent.gameObject.GetComponent<Player>().kills += 1;
                     break;
                 case GamePad.Index.Four:
-                    Global.leprechauns[3].gameObject.GetComponent<Player>().kills += 1;
+                    Global.leprechauns[3].gameObject.transform.parent.gameObject.GetComponent<Player>().kills += 1;
                     break;
                 default:
                     break;
