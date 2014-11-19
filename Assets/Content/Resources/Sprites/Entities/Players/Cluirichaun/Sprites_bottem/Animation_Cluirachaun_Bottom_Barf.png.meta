@@ -1,7 +1,25 @@
 fileFormatVersion: 2
 guid: 316a0ba3651bb1643be7eb278d172d36
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Animation_Cluirachaun_Bottom_Barf_0
+    21300002: Animation_Cluirachaun_Bottom_Barf_1
+    21300004: Animation_Cluirachaun_Bottom_Barf_2
+    21300006: Animation_Cluirachaun_Bottom_Barf_3
+    21300008: Animation_Cluirachaun_Bottom_Barf_4
+    21300010: Animation_Cluirachaun_Bottom_Barf_5
+    21300012: Animation_Cluirachaun_Bottom_Barf_6
+    21300014: Animation_Cluirachaun_Bottom_Barf_7
+    21300016: Animation_Cluirachaun_Bottom_Barf_8
+    21300018: Animation_Cluirachaun_Bottom_Barf_9
+    21300020: Animation_Cluirachaun_Bottom_Barf_10
+    21300022: Animation_Cluirachaun_Bottom_Barf_11
+    21300024: Animation_Cluirachaun_Bottom_Barf_12
+    21300026: Animation_Cluirachaun_Bottom_Barf_13
+    21300028: Animation_Cluirachaun_Bottom_Barf_14
+    21300030: Animation_Cluirachaun_Bottom_Barf_15
+    21300032: Animation_Cluirachaun_Bottom_Barf_16
+    21300034: Animation_Cluirachaun_Bottom_Barf_17
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,9 +43,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -42,6 +60,186 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Animation_Cluirachaun_Bottom_Barf_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 576
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_2
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 576
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_3
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 576
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_4
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 576
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_5
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 576
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_7
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 288
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_8
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 288
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_9
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 288
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_10
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 288
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_11
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 288
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_13
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_14
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_15
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_16
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Animation_Cluirachaun_Bottom_Barf_17
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
