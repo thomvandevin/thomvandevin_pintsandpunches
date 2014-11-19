@@ -63,7 +63,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Cluirachaun_Bottom_Drink_Ale_1
       rect:
@@ -73,7 +73,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Cluirachaun_Bottom_Drink_Ale_2
       rect:
@@ -83,7 +83,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Cluirachaun_Bottom_Drink_Ale_3
       rect:
@@ -93,7 +93,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Cluirachaun_Bottom_Drink_Ale_4
       rect:
@@ -103,7 +103,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Cluirachaun_Bottom_Drink_Ale_5
       rect:
@@ -113,7 +113,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Cluirachaun_Bottom_Drink_Ale_6
       rect:
@@ -123,7 +123,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Cluirachaun_Bottom_Drink_Ale_7
       rect:
@@ -133,47 +133,7 @@ TextureImporter:
         width: 288
         height: 288
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Cluirachaun_Bottom_Drink_Ale_8
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 288
-        height: 288
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Cluirachaun_Bottom_Drink_Ale_9
-      rect:
-        serializedVersion: 2
-        x: 864
-        y: 0
-        width: 288
-        height: 288
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Cluirachaun_Bottom_Drink_Ale_10
-      rect:
-        serializedVersion: 2
-        x: 1152
-        y: 0
-        width: 288
-        height: 288
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Cluirachaun_Bottom_Drink_Ale_11
-      rect:
-        serializedVersion: 2
-        x: 1440
-        y: 0
-        width: 288
-        height: 288
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
