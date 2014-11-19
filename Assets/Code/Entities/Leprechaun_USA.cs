@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
+using System;
 
-public class Leprechaun_USA : Entity {
+public class Leprechaun_USA : Entity
+{
 
     public enum PlayerStates
     {
@@ -38,7 +40,7 @@ public class Leprechaun_USA : Entity {
     public bool mirrored, isDashCooldown, skipNextMove, fallTroughBar, underBar, playerStateBool, maxDrunk, checkDrunkTimer;
     public bool collidingWithWall, attackDone;
     public bool onGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
-    public int controllerNumber, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile, kills;
+    public int controllerNumber, dashTimer, dashCooldown, playerStateTimer, jumpOnce, attackOnce, currentTile;
     public int drinkAnimCounter, drunkness, maxDrunkness, drunkTimeMultiplier, drunkWalkTimer, drunkWalkResetTimer, drunkRandomSide, attackCooldown;
     public int deathCounter;
     public Player.Character chosenCharacter;
@@ -53,36 +55,19 @@ public class Leprechaun_USA : Entity {
     //public DrunkBubbles drunkBubbles;
 
     private Animator top_animator, bottom_animator;
-    
+
     public Leprechaun_USA()
     {
 
     }
 
-    public void SetLeprechaun_USA(Vector2 pos, int controllerNumber, Player.Character chosenCharacter, GameObject playerObject, int killsAmount)
+    public void SetLeprechaun_USA(Vector2 pos, int controllerNumber, Player.Character chosenCharacter, GameObject playerObject)
     {
         this.controllerNumber = controllerNumber;
 
         playerScript = playerObject.GetComponent<Player>();
-        kills = killsAmount;
 
         this.chosenCharacter = chosenCharacter;
-        switch (chosenCharacter)
-        {
-            case Player.Character.LEPRECHAUN_01:
-                characterTypeScript = gameObject.GetComponent<Leprechaun>();
-                break;
-            case Player.Character.LEPRECHAUN_USA:
-                characterTypeScript = gameObject.GetComponent<Leprechaun_USA>();
-                break;
-            case Player.Character.CLURICHAUN:
-                break;
-            case Player.Character.FAR_DARRIG:
-                break;
-            default:
-                break;
-        }
-
         startingPosition = pos;
         mirrored = false;
         onGround = false;
@@ -156,9 +141,9 @@ public class Leprechaun_USA : Entity {
 
     void FixedUpdate()
     {
-        if(!IsDead)
+        if (!IsDead)
         {
-            if(!isDrinking)
+            if (!isDrinking)
             {
                 Movement();
             }
@@ -169,13 +154,13 @@ public class Leprechaun_USA : Entity {
         base.Update();
     }
 
-	// Update is called once per frame
-	public override void Update () 
+    // Update is called once per frame
+    public override void Update()
     {
         if (GamePad.GetButtonDown(GamePad.Button.Start, controllerIndex[1]))
             Global.GAME_RESET = true;
 
-        if (kills >= 5)
+        if (gameObject.GetComponent<Player>().kills >= 5)
         {
             Global.WorldObject.GameWon(controllerNumber);
             //Global.WorldObject.winnerIndex = chosenPlayerIndex;
@@ -217,37 +202,79 @@ public class Leprechaun_USA : Entity {
                 isAttacking = true;
                 SetAnimation("isAttacking", true);
                 attackOnce = 1;
-                attackCooldown = Random.Range(40, 48);
+                attackCooldown = UnityEngine.Random.Range(40, 48);
 
                 bool didHit = false;
 
                 foreach (GameObject lep in Global.leprechauns.ToArray())
                 {
-                    if (punchCheck.collider2D.bounds.Intersects(lep.chara .bodyCheck.collider2D.bounds) && lep != this)
+
+                    if (punchCheck.collider2D.bounds.Intersects(lep.GetComponent<Player>().GetCollisionObject("bodyCheck", lep).collider2D.bounds) && lep != this)
                     {
-                        lep.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
-                        didHit = true;
-                        lep.isHit = true;
-                        lep.SetAnimation("isHit", true);
-                        lep.Invoke("NotHit", .2f);
+                        if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Leprechaun))
+                        {
+                            Leprechaun lepScript = (Leprechaun)lep.GetComponent<Player>().leprechaunScript;
+                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            didHit = true;
+                            lepScript.isHit = true;
+                            lepScript.SetAnimation("isHit", true);
+                            lepScript.Invoke("NotHit", .2f);
+                        }
+                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Leprechaun_USA))
+                        {
+                            Leprechaun_USA lepScript = (Leprechaun_USA)lep.GetComponent<Player>().leprechaunScript;
+                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            didHit = true;
+                            lepScript.isHit = true;
+                            lepScript.SetAnimation("isHit", true);
+                            lepScript.Invoke("NotHit", .2f);
+                        }
+                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Cluirichaun))
+                        {
+                            Cluirichaun lepScript = (Cluirichaun)lep.GetComponent<Player>().leprechaunScript;
+                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            didHit = true;
+                            lepScript.isHit = true;
+                            lepScript.SetAnimation("isHit", true);
+                            lepScript.Invoke("NotHit", .2f);
+                        }
+                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(FarDarrig))
+                        {
+                            FarDarrig lepScript = (FarDarrig)lep.GetComponent<Player>().leprechaunScript;
+                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            didHit = true;
+                            lepScript.isHit = true;
+                            lepScript.SetAnimation("isHit", true);
+                            lepScript.Invoke("NotHit", .2f);
+                        }
+                        else if (lep.GetComponent<Player>().GetLeprechaunScriptType().GetType() == typeof(Fairy))
+                        {
+                            Fairy lepScript = (Fairy)lep.GetComponent<Player>().leprechaunScript;
+                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            didHit = true;
+                            lepScript.isHit = true;
+                            lepScript.SetAnimation("isHit", true);
+                            lepScript.Invoke("NotHit", .2f);
+                        }
+
                     }
                 }
 
                 if (!didHit)
                 {
-                    int i = Random.Range(1, 6);
+                    int i = UnityEngine.Random.Range(1, 6);
                     gameObject.Stab(Resources.Load("Audio/SFX/Punch_Miss_" + i.ToString()) as AudioClip, 1f, 1f, 0f);
                 }
                 else
                 {
-                    int i = Random.Range(1, 6);
+                    int i = UnityEngine.Random.Range(1, 6);
                     gameObject.Stab(Resources.Load("Audio/SFX/Punch_Hit_" + i.ToString()) as AudioClip, 1f, 1f, 0f);
                 }
             }
 
             if (attackOnce >= 1)
                 attackOnce -= 1;
-            else if(attackOnce == 0)
+            else if (attackOnce == 0)
             {
                 attackOnce = -1;
                 attackDone = false;
@@ -260,7 +287,7 @@ public class Leprechaun_USA : Entity {
                 attackCooldown--;
             else if (attackCooldown < 0)
                 attackCooldown = 0;
-            
+
             #endregion
 
             #region BLOCKING CODE
@@ -354,26 +381,26 @@ public class Leprechaun_USA : Entity {
         {
             SetAnimation("deathCounter", deathCounter);
             SetAnimation("isDead", false);
-            Global.leprechauns.Remove(gameObject<>);
+            Global.leprechauns.Remove(gameObject);
 
             deathCounter++;
-        } 
+        }
         else if (IsDead && deathCounter == 2)
         {
             RespawnButton();
 
             deathCounter++;
-        } 
+        }
         else if (IsDead && deathCounter == 3)
-        { 
+        {
             if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex))
             {
                 respawnButton.GetComponent<RespawnButton>().RemoveRespawnButton();
-                playerScript.ResetPlayer(gameObject, kills);
+                playerScript.ResetPlayer(gameObject);
             }
         }
 
-	}
+    }
 
 
     public void Movement()
@@ -405,7 +432,7 @@ public class Leprechaun_USA : Entity {
         }
         else if (collidingWithWall && onGround)
             collidingWithWall = false;
-        
+
     }
 
     public void ManageDrunkness()
@@ -485,8 +512,8 @@ public class Leprechaun_USA : Entity {
             else if (drunkWalkResetTimer <= 0 && checkDrunkTimer == true)
             {
                 checkDrunkTimer = false;
-                drunkWalkTimer = Random.Range(3000 / (drunkness * (1 + (100 / drunkness))), 4500 / (drunkness * (1 + (100 / drunkness))));
-                drunkRandomSide = Random.Range(0, 2);
+                drunkWalkTimer = UnityEngine.Random.Range(3000 / (drunkness * (1 + (100 / drunkness))), 4500 / (drunkness * (1 + (100 / drunkness))));
+                drunkRandomSide = UnityEngine.Random.Range(0, 2);
             }
 
             if (!isAttacking && !isBlocking && !playerStateBool)
@@ -497,11 +524,11 @@ public class Leprechaun_USA : Entity {
                     if (drunkWalkTimer > 0 && checkDrunkTimer == false)
                     {
                         drunkWalkTimer--;
-                        maxVelocity.x = Random.Range(3 - (drunkness / 2000), 4 + (drunkness / 1000));
+                        maxVelocity.x = UnityEngine.Random.Range(3 - (drunkness / 2000), 4 + (drunkness / 1000));
                     }
                     else if (checkDrunkTimer == false)
                     {
-                        drunkWalkResetTimer = Random.Range(8000 / drunkness, 12000 / drunkness);
+                        drunkWalkResetTimer = UnityEngine.Random.Range(8000 / drunkness, 12000 / drunkness);
                         checkDrunkTimer = true;
                     }
 
@@ -539,10 +566,10 @@ public class Leprechaun_USA : Entity {
                 Flip();
 
         }
-        playerObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, maxVelocity.y/3.5f));
+        playerObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, maxVelocity.y / 3.5f));
         PunchShake(punchDirection, 1.7f, .4f, false);
 
-        GameObject particles = Instantiate(Resources.Load("Prefabs/Objects/Particles/Particles_BloodAndGore"), transform.position - (punchDirection/1.3f), Quaternion.identity) as GameObject;
+        GameObject particles = Instantiate(Resources.Load("Prefabs/Objects/Particles/Particles_BloodAndGore"), transform.position - (punchDirection / 1.3f), Quaternion.identity) as GameObject;
         if (punchDirection.x == 1)
         {
             Vector3 rot = particles.transform.localEulerAngles;
@@ -551,7 +578,7 @@ public class Leprechaun_USA : Entity {
         }
         Destroy(particles.gameObject, 1f);
 
-        
+
         if (!isBlocking && !IsDead && ((int)(1 * damageM)) >= GetHealth)
         {
             Damage((int)(1 * damageM));
@@ -559,16 +586,16 @@ public class Leprechaun_USA : Entity {
             switch (player)
             {
                 case GamePad.Index.One:
-                    Global.leprechauns[0].kills += 1;
+                    Global.leprechauns[0].gameObject.GetComponent<Player>().kills += 1;
                     break;
                 case GamePad.Index.Two:
-                    Global.leprechauns[1].kills += 1;
+                    Global.leprechauns[1].gameObject.GetComponent<Player>().kills += 1;
                     break;
                 case GamePad.Index.Three:
-                    Global.leprechauns[2].kills += 1;
+                    Global.leprechauns[2].gameObject.GetComponent<Player>().kills += 1;
                     break;
                 case GamePad.Index.Four:
-                    Global.leprechauns[3].kills += 1;
+                    Global.leprechauns[3].gameObject.GetComponent<Player>().kills += 1;
                     break;
                 default:
                     break;
@@ -592,7 +619,7 @@ public class Leprechaun_USA : Entity {
 
     public void NotDrinking(int number, bool end)
     {
-        SetAnimation("isDrinking_"+number.ToString(), false);
+        SetAnimation("isDrinking_" + number.ToString(), false);
         if (end)
             isDrinking = false;
 
@@ -637,7 +664,7 @@ public class Leprechaun_USA : Entity {
         //else if(wallCheck.transform.position.x < wallLeft.transform.position.x)
         //    collidingWithWall = true;
     }
-    
+
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Collision_left" || coll.gameObject.tag == "Collision_right")
@@ -647,9 +674,9 @@ public class Leprechaun_USA : Entity {
 
     public void PunchShake(Vector2 punchDirection, float hardness, float time, bool motionB)
     {
-        punchDirection = (punchDirection/10)*hardness;
+        punchDirection = (punchDirection / 10) * hardness;
         iTween.PunchPosition(GameObject.FindGameObjectWithTag("MainCamera"), punchDirection, time);
-        if(motionB)
+        if (motionB)
         {
             MotionBlur motionBlur = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MotionBlur>();
             motionBlur.blurAmount = .8f;
@@ -658,19 +685,20 @@ public class Leprechaun_USA : Entity {
 
     }
 
+
     #region SET ANIMATION STUFF
 
-    private void SetAnimation(string name, int value)
+    public void SetAnimation(string name, int value)
     {
         top_animator.SetInteger(name, value);
         bottom_animator.SetInteger(name, value);
     }
-    private void SetAnimation(string name, float value)
+    public void SetAnimation(string name, float value)
     {
         top_animator.SetFloat(name, value);
         bottom_animator.SetFloat(name, value);
     }
-    private void SetAnimation(string name, bool value)
+    public void SetAnimation(string name, bool value)
     {
         top_animator.SetBool(name, value);
         bottom_animator.SetBool(name, value);

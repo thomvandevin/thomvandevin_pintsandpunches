@@ -17,10 +17,6 @@ public class KeyButton : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(RectanglePos(1), "PunchShake"))
-        {
-            Global.leprechauns[0].PunchShake(new Vector2(.1f, .1f), 10, .5f, false);
-        }
         if (GUI.Button(RectanglePos(2), "Damage 1"))
         {
             GameObject.Find("Player 1").GetComponentInChildren<Leprechaun>().Damage(5);

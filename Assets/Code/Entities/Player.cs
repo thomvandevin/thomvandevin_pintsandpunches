@@ -11,7 +11,8 @@ public class Player : MonoBehaviour {
         LEPRECHAUN_01,
         LEPRECHAUN_USA,
         CLURICHAUN,
-        FAR_DARRIG
+        FAR_DARRIG,
+        FAIRY
     }
 
     public enum CharacterScript
@@ -19,13 +20,14 @@ public class Player : MonoBehaviour {
         Leprechaun,
         Leprechaun_USA,
         Clurichaun,
-        FarDarrig
+        FarDarrig,
+        Fairy
     }
 
     public Character chosenCharacter;
     private string loadCharacterString;
 
-    public int controllerNumber;
+    public int controllerNumber, kills;
     public bool RESET;
     public Vector2 playerStartPosition;
 
@@ -55,10 +57,13 @@ public class Player : MonoBehaviour {
                 loadCharacterString = "Prefabs/Entities/Leprechaun_usa";
                 break;
             case Character.CLURICHAUN:
-                loadCharacterString = "Prefabs/Entities/Clurichaun_01";
+                loadCharacterString = "Prefabs/Entities/Clurichaun";
                 break;
             case Character.FAR_DARRIG:
-                loadCharacterString = "Prefabs/Entities/FarDarrig_01";
+                loadCharacterString = "Prefabs/Entities/FarDarrig";
+                break;
+            case Character.FAIRY:
+                loadCharacterString = "Prefabs/Entities/Fairy";
                 break;
             default:
                 loadCharacterString = "Prefabs/Entities/Leprechaun_01";
@@ -77,16 +82,27 @@ public class Player : MonoBehaviour {
             case Character.LEPRECHAUN_01:
                         leprechaunScript = leprechaunObject.AddComponent<Leprechaun>();
                         Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
-                        leprechaunScript.GetComponent<Leprechaun>().SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject, 0);
+                        leprechaunScript.GetComponent<Leprechaun>().SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             case Character.LEPRECHAUN_USA:
                         leprechaunScript = leprechaunObject.AddComponent<Leprechaun_USA>();
                         Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
-                        leprechaunScript.GetComponent<Leprechaun_USA>().SetLeprechaun_USA(playerStartPosition, controllerNumber, chosenCharacter, gameObject, 0);
+                        leprechaunScript.GetComponent<Leprechaun_USA>().SetLeprechaun_USA(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             case Character.CLURICHAUN:
+                        leprechaunScript = leprechaunObject.AddComponent<Cluirichaun>();
+                        Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
+                        leprechaunScript.GetComponent<Cluirichaun>().SetCluirichaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             case Character.FAR_DARRIG:
+                        leprechaunScript = leprechaunObject.AddComponent<FarDarrig>();
+                        Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
+                        leprechaunScript.GetComponent<FarDarrig>().SetFarDarrig(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
+                break;
+            case Character.FAIRY:
+                    leprechaunScript = leprechaunObject.AddComponent<Fairy>();
+                    Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
+                    leprechaunScript.GetComponent<Fairy>().SetFairy(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             default:
                 break;
@@ -110,7 +126,7 @@ public class Player : MonoBehaviour {
         //respawnFlare.Update();
     }
 
-    public void ResetPlayer(GameObject deadLeprechaun, int kills)
+    public void ResetPlayer(GameObject deadLeprechaun)
     {
         Vector3 deadLepPosition = deadLeprechaun.transform.position;
         Destroy(deadLeprechaun);
@@ -126,15 +142,27 @@ public class Player : MonoBehaviour {
         {
             case Character.LEPRECHAUN_01:
                 leprechaunScript = leprechaunObject.AddComponent<Leprechaun>();
-                leprechaunScript.GetComponent<Leprechaun>().SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject, 0);
+                leprechaunScript.GetComponent<Leprechaun>().SetLeprechaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             case Character.LEPRECHAUN_USA:
                 leprechaunScript = leprechaunObject.AddComponent<Leprechaun_USA>();
-                leprechaunScript.GetComponent<Leprechaun_USA>().SetLeprechaun_USA(playerStartPosition, controllerNumber, chosenCharacter, gameObject, 0);
+                Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
+                leprechaunScript.GetComponent<Leprechaun_USA>().SetLeprechaun_USA(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             case Character.CLURICHAUN:
+                leprechaunScript = leprechaunObject.AddComponent<Cluirichaun>();
+                Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
+                leprechaunScript.GetComponent<Cluirichaun>().SetCluirichaun(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             case Character.FAR_DARRIG:
+                leprechaunScript = leprechaunObject.AddComponent<FarDarrig>();
+                Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
+                leprechaunScript.GetComponent<FarDarrig>().SetFarDarrig(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
+                break;
+            case Character.FAIRY:
+                leprechaunScript = leprechaunObject.AddComponent<Fairy>();
+                Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
+                leprechaunScript.GetComponent<Fairy>().SetFairy(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
                 break;
             default:
                 break;
@@ -161,6 +189,45 @@ public class Player : MonoBehaviour {
         else if (leprechaun.GetComponent<Leprechaun_USA>() != null)
         {
             Leprechaun_USA script = leprechaunScript.GetComponent<Leprechaun_USA>();
+
+            if (collisionName == "groundCheck")
+                return script.groundCheck;
+            else if (collisionName == "punchCheck")
+                return script.punchCheck;
+            else if (collisionName == "bodyCheck")
+                return script.bodyCheck;
+            else if (collisionName == "wallCheck")
+                return script.wallCheck;
+        }
+        else if (leprechaun.GetComponent<Cluirichaun>() != null)
+        {
+            Cluirichaun script = leprechaunScript.GetComponent<Cluirichaun>();
+
+            if (collisionName == "groundCheck")
+                return script.groundCheck;
+            else if (collisionName == "punchCheck")
+                return script.punchCheck;
+            else if (collisionName == "bodyCheck")
+                return script.bodyCheck;
+            else if (collisionName == "wallCheck")
+                return script.wallCheck;
+        }
+        else if (leprechaun.GetComponent<FarDarrig>() != null)
+        {
+            FarDarrig script = leprechaunScript.GetComponent<FarDarrig>();
+
+            if (collisionName == "groundCheck")
+                return script.groundCheck;
+            else if (collisionName == "punchCheck")
+                return script.punchCheck;
+            else if (collisionName == "bodyCheck")
+                return script.bodyCheck;
+            else if (collisionName == "wallCheck")
+                return script.wallCheck;
+        }
+        else if (leprechaun.GetComponent<Fairy>() != null)
+        {
+            Fairy script = leprechaunScript.GetComponent<Fairy>();
 
             if (collisionName == "groundCheck")
                 return script.groundCheck;
