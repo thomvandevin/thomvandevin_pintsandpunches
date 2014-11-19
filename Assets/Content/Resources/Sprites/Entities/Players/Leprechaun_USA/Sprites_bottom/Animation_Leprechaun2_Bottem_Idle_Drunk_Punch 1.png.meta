@@ -1,13 +1,12 @@
 fileFormatVersion: 2
-guid: 41752b0ea6423924680793cdf4cd33fc
+guid: 079ab0d5e88fff2449e204a893ca8d28
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Top_Idle_Barf_Loop_0
-    21300002: Animation_Leprechaun2_Top_Idle_Barf_Loop_1
-    21300004: Animation_Leprechaun2_Top_Idle_Barf_Loop_2
-    21300006: Animation_Leprechaun2_Top_Idle_Barf_Loop_3
-    21300008: Animation_Leprechaun2_Top_Idle_Barf_Loop_4
-    21300010: Animation_Leprechaun2_Top_Idle_Barf_Loop_5
+    21300000: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_0
+    21300002: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_1
+    21300004: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_2
+    21300006: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_3
+    21300008: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,7 +48,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Animation_Leprechaun2_Top_Idle_Barf_Loop_0
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -59,7 +58,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Top_Idle_Barf_Loop_1
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_1
       rect:
         serializedVersion: 2
         x: 192
@@ -69,7 +68,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Top_Idle_Barf_Loop_2
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_2
       rect:
         serializedVersion: 2
         x: 384
@@ -79,7 +78,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Top_Idle_Barf_Loop_3
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_3
       rect:
         serializedVersion: 2
         x: 576
@@ -89,20 +88,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Top_Idle_Barf_Loop_4
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_4
       rect:
         serializedVersion: 2
         x: 768
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Top_Idle_Barf_Loop_5
-      rect:
-        serializedVersion: 2
-        x: 960
         y: 0
         width: 192
         height: 192
