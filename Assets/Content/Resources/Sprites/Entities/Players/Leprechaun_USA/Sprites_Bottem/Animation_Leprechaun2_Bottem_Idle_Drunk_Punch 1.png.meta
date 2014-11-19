@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 82aa4269bc94fa14c82fd8b58320a087
+guid: 079ab0d5e88fff2449e204a893ca8d28
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_0
-    21300002: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_1
-    21300004: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_2
-    21300006: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_3
-    21300008: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_4
+    21300000: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_0
+    21300002: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_1
+    21300004: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_2
+    21300006: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_3
+    21300008: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +48,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_0
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -58,7 +58,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_1
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_1
       rect:
         serializedVersion: 2
         x: 192
@@ -68,7 +68,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_2
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_2
       rect:
         serializedVersion: 2
         x: 384
@@ -78,7 +78,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_3
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_3
       rect:
         serializedVersion: 2
         x: 576
@@ -88,7 +88,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch_4
+    - name: Animation_Leprechaun2_Bottem_Idle_Drunk_Punch 1_4
       rect:
         serializedVersion: 2
         x: 768
