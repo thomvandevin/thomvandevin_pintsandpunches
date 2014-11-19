@@ -67,6 +67,22 @@ public class Leprechaun_USA : Entity {
         kills = killsAmount;
 
         this.chosenCharacter = chosenCharacter;
+        switch (chosenCharacter)
+        {
+            case Player.Character.LEPRECHAUN_01:
+                characterTypeScript = gameObject.GetComponent<Leprechaun>();
+                break;
+            case Player.Character.LEPRECHAUN_USA:
+                characterTypeScript = gameObject.GetComponent<Leprechaun_USA>();
+                break;
+            case Player.Character.CLURICHAUN:
+                break;
+            case Player.Character.FAR_DARRIG:
+                break;
+            default:
+                break;
+        }
+
         startingPosition = pos;
         mirrored = false;
         onGround = false;
@@ -205,9 +221,9 @@ public class Leprechaun_USA : Entity {
 
                 bool didHit = false;
 
-                foreach (Leprechaun lep in Global.leprechauns.ToArray())
+                foreach (GameObject lep in Global.leprechauns.ToArray())
                 {
-                    if (punchCheck.collider2D.bounds.Intersects(lep.bodyCheck.collider2D.bounds) && lep != this)
+                    if (punchCheck.collider2D.bounds.Intersects(lep.chara .bodyCheck.collider2D.bounds) && lep != this)
                     {
                         lep.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                         didHit = true;
@@ -338,7 +354,7 @@ public class Leprechaun_USA : Entity {
         {
             SetAnimation("deathCounter", deathCounter);
             SetAnimation("isDead", false);
-            Global.leprechauns.Remove(this);
+            Global.leprechauns.Remove(gameObject<>);
 
             deathCounter++;
         } 

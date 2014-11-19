@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
+using System;
 
 public class Leprechaun : Entity {
 
@@ -201,14 +202,16 @@ public class Leprechaun : Entity {
                 isAttacking = true;
                 SetAnimation("isAttacking", true);
                 attackOnce = 1;
-                attackCooldown = Random.Range(40, 48);
+                attackCooldown = UnityEngine.Random.Range(40, 48);
 
                 bool didHit = false;
 
-                foreach (Leprechaun lep in Global.leprechauns.ToArray())
+                foreach (GameObject lep in Global.leprechauns.ToArray())
                 {
-                    if (punchCheck.collider2D.bounds.Intersects(lep.bodyCheck.collider2D.bounds) && lep != this)
+
+                    if (punchCheck.collider2D.bounds.Intersects(lep.GetComponent<Player>().GetCollisionObject("bodyCheck",lep).collider2D.bounds) && lep != this)
                     {
+                        lep.GetComponent<Player>
                         lep.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
                         didHit = true;
                         lep.isHit = true;
@@ -338,7 +341,7 @@ public class Leprechaun : Entity {
         {
             SetAnimation("deathCounter", deathCounter);
             SetAnimation("isDead", false);
-            Global.leprechauns.Remove(this);
+            Global.leprechauns.Remove(gameObject);
 
             deathCounter++;
         } 
@@ -469,8 +472,8 @@ public class Leprechaun : Entity {
             else if (drunkWalkResetTimer <= 0 && checkDrunkTimer == true)
             {
                 checkDrunkTimer = false;
-                drunkWalkTimer = Random.Range(3000 / (drunkness * (1 + (100 / drunkness))), 4500 / (drunkness * (1 + (100 / drunkness))));
-                drunkRandomSide = Random.Range(0, 2);
+                drunkWalkTimer = UnityEngine.Random.Range(3000 / (drunkness * (1 + (100 / drunkness))), 4500 / (drunkness * (1 + (100 / drunkness))));
+                drunkRandomSide = UnityEngine.Random.Range(0, 2);
             }
 
             if (!isAttacking && !isBlocking && !playerStateBool)
@@ -481,11 +484,11 @@ public class Leprechaun : Entity {
                     if (drunkWalkTimer > 0 && checkDrunkTimer == false)
                     {
                         drunkWalkTimer--;
-                        maxVelocity.x = Random.Range(3 - (drunkness / 2000), 4 + (drunkness / 1000));
+                        maxVelocity.x = UnityEngine.Random.Range(3 - (drunkness / 2000), 4 + (drunkness / 1000));
                     }
                     else if (checkDrunkTimer == false)
                     {
-                        drunkWalkResetTimer = Random.Range(8000 / drunkness, 12000 / drunkness);
+                        drunkWalkResetTimer = UnityEngine.Random.Range(8000 / drunkness, 12000 / drunkness);
                         checkDrunkTimer = true;
                     }
 
@@ -641,6 +644,7 @@ public class Leprechaun : Entity {
         }
 
     }
+
 
     #region SET ANIMATION STUFF
 
