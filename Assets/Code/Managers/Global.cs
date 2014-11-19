@@ -15,8 +15,10 @@ public class Global : MonoBehaviour {
     public static bool GAME_RESET = false;
 
     public static List<GameObject> players;
-    public static List<Leprechaun> leprechauns;
+    public static List<GameObject> leprechauns;
     public static List<GameObject> drinks;
+
+    public static Dictionary<GameObject, string> lepGOlepScript;
 
     public static World WorldObject;
 
@@ -41,8 +43,10 @@ public class Global : MonoBehaviour {
         if (Application.loadedLevel == Global.Screen_MainGame)
         {
             players = new List<GameObject>();
-            leprechauns = new List<Leprechaun>();
+            leprechauns = new List<GameObject>();
             drinks = new List<GameObject>();
+
+            lepGOlepScript = new Dictionary<GameObject, string>();
 
             WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
         }
