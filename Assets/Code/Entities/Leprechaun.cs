@@ -208,12 +208,12 @@ public class Leprechaun : Entity {
                 foreach (GameObject lep in Global.leprechauns.ToArray())
                 {
                     Player p = lep.gameObject.transform.parent.GetComponent<Player>();
-                    if (punchCheck.collider2D.bounds.Intersects(p.GetCollisionObject("bodyCheck",lep).collider2D.bounds) && lep != this)
+                    if (punchCheck.collider2D.bounds.Intersects(p.GetCollisionObject("bodyCheck",lep).collider2D.bounds) && lep != gameObject)
                     {
                         if (p.GetLeprechaunScriptType().GetType() == typeof(Leprechaun))
                         {
                             Leprechaun lepScript = (Leprechaun)p.leprechaunScript;
-                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -222,7 +222,7 @@ public class Leprechaun : Entity {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(Leprechaun_USA))
                         {
                             Leprechaun_USA lepScript = (Leprechaun_USA)p.leprechaunScript;
-                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -231,7 +231,7 @@ public class Leprechaun : Entity {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(Cluirichaun))
                         {
                             Cluirichaun lepScript = (Cluirichaun)p.leprechaunScript;
-                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -240,7 +240,7 @@ public class Leprechaun : Entity {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(FarDarrig))
                         {
                             FarDarrig lepScript = (FarDarrig)p.leprechaunScript;
-                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -249,7 +249,7 @@ public class Leprechaun : Entity {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(Fairy))
                         {
                             Fairy lepScript = (Fairy)p.leprechaunScript;
-                            lepScript.GotHit(this.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
