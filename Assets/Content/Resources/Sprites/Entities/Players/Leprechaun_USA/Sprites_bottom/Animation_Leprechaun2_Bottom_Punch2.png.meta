@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9d816d27171873741ba0f708245794d6
+guid: 22cb657389ff5cb4bbce7fe99e2ddc95
 TextureImporter:
   fileIDToRecycleName:
     21300000: Animation_Leprechaun2_Bottom_Punch2_0
@@ -52,38 +52,38 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Leprechaun2_Bottom_Punch2_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 192
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Leprechaun2_Bottom_Punch2_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 384
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Leprechaun2_Bottom_Punch2_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 576
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

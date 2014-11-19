@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ad5ce3709d074249a689e4bfd2da1a0
+guid: 84cb48a621e72764e9ec0a384206595a
 TextureImporter:
   fileIDToRecycleName:
     21300000: Animation_Leprechaun2_Rollerskate_Begin_0
@@ -53,48 +53,48 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Leprechaun2_Rollerskate_Begin_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 192
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Leprechaun2_Rollerskate_Begin_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 384
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Leprechaun2_Rollerskate_Begin_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 576
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Animation_Leprechaun2_Rollerskate_Begin_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 768
         y: 0
-        width: 64
-        height: 64
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
