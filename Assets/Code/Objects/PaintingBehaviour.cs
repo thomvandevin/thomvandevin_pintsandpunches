@@ -5,7 +5,7 @@ public class PaintingBehaviour : MonoBehaviour {
 
     public int delayfrom, delaytill;
 
-    private int randomDelay, timer = 0;
+    public int randomDelay, timer = 0;
     private Animator anim;
     private bool triggerOnce = false;
 
@@ -28,7 +28,7 @@ public class PaintingBehaviour : MonoBehaviour {
         else
             timer++;
 
-        if (triggerOnce)
+        if (triggerOnce && anim.IsInTransition(0))
             ResetBool("startAnimation");
 
 	}
