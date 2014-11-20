@@ -563,7 +563,6 @@ public class Leprechaun : Entity {
                 Flip();
             else if (punchDirection.x <= -.5 && Direction == Facing.RIGHT)
                 Flip();
-
         }
         playerObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, maxVelocity.y/3.5f));
         PunchShake(punchDirection, 1.7f, .4f, false);
