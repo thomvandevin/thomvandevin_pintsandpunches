@@ -17,6 +17,7 @@ public class Global : MonoBehaviour {
     public static List<GameObject> players;
     public static List<GameObject> leprechauns;
     public static List<GameObject> drinks;
+    public static List<int> playerCharacter;
 
     public static Dictionary<GameObject, string> lepGOlepScript;
 
@@ -40,6 +41,8 @@ public class Global : MonoBehaviour {
         GAME_RESET = false;
         GAME_END = false;
 
+        playerCharacter = new List<int>();
+
         if (Application.loadedLevel == Global.Screen_MainGame)
         {
             players = new List<GameObject>();
@@ -58,6 +61,10 @@ public class Global : MonoBehaviour {
         Global.NumberOfPlayers = nr;
     }
 
+    static public void AddSelectedCharacter(int i)
+    {
+        Global.playerCharacter.Add(i);
+    }
 
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
     {

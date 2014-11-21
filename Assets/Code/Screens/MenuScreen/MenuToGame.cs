@@ -9,8 +9,6 @@ public class MenuToGame : MonoBehaviour {
 
     public List<int> playerCharacter;
 
-    public int SCPlayer1, SCPlayer2, SCPlayer3, SCPlayer4;
-
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -27,10 +25,22 @@ public class MenuToGame : MonoBehaviour {
     {
         if(GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
         {
-
-
             Application.LoadLevel("PintsAndPunches_MainGame");
-            Global.SetNumberOfPlayers(2);
+
+
+            int players = 0;
+            for (int i = 0; i < playerCharacter.Count; i++)
+            {
+                if (playerCharacter[i] != 0)
+                    players++;
+
+                Global.AddSelectedCharacter(playerCharacter[i]);
+
+                print("test");
+            }
+
+            Global.SetNumberOfPlayers(players);
+
         }
 
         //if(Application.loadedLevel == Global.Screen_MainGame)
