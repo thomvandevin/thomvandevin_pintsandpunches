@@ -35,13 +35,16 @@ public class Global : MonoBehaviour {
     {
         Reset();
     }
+
+    public static void EarlyStart()
+    {        
+        playerCharacter = new List<int>();
+    }
     
     static public void Reset()
     {        
         GAME_RESET = false;
         GAME_END = false;
-
-        playerCharacter = new List<int>();
 
         if (Application.loadedLevel == Global.Screen_MainGame)
         {

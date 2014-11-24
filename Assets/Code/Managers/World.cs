@@ -13,21 +13,20 @@ public class World : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        print(Global.playerCharacter.Count);
 
         int SCP = 0;
-        for (int i = 0; i <= Global.NumberOfPlayers; i++)
+        for (int i = 1; i <= Global.NumberOfPlayers; i++)
         {
             Player.Character sc;
-            if (Global.playerCharacter[SCP] == 1)
+            if (Global.playerCharacter[SCP] == 5)
                 sc = Player.Character.LEPRECHAUN_01;
-            else if (Global.playerCharacter[SCP] == 2)
+            else if (Global.playerCharacter[SCP] == 1)
                 sc = Player.Character.LEPRECHAUN_USA;
-            else if (Global.playerCharacter[SCP] == 3)
+            else if (Global.playerCharacter[SCP] == 2)
                 sc = Player.Character.CLUIRICHAUN;
-            else if (Global.playerCharacter[SCP] == 4)
+            else if (Global.playerCharacter[SCP] == 3)
                 sc = Player.Character.FAR_DARRIG;
-            else if (Global.playerCharacter[SCP] == 5)
+            else if (Global.playerCharacter[SCP] == 4)
                 sc = Player.Character.FAIRY;
             else sc = Player.Character.LEPRECHAUN_01;
 

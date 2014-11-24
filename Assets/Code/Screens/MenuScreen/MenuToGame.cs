@@ -25,9 +25,7 @@ public class MenuToGame : MonoBehaviour {
     {
         if(GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
         {
-            Application.LoadLevel("PintsAndPunches_MainGame");
-
-
+            Global.EarlyStart();
             int players = 0;
             for (int i = 0; i < playerCharacter.Count; i++)
             {
@@ -35,18 +33,17 @@ public class MenuToGame : MonoBehaviour {
                     players++;
 
                 Global.AddSelectedCharacter(playerCharacter[i]);
-
-                print("test");
             }
 
             Global.SetNumberOfPlayers(players);
 
+            Application.LoadLevel("PintsAndPunches_MainGame");
+
+            //print(playerCharacter[0].ToString() + " " +playerCharacter[1].ToString() + " " +playerCharacter[2].ToString());
         }
 
-        //if(Application.loadedLevel == Global.Screen_MainGame)
-        //{
-        //}
 	}
+
 
 
 }
