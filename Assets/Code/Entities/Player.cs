@@ -103,6 +103,8 @@ public class Player : MonoBehaviour
                 leprechaunScript = leprechaunObject.AddComponent<FarDarrig>();
                 Global.lepGOlepScript.Add(leprechaunObject, leprechaunScript.ToString());
                 leprechaunScript.GetComponent<FarDarrig>().SetFarDarrig(playerStartPosition, controllerNumber, chosenCharacter, gameObject);
+                gameObject.GetComponent<BoxCollider2D>().size = leprechaunScript.GetComponent<FarDarrig>().bodyCheck.GetComponent<BoxCollider2D>().size;
+                gameObject.GetComponent<BoxCollider2D>().center = leprechaunScript.GetComponent<FarDarrig>().bodyCheck.GetComponent<BoxCollider2D>().center;
                 break;
             case Character.FAIRY:
                 leprechaunScript = leprechaunObject.AddComponent<Fairy>();
@@ -117,7 +119,8 @@ public class Player : MonoBehaviour
 
         Global.leprechauns.Add(leprechaunObject);
 
-        playerIndicatorObject = Instantiate(Resources.Load("Prefabs/Objects/HUD/Controller_indicator"), new Vector3(transform.position.x, transform.position.y + 1, 0), Quaternion.identity) as GameObject;
+        Vector3 playerIndPos = new Vector3(transform.position.x, transform.position.y + 1, 0);
+        playerIndicatorObject = Instantiate(Resources.Load("Prefabs/Objects/HUD/Controller_indicator"), playerIndPos, Quaternion.identity) as GameObject;
         playerIndicatorScript = playerIndicatorObject.GetComponent<PlayerIndicator>();
         playerIndicatorScript.SetIndicator(gameObject, controllerNumber);
 

@@ -3,7 +3,6 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using GamepadInput;
-using UnityEditor;
 
 public class MenuToGame : MonoBehaviour {
 

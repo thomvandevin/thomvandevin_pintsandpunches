@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
-using UnityEditor;
 
 public class Global : MonoBehaviour {
 
