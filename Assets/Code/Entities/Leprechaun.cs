@@ -608,8 +608,8 @@ public class Leprechaun : Entity {
     {
         if (Mathf.Abs(playerObject.rigidbody2D.velocity.x) > 10)
         {
-            playerObject.rigidbody2D.velocity = new Vector2(playerObject.rigidbody2D.velocity.x / 10, playerObject.rigidbody2D.velocity.y);
-            Invoke("NotHit", .1f);
+            playerObject.rigidbody2D.velocity = new Vector2(playerObject.rigidbody2D.velocity.x / 10, rigidbody2D.velocity.y);
+            Invoke("NotHit", .01f);
         }
            else
         {

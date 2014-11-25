@@ -75,7 +75,8 @@ public class Player : MonoBehaviour
         RESET = false;
         kills = 0;
 
-        playerStartPosition = new Vector2(-10 + (4 * controllerNumber), 0);
+        playerStartPosition = new Vector3(-10 + (4 * controllerNumber),0 , (-.1f * controllerNumber));
+        print(playerStartPosition);
         gameObject.transform.position = playerStartPosition;
 
         leprechaunObject = Instantiate(Resources.Load(loadCharacterString), transform.position, Quaternion.identity) as GameObject;
