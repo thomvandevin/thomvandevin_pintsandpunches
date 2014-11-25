@@ -1,6 +1,15 @@
 fileFormatVersion: 2
 guid: 0b2baed67f8ff7448a766d5e2b0a3445
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Pickup_Flash_Pint_0
+    21300002: Pickup_Flash_Pint_1
+    21300004: Pickup_Flash_Pint_2
+    21300006: Pickup_Flash_Pint_3
+    21300008: Pickup_Flash_Pint_4
+    21300010: Pickup_Flash_Pint_5
+    21300012: Pickup_Flash_Pint_6
+    21300014: Pickup_Flash_Pint_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

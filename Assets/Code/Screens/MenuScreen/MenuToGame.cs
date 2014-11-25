@@ -3,13 +3,10 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using GamepadInput;
-using UnityEditor;
 
 public class MenuToGame : MonoBehaviour {
 
     public List<int> playerCharacter;
-
-    public int SCPlayer1, SCPlayer2, SCPlayer3, SCPlayer4;
 
     void Awake()
     {
@@ -27,16 +24,25 @@ public class MenuToGame : MonoBehaviour {
     {
         if(GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
         {
+            Global.EarlyStart();
+            int players = 0;
+            for (int i = 0; i < playerCharacter.Count; i++)
+            {
+                if (playerCharacter[i] != 0)
+                    players++;
 
+                Global.AddSelectedCharacter(playerCharacter[i]);
+            }
+
+            Global.SetNumberOfPlayers(players);
 
             Application.LoadLevel("PintsAndPunches_MainGame");
-            Global.SetNumberOfPlayers(2);
+
+            //print(playerCharacter[0].ToString() + " " +playerCharacter[1].ToString() + " " +playerCharacter[2].ToString());
         }
 
-        //if(Application.loadedLevel == Global.Screen_MainGame)
-        //{
-        //}
 	}
+
 
 
 }

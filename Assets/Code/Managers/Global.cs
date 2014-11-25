@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
-using UnityEditor;
 
 public class Global : MonoBehaviour {
 
@@ -17,11 +16,11 @@ public class Global : MonoBehaviour {
     public static List<GameObject> players;
     public static List<GameObject> leprechauns;
     public static List<GameObject> drinks;
+    public static List<int> playerCharacter;
 
     public static Dictionary<GameObject, string> lepGOlepScript;
 
     public static World WorldObject;
-    public static GameElementManager GameElements;
 
     public static int Screen_CharacterSelect = 0, Screen_MainGame = 1;
 
@@ -34,6 +33,11 @@ public class Global : MonoBehaviour {
     void OnLevelWasLoaded()
     {
         Reset();
+    }
+
+    public static void EarlyStart()
+    {        
+        playerCharacter = new List<int>();
     }
     
     static public void Reset()
@@ -50,7 +54,6 @@ public class Global : MonoBehaviour {
             lepGOlepScript = new Dictionary<GameObject, string>();
 
             WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
-            GameElements = GameObject.FindGameObjectWithTag("GameElements").AddComponent<GameElementManager>();
         }
 
     }
@@ -60,6 +63,10 @@ public class Global : MonoBehaviour {
         Global.NumberOfPlayers = nr;
     }
 
+    static public void AddSelectedCharacter(int i)
+    {
+        Global.playerCharacter.Add(i);
+    }
 
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)
     {

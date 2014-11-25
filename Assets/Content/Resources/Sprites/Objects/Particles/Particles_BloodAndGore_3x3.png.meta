@@ -1,6 +1,16 @@
 fileFormatVersion: 2
 guid: 9f8fe9bfa88c0e143895c2615d49f5e1
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Particles_BloodAndGore_3x3_0
+    21300002: Particles_BloodAndGore_3x3_1
+    21300004: Particles_BloodAndGore_3x3_2
+    21300006: Particles_BloodAndGore_3x3_3
+    21300008: Particles_BloodAndGore_3x3_4
+    21300010: Particles_BloodAndGore_3x3_5
+    21300012: Particles_BloodAndGore_3x3_6
+    21300014: Particles_BloodAndGore_3x3_7
+    21300016: Particles_BloodAndGore_3x3_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

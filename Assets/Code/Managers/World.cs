@@ -7,20 +7,37 @@ public class World : MonoBehaviour {
     [HideInInspector]
 
     public Vector2 drinkPos;
+
     private int drinkTimer;
 
 	// Use this for initialization
     void Start()
     {
 
+        int SCP = 0;
         for (int i = 1; i <= Global.NumberOfPlayers; i++)
         {
+            Player.Character sc;
+            if (Global.playerCharacter[SCP] == 5)
+                sc = Player.Character.LEPRECHAUN_01;
+            else if (Global.playerCharacter[SCP] == 1)
+                sc = Player.Character.LEPRECHAUN_USA;
+            else if (Global.playerCharacter[SCP] == 2)
+                sc = Player.Character.CLUIRICHAUN;
+            else if (Global.playerCharacter[SCP] == 3)
+                sc = Player.Character.FAR_DARRIG;
+            else if (Global.playerCharacter[SCP] == 4)
+                sc = Player.Character.FAIRY;
+            else sc = Player.Character.LEPRECHAUN_01;
+
             GameObject playerObject = Instantiate(Resources.Load("Prefabs/Entities/Player")) as GameObject;
             Player playerScript = playerObject.AddComponent<Player>();
-            playerScript.SetPlayer(i, Player.Character.LEPRECHAUN_01);
+            playerScript.SetPlayer(i, sc);
             playerObject.layer = 7 + i;
             playerObject.name = "Player " + i.ToString();
             Global.players.Add(playerObject);
+
+            SCP++;
         }
 
         drinkTimer = Random.Range(200, 300);

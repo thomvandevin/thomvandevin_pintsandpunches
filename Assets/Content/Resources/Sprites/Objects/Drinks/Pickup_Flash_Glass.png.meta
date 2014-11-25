@@ -1,6 +1,15 @@
 fileFormatVersion: 2
 guid: 89f0e749e1735fa4faf32a8f62d794cd
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Pickup_Flash_Glass_0
+    21300002: Pickup_Flash_Glass_1
+    21300004: Pickup_Flash_Glass_2
+    21300006: Pickup_Flash_Glass_3
+    21300008: Pickup_Flash_Glass_4
+    21300010: Pickup_Flash_Glass_5
+    21300012: Pickup_Flash_Glass_6
+    21300014: Pickup_Flash_Glass_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
