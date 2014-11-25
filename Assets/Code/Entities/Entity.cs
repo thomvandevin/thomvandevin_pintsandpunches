@@ -36,7 +36,7 @@ public class Entity : MonoBehaviour {
     }
 
     #region EDITABLE IN LEPRECHAUN
-    public int dashCooldown, maxDrunkness, drunkTimeMultiplier, drunkWalkResetTimer, attackCooldown;
+    public int dashCooldown, maxDrunkness, drunkTimeMultiplier, drunkWalkResetTimer, attackCooldownMax;
     public float gravity, gravityCorrection, resistance, damageMultiplayer, groundRadius;
     public Vector2 startingPosition, velocity, maxVelocity, drunkVelocity;
     #endregion
@@ -63,7 +63,7 @@ public class Entity : MonoBehaviour {
     protected int maxHealth, health;
     public int GetHealth { get { return health; } set { health = value; } }
     public int drinkAnimCounter, drunkness, drunkWalkTimer, drunkRandomSide;
-    public int controllerNumber, dashTimer, deathCounter, playerStateTimer, jumpOnce, attackOnce;
+    public int controllerNumber, dashTimer, deathCounter, playerStateTimer, jumpOnce, attackOnce, attackCooldown;
 
     public float drunknessF;
 
@@ -111,6 +111,7 @@ public class Entity : MonoBehaviour {
         
         jumpOnce = 0;
         attackOnce = 0;
+        attackCooldown = 0;
         drinkAnimCounter = 0;
         drunkness = 0;
         drunknessF = 0f;
@@ -196,7 +197,7 @@ public class Entity : MonoBehaviour {
                 isAttacking = true;
                 SetAnimation("isAttacking", true);
                 attackOnce = 1;
-                attackCooldown = UnityEngine.Random.Range(40, 48);
+                attackCooldown = attackCooldownMax;
 
                 bool didHit = false;
 

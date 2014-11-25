@@ -21,7 +21,7 @@ public class Leprechaun : Entity {
         damageMultiplayer = 1;
         groundRadius = 0.2f;
 
-        attackCooldown = 0;
+        attackCooldownMax = 0;
         maxDrunkness = 500;
         drunkTimeMultiplier = 300;
         drunkWalkResetTimer = 0;
