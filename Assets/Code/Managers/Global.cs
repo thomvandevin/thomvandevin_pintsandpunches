@@ -21,6 +21,7 @@ public class Global : MonoBehaviour {
     public static Dictionary<GameObject, string> lepGOlepScript;
 
     public static World WorldObject;
+    public static GameElementManager GameElements;
 
     public static int Screen_CharacterSelect = 0, Screen_MainGame = 1;
 
@@ -49,6 +50,7 @@ public class Global : MonoBehaviour {
             lepGOlepScript = new Dictionary<GameObject, string>();
 
             WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
+            GameElements = GameObject.FindGameObjectWithTag("GameElements").AddComponent<GameElementManager>();
         }
 
     }
