@@ -15,7 +15,9 @@ public class GameElementManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (shakiness > 1)
+        if (shakiness > 400)
+            KnockGlassOrPaintingOff();
+        else if (shakiness > 1)
             shakiness -= shakiness / 5;
         else
             shakiness = 0;
@@ -24,5 +26,20 @@ public class GameElementManager : MonoBehaviour {
     public void AddShakiness(float shake)
     {
         shakiness += shake;
+    }
+
+    public void KnockGlassOrPaintingOff()
+    {
+
+    }
+
+    public void KnockPaintingOff()
+    {
+
+    }
+
+    public void KnockGlassOff()
+    {
+
     }
 }
