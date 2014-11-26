@@ -56,7 +56,7 @@ public class Entity : MonoBehaviour {
     private bool isDead;
     public bool IsDead { get { return isDead; } set { isDead = value; } }
     public bool isPlayer;
-    public bool mirrored, attackDone, playerStateBool, maxDrunk, checkDrunkTimer;
+    public bool mirrored, attackDone, playerStateBool, maxDrunk, checkDrunkTimer, dustOnce;
     public bool isDashCooldown, skipNextMove, fallTroughBar, underBar, collidingWithWall;
     public bool onGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
 
@@ -74,6 +74,7 @@ public class Entity : MonoBehaviour {
     protected Animator top_animator, bottom_animator;
     public GameObject playerObject, respawnButton;
     public GameObject groundCheck, punchCheck, bodyCheck, wallCheck;
+    public GameObject dustParticle;
     public LayerMask groundLayer;
 
 	// Use this for initialization
@@ -100,6 +101,7 @@ public class Entity : MonoBehaviour {
         fallTroughBar = false;
         underBar = false; 
         attackDone = false;
+        dustOnce = false;
         maxDrunk = false;
         checkDrunkTimer = true;
 
@@ -129,6 +131,7 @@ public class Entity : MonoBehaviour {
         punchCheck = Global.getChildGameObject(gameObject, "PunchCheck");
         bodyCheck = Global.getChildGameObject(gameObject, "BodyCheck");
         wallCheck = Global.getChildGameObject(gameObject, "WallCheck");
+        dustParticle = Global.getChildGameObject(gameObject, "Dust particle");
         groundLayer = playerObject.GetComponent<LayerMaskPass>().GetLayerMask();
 
         respawnButtonPos = new Vector2(transform.position.x, transform.position.y - 40);
@@ -356,6 +359,7 @@ public class Entity : MonoBehaviour {
                 NotDrinking(2, true);
         }
 
+
         //ManageDrunkness();
 
         if (IsDead && deathCounter == 0)
@@ -397,6 +401,11 @@ public class Entity : MonoBehaviour {
 
 	}
 
+    public void FixedUpdate()
+    {
+
+    }
+
     public virtual void Move(Vector2 pos)
     {
 
@@ -421,14 +430,30 @@ public class Entity : MonoBehaviour {
 
         SetAnimation("vSpeed", playerObject.rigidbody2D.velocity.y);
 
-        float move = GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x;
+        float move = 0;
 
         if (!isHit && !collidingWithWall && !isBlocking)
         {
-            if (GamePad.GetKeyboardKey(KeyCode.LeftArrow))
-                move = -1;
-            else if (GamePad.GetKeyboardKey(KeyCode.RightArrow))
+            if (GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x > .3f)
                 move = 1;
+            else if (GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x < -.3f)
+                move = -1;
+
+            if(Mathf.Abs(move) >= 1)
+            {
+                if(!dustOnce)
+                {
+                    dustOnce = true;
+                    dustParticle.GetComponent<Animator>().SetBool("triggerOnce", true);
+                } 
+                //else if(dustOnce)
+                //    dustParticle.GetComponent<Animator>().SetBool("triggerOnce", false);
+            }
+            else if (dustOnce)
+            {
+                dustOnce = false;
+                dustParticle.GetComponent<Animator>().SetBool("triggerOnce", false);
+            }
 
             if (!isAttacking)
             {
