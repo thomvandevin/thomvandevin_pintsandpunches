@@ -49,8 +49,6 @@ public class Global : MonoBehaviour {
             lepGOlepScript = new Dictionary<GameObject, string>();
 
             WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
-
-            print("jojojo");
         }
 
         Reset();
