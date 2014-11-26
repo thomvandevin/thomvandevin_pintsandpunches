@@ -69,9 +69,16 @@ public class SelectedCharacter : MonoBehaviour {
                 break;
         }
 
-        GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter.Add(0);
-
+        Invoke("AddPlayerCharacter", 0.01f);
 	}
+
+    private void AddPlayerCharacter()
+    {
+        if (GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>() == null)
+            Invoke("AddPlayerCharacter", 0.01f);
+        else
+            GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter.Add(0);
+    }
 	
 	// Update is called once per frame
 	void Update () 

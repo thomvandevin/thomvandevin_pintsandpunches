@@ -32,6 +32,27 @@ public class Global : MonoBehaviour {
 
     void OnLevelWasLoaded()
     {
+        if (Application.loadedLevel == Screen_CharacterSelect)
+        {
+            if(GameObject.FindGameObjectWithTag("Global") != null)
+                Destroy(GameObject.FindGameObjectWithTag("Global"));
+
+            //GameObject glob = Instantiate(Resources.Load("Prefabs/Managers/Global")) as GameObject;
+        }
+        
+        if (Application.loadedLevel == Screen_MainGame)
+        {
+            players = new List<GameObject>();
+            leprechauns = new List<GameObject>();
+            drinks = new List<GameObject>();
+
+            lepGOlepScript = new Dictionary<GameObject, string>();
+
+            WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
+
+            print("jojojo");
+        }
+
         Reset();
     }
 
@@ -44,18 +65,7 @@ public class Global : MonoBehaviour {
     {        
         GAME_RESET = false;
         GAME_END = false;
-
-        if (Application.loadedLevel == Global.Screen_MainGame)
-        {
-            players = new List<GameObject>();
-            leprechauns = new List<GameObject>();
-            drinks = new List<GameObject>();
-
-            lepGOlepScript = new Dictionary<GameObject, string>();
-
-            WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
-        }
-
+        
     }
 
     static public void SetNumberOfPlayers(int nr)

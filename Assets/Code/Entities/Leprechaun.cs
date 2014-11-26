@@ -60,7 +60,7 @@ public class Leprechaun : Entity {
             }
         }
 
-        //base.Update();
+        base.FixedUpdate();
     }
 
 	// Update is called once per frame

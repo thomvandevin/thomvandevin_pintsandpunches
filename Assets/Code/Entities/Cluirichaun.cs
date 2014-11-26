@@ -61,7 +61,7 @@ public class Cluirichaun : Entity
             }
         }
 
-        //base.Update();
+        base.FixedUpdate();
     }
 
     // Update is called once per frame

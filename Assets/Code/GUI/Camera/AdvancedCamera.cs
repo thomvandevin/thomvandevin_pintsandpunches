@@ -9,29 +9,33 @@ public class AdvancedCamera : MonoBehaviour {
     public float margin;
 
     private Vector3 newPosition;
-    private bool on = true;
+    private bool on = false;
     private List<GameObject> playerList;
 
 	// Use this for initialization
 	void Start () {
         playerList = new List<GameObject>();
         newPosition = Vector3.zero;
+        
 	}
+
+    public void LateStart()
+    {
+        if (Global.players.Count > 0)
+        {
+            foreach (GameObject p in Global.players)
+            {
+                playerList.Add(p);
+            }
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (on)
         {
             newPosition = Vector3.zero;
-
-            if (Global.players.Count > 0)
-            {
-                foreach (GameObject p in Global.players)
-                {
-                    playerList.Add(p);
-                }
-            }
-
+            
 
             playerList.OrderBy(p => p.transform.position);
             Vector3 highestValue = playerList[0].transform.position;

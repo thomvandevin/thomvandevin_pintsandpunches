@@ -61,7 +61,7 @@ public class Leprechaun_USA : Entity
             }
         }
 
-        //base.Update();
+        base.FixedUpdate();
     }
 
     // Update is called once per frame

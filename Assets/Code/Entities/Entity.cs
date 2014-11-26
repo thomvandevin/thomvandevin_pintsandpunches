@@ -154,9 +154,6 @@ public class Entity : MonoBehaviour {
 	public virtual void Update () {
         if (health <= 0)
             isDead = true;
-        
-        if (GamePad.GetButtonDown(GamePad.Button.Start, controllerIndex[1]))
-            Global.GAME_RESET = true;
 
         if (gameObject.transform.parent.gameObject.GetComponent<Player>().kills >= 5)
         {
@@ -441,13 +438,13 @@ public class Entity : MonoBehaviour {
 
             if(Mathf.Abs(move) >= 1)
             {
-                if(!dustOnce)
+                if(!dustOnce && onGround)
                 {
                     dustOnce = true;
                     dustParticle.GetComponent<Animator>().SetBool("triggerOnce", true);
                 } 
-                //else if(dustOnce)
-                //    dustParticle.GetComponent<Animator>().SetBool("triggerOnce", false);
+                else if(dustOnce && !onGround)
+                    dustParticle.GetComponent<Animator>().SetBool("triggerOnce", false);
             }
             else if (dustOnce)
             {
