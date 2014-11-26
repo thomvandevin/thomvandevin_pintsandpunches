@@ -10,17 +10,22 @@ public class Global : MonoBehaviour {
 
     [HideInInspector]
 
-    public static bool GAME_END;
+    public static bool GAME_END = false;
     public static bool GAME_RESET = false;
+    public static bool LATE_START = false;
 
     public static List<GameObject> players;
     public static List<GameObject> leprechauns;
     public static List<GameObject> drinks;
     public static List<int> playerCharacter;
 
+    public static List<GameObject> environmentGlasses;
+    public static List<GameObject> environmentPaintings;
+
     public static Dictionary<GameObject, string> lepGOlepScript;
 
     public static World WorldObject;
+    public static GameElementManager GameElements;
 
     public static int Screen_CharacterSelect = 0, Screen_MainGame = 1;
 
@@ -37,7 +42,6 @@ public class Global : MonoBehaviour {
             if(GameObject.FindGameObjectWithTag("Global") != null)
                 Destroy(GameObject.FindGameObjectWithTag("Global"));
 
-            //GameObject glob = Instantiate(Resources.Load("Prefabs/Managers/Global")) as GameObject;
         }
         
         if (Application.loadedLevel == Screen_MainGame)
@@ -45,13 +49,16 @@ public class Global : MonoBehaviour {
             players = new List<GameObject>();
             leprechauns = new List<GameObject>();
             drinks = new List<GameObject>();
+            environmentGlasses = new List<GameObject>();
+            environmentPaintings = new List<GameObject>();
 
             lepGOlepScript = new Dictionary<GameObject, string>();
 
             WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
-        }
+            GameElements = GameObject.FindGameObjectWithTag("Global").AddComponent<GameElementManager>();
 
-        Reset();
+            LATE_START = true;
+        }
     }
 
     public static void EarlyStart()
@@ -63,6 +70,7 @@ public class Global : MonoBehaviour {
     {        
         GAME_RESET = false;
         GAME_END = false;
+        LATE_START = false;
         
     }
 

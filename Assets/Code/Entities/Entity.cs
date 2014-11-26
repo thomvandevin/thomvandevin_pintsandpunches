@@ -37,7 +37,7 @@ public class Entity : MonoBehaviour {
 
     #region EDITABLE IN LEPRECHAUN
     public int dashCooldown, maxDrunkness, drunkTimeMultiplier, drunkWalkResetTimer, attackCooldownMax;
-    public float gravity, gravityCorrection, resistance, damageMultiplayer, groundRadius;
+    public float gravity, gravityCorrection, resistance, damageMultiplayer, groundRadius, jumpShakeHardness, punchShakeHardness;
     public Vector2 startingPosition, velocity, maxVelocity, drunkVelocity;
     #endregion
 
@@ -58,7 +58,7 @@ public class Entity : MonoBehaviour {
     public bool isPlayer;
     public bool mirrored, attackDone, playerStateBool, maxDrunk, checkDrunkTimer, dustOnce, canDoubleJump;
     public bool isDashCooldown, skipNextMove, fallTroughBar, underBar, collidingWithWall;
-    public bool onGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
+    public bool onGround, previousGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
 
     protected int maxHealth, health;
     public int GetHealth { get { return health; } set { health = value; } }
@@ -213,7 +213,7 @@ public class Entity : MonoBehaviour {
                         if (p.GetLeprechaunScriptType().GetType() == typeof(Leprechaun))
                         {
                             Leprechaun lepScript = (Leprechaun)p.leprechaunScript;
-                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex, punchShakeHardness);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -222,7 +222,7 @@ public class Entity : MonoBehaviour {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(Leprechaun_USA))
                         {
                             Leprechaun_USA lepScript = (Leprechaun_USA)p.leprechaunScript;
-                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex, punchShakeHardness);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -231,7 +231,7 @@ public class Entity : MonoBehaviour {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(Cluirichaun))
                         {
                             Cluirichaun lepScript = (Cluirichaun)p.leprechaunScript;
-                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex, punchShakeHardness);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -240,7 +240,7 @@ public class Entity : MonoBehaviour {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(FarDarrig))
                         {
                             FarDarrig lepScript = (FarDarrig)p.leprechaunScript;
-                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex, punchShakeHardness);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -249,7 +249,7 @@ public class Entity : MonoBehaviour {
                         else if (p.GetLeprechaunScriptType().GetType() == typeof(Fairy))
                         {
                             Fairy lepScript = (Fairy)p.leprechaunScript;
-                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex);
+                            lepScript.GotHit(gameObject.transform.position, damageMultiplayer, gamePadIndex, punchShakeHardness);
                             didHit = true;
                             lepScript.isHit = true;
                             lepScript.SetAnimation("isHit", true);
@@ -351,7 +351,7 @@ public class Entity : MonoBehaviour {
                 Vector3 vel = playerObject.rigidbody2D.velocity;
                 vel.y = 0;
                 playerObject.rigidbody2D.velocity = vel;
-                playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
+                playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y/1.2f));
                 canDoubleJump = false;
             }
 
@@ -382,6 +382,8 @@ public class Entity : MonoBehaviour {
             SetAnimation("isBlocking", false);
             SetAnimation("isDrinking_1", false);
             SetAnimation("isDrinking_2", false);
+            dustOnce = false;
+            dustParticle.GetComponent<Animator>().SetBool("triggerOnce", false);
             gameObject.Stab(Resources.Load("Audio/SFX/Knockout") as AudioClip, 1f, 1f, 0f);
 
             deathCounter++;
@@ -417,6 +419,11 @@ public class Entity : MonoBehaviour {
 
     }
 
+    public void LateUpdate()
+    {
+        previousGround = onGround;
+    }
+     
     public virtual void Move(Vector2 pos)
     {
 
@@ -441,6 +448,9 @@ public class Entity : MonoBehaviour {
 
         if (onGround && chosenCharacter == Player.Character.FAIRY)
             canDoubleJump = true;
+
+        if (!previousGround && onGround)
+            PunchShake(new Vector2(0, jumpShakeHardness), jumpShakeHardness, .5f, false);
 
         SetAnimation("vSpeed", playerObject.rigidbody2D.velocity.y);
 
@@ -536,14 +546,15 @@ public class Entity : MonoBehaviour {
     public void PunchShake(Vector2 punchDirection, float hardness, float time, bool motionB)
     {
         punchDirection = (punchDirection / 10) * hardness;
-        iTween.PunchPosition(GameObject.FindGameObjectWithTag("MainCamera"), punchDirection, time);
+        iTween.PunchPosition(Camera.main.gameObject, punchDirection, time);
         if (motionB)
         {
-            MotionBlur motionBlur = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MotionBlur>();
+            MotionBlur motionBlur = Camera.main.GetComponent<MotionBlur>();
             motionBlur.blurAmount = .8f;
             motionBlur.Invoke("StopBlur", .2f);
         }
 
+        Global.GameElements.AddShakiness(50 * hardness);
     }
     
     protected void RespawnButton()
@@ -559,7 +570,7 @@ public class Entity : MonoBehaviour {
 
     }
 
-    public void GotHit(Vector2 punchPosition, float damageM, GamePad.Index player)
+    public void GotHit(Vector2 punchPosition, float damageM, GamePad.Index player, float pshake)
     {
         Vector3 punchDirection = Vector3.zero;
         if (punchPosition.x > transform.position.x)
@@ -576,7 +587,7 @@ public class Entity : MonoBehaviour {
                 Flip();
         }
         playerObject.rigidbody2D.AddForce(new Vector2(-punchDirection.x * maxVelocity.x * 8, maxVelocity.y / 3.5f));
-        PunchShake(punchDirection, 1.7f, .4f, false);
+        PunchShake(punchDirection, pshake, .4f, false);
 
         GameObject particles = Instantiate(Resources.Load("Prefabs/Objects/Particles/Particles_BloodAndGore"), transform.position - (punchDirection / 1.3f), Quaternion.identity) as GameObject;
         if (punchDirection.x == 1)
@@ -619,7 +630,7 @@ public class Entity : MonoBehaviour {
     {
         if (Mathf.Abs(playerObject.rigidbody2D.velocity.x) > 10)
         {
-            playerObject.rigidbody2D.velocity = new Vector2(playerObject.rigidbody2D.velocity.x / 10, rigidbody2D.velocity.y);
+            playerObject.rigidbody2D.velocity = new Vector2(playerObject.rigidbody2D.velocity.x / 10, playerObject.rigidbody2D.velocity.y);
             Invoke("NotHit", .01f);
         }
         else

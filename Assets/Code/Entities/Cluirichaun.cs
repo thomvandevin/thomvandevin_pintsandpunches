@@ -21,6 +21,8 @@ public class Cluirichaun : Entity
         //resistance = 2f;
         damageMultiplayer = 1;
         groundRadius = 0.2f;
+        punchShakeHardness = 1.7f;
+        jumpShakeHardness = 1.4f;
 
         attackCooldownMax = 30; //50
         maxDrunkness = 500;

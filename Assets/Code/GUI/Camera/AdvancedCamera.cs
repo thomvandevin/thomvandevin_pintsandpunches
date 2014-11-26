@@ -34,8 +34,7 @@ public class AdvancedCamera : MonoBehaviour {
 	void Update () {
         if (on)
         {
-            newPosition = Vector3.zero;
-            
+            newPosition = Vector3.zero;            
 
             playerList.OrderBy(p => p.transform.position);
             Vector3 highestValue = playerList[0].transform.position;

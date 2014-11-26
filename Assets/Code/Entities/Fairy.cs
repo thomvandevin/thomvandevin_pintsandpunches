@@ -21,6 +21,8 @@ public class Fairy : Entity
         //resistance = 2f;
         damageMultiplayer = 1;
         groundRadius = 0.2f;
+        punchShakeHardness = 1.7f;
+        jumpShakeHardness = 1.5f;
 
         attackCooldownMax = 30; //50
         maxDrunkness = 500;
