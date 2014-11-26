@@ -15,20 +15,20 @@ public class Cluirichaun : Entity
 
     public void SetCluirichaun(Vector2 pos, int controllerNumber, Player.Character chosenCharacter, GameObject playerObject)
     {
-        maxHealth = 5;
+        maxHealth = 7;
         gravity = 0.5f;
-        gravityCorrection = 0f;
-        resistance = 2f;
+        //gravityCorrection = 0f;
+        //resistance = 2f;
         damageMultiplayer = 1;
         groundRadius = 0.2f;
 
-        attackCooldownMax = 0;
+        attackCooldownMax = 30; //50
         maxDrunkness = 500;
         drunkTimeMultiplier = 300;
         drunkWalkResetTimer = 0;
 
-        velocity = new Vector2(0, 60);
-        maxVelocity = new Vector2(80, 840);
+        velocity = new Vector2(0, 60); //0,60
+        maxVelocity = new Vector2(50, 840); //80, 840
         drunkVelocity = new Vector2(0, 0);
 
         dashType = DashTypes.FORWARD;

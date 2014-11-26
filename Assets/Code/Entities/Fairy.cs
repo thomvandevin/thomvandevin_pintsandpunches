@@ -15,20 +15,20 @@ public class Fairy : Entity
 
     public void SetFairy(Vector2 pos, int controllerNumber, Player.Character chosenCharacter, GameObject playerObject)
     {
-        maxHealth = 5;
-        gravity = 0.5f;
-        gravityCorrection = 0f;
-        resistance = 2f;
+        maxHealth = 4;//5
+        gravity = 0.3f; //0.5f
+        //gravityCorrection = 0f;
+        //resistance = 2f;
         damageMultiplayer = 1;
         groundRadius = 0.2f;
 
-        attackCooldownMax = 0;
+        attackCooldownMax = 30; //50
         maxDrunkness = 500;
         drunkTimeMultiplier = 300;
         drunkWalkResetTimer = 0;
 
-        velocity = new Vector2(0, 60);
-        maxVelocity = new Vector2(80, 840);
+        velocity = new Vector2(0, 60);//0,60
+        maxVelocity = new Vector2(60, 940); //80,840
         drunkVelocity = new Vector2(0, 0);
 
         dashType = DashTypes.FORWARD;

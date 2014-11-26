@@ -17,12 +17,12 @@ public class Leprechaun_USA : Entity
     {
         maxHealth = 5;
         gravity = 0.5f;
-        gravityCorrection = 0f;
-        resistance = 2f;
+        //gravityCorrection = 0f;
+        //resistance = 2f;
         damageMultiplayer = 1;
         groundRadius = 0.2f;
 
-        attackCooldownMax = 50;
+        attackCooldownMax = 30; //50
         maxDrunkness = 500;
         drunkTimeMultiplier = 300;
         drunkWalkResetTimer = 0;
