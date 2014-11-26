@@ -56,7 +56,7 @@ public class Entity : MonoBehaviour {
     private bool isDead;
     public bool IsDead { get { return isDead; } set { isDead = value; } }
     public bool isPlayer;
-    public bool mirrored, attackDone, playerStateBool, maxDrunk, checkDrunkTimer, dustOnce;
+    public bool mirrored, attackDone, playerStateBool, maxDrunk, checkDrunkTimer, dustOnce, canDoubleJump;
     public bool isDashCooldown, skipNextMove, fallTroughBar, underBar, collidingWithWall;
     public bool onGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
 
@@ -104,6 +104,10 @@ public class Entity : MonoBehaviour {
         dustOnce = false;
         maxDrunk = false;
         checkDrunkTimer = true;
+        if (chosenCharacter == Player.Character.FAIRY)
+            canDoubleJump = true;
+        else
+            canDoubleJump = false;
 
         isHit = false;
         isAttacking = false;
@@ -339,6 +343,16 @@ public class Entity : MonoBehaviour {
             {
                 SetAnimation("grounded", false);
                 playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
+
+            }
+
+            if(!onGround && chosenCharacter == Player.Character.FAIRY && canDoubleJump && GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) && !isAttacking && !isHit)
+            {
+                Vector3 vel = playerObject.rigidbody2D.velocity;
+                vel.y = 0;
+                playerObject.rigidbody2D.velocity = vel;
+                playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
+                canDoubleJump = false;
             }
 
             #endregion
@@ -424,6 +438,9 @@ public class Entity : MonoBehaviour {
     {
         onGround = Physics2D.OverlapCircle(groundCheck.transform.position, groundRadius, groundLayer);
         SetAnimation("grounded", onGround);
+
+        if (onGround && chosenCharacter == Player.Character.FAIRY)
+            canDoubleJump = true;
 
         SetAnimation("vSpeed", playerObject.rigidbody2D.velocity.y);
 
