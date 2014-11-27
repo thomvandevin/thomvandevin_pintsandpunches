@@ -159,6 +159,9 @@ public class Entity : MonoBehaviour {
         if (health <= 0)
             isDead = true;
 
+        if (GamePad.GetButtonDown(GamePad.Button.Back, gamePadIndex))
+            Camera.main.GetComponent<AdvancedCamera>().Zoom(new Vector2(0, 0));
+
         if (gameObject.transform.parent.gameObject.GetComponent<Player>().kills >= 5)
         {
             Global.WorldObject.GameWon(controllerNumber, chosenCharacter);

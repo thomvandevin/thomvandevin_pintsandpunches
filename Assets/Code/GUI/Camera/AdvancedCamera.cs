@@ -15,6 +15,7 @@ public class AdvancedCamera : MonoBehaviour {
     public Vector2 minXAndY;
 
     private bool on = true;
+    private Vector2 currentPosition, previousPosition;
 
 	// Use this for initialization
 	void Start ()
@@ -72,6 +73,24 @@ public class AdvancedCamera : MonoBehaviour {
     public void Toggle(bool state)
     {
         on = state;
+    }
+
+    public void Zoom(Vector2 target)
+    {
+        previousPosition = transform.position;
+        ZoomIn(target);
+        Invoke("ZoomOut", .1f);
+        
+    }
+
+    private void ZoomIn(Vector2 target)
+    {
+        Camera.main.orthographicSize = 3;
+    }
+
+    private void ZoomOut()
+    {
+        Camera.main.orthographicSize = 4;
     }
 }
 
