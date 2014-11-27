@@ -21,7 +21,7 @@ public class ScreenShakeSimple : MonoBehaviour
     {
         shakeAmt = amt;
         shakeDirection = direction;
-        mainCamera.GetComponent<AdvancedCameraFollower>().Toggle(false);
+        mainCamera.GetComponent<AdvancedCamera>().Toggle(false);
         InvokeRepeating("CameraShake", 0, .2f);
         InvokeRepeating("StopShaking", .3f, .01f);
 
@@ -49,7 +49,7 @@ public class ScreenShakeSimple : MonoBehaviour
         {
             transform.position = originalCameraPosition;
             CancelInvoke("StopShaking");
-            mainCamera.GetComponent<AdvancedCameraFollower>().Toggle(true);
+            mainCamera.GetComponent<AdvancedCamera>().Toggle(true);
         }
     }
 

@@ -41,8 +41,8 @@ public class World : MonoBehaviour {
         }
 
         drinkTimer = Random.Range(200, 300);
-        GameObject.FindGameObjectWithTag("CameraSmoother").GetComponent<AdvancedCamera>().LateStart();
-        GameObject.FindGameObjectWithTag("CameraSmoother").GetComponent<AdvancedCamera>().Toggle(true);
+        GameObject.FindGameObjectWithTag("CameraSmoother").GetComponent<AdvancedCameraFollower>().LateStart();
+        GameObject.FindGameObjectWithTag("CameraSmoother").GetComponent<AdvancedCameraFollower>().Toggle(true);
     }
 
 	// Update is called once per frame

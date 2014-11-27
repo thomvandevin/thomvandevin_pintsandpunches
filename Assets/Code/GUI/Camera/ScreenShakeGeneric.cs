@@ -19,7 +19,7 @@ public class ScreenShakeGeneric : MonoBehaviour {
     public void StartShaking(float amt)
     {
         shakeAmt = amt;
-        mainCamera.GetComponent<AdvancedCameraFollower>().Toggle(false);
+        mainCamera.GetComponent<AdvancedCamera>().Toggle(false);
         InvokeRepeating("CameraShake", 0, .2f);
         Invoke("StopShaking", 2f);
 
