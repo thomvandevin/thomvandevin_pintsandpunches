@@ -14,6 +14,9 @@ public class Global : MonoBehaviour {
     public static bool GAME_RESET = false;
     public static bool LATE_START = false;
 
+    public static int playerWhoWon = 0;
+    public static Player.Character characterThatWon;
+
     public static List<GameObject> players;
     public static List<GameObject> leprechauns;
     public static List<GameObject> drinks;
@@ -27,7 +30,7 @@ public class Global : MonoBehaviour {
     public static World WorldObject;
     public static GameElementManager GameElements;
 
-    public static int Screen_CharacterSelect = 0, Screen_MainGame = 1;
+    public static int Screen_CharacterSelect = 0, Screen_MainGame = 1, Screen_WinScreen = 2;
 
     void Awake()
     {

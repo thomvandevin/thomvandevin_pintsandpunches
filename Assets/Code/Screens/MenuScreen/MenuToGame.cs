@@ -47,6 +47,11 @@ public class MenuToGame : MonoBehaviour {
                 Application.LoadLevel(Global.Screen_CharacterSelect);
                 Global.Reset();
             }
+            else if (Application.loadedLevel == Global.Screen_WinScreen)
+            {
+                Application.LoadLevel(Global.Screen_CharacterSelect);
+                Global.Reset();
+            }
 
         }
 

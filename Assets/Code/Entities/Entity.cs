@@ -161,7 +161,7 @@ public class Entity : MonoBehaviour {
 
         if (gameObject.transform.parent.gameObject.GetComponent<Player>().kills >= 5)
         {
-            Global.WorldObject.GameWon(controllerNumber);
+            Global.WorldObject.GameWon(controllerNumber, chosenCharacter);
             //Global.WorldObject.winnerIndex = chosenPlayerIndex;
         }
 

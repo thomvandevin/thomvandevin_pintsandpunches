@@ -48,30 +48,37 @@ public class World : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        foreach (GameObject p in Global.players)
+        if (Application.loadedLevel == Global.Screen_MainGame)
         {
-            p.GetComponent<Player>().Update();
-        }
-
-        if(Global.enableDrinks)
-        {
-            foreach (GameObject d in Global.drinks)
+            foreach (GameObject p in Global.players)
             {
-                d.GetComponent<Drink>().Update();
+                p.GetComponent<Player>().Update();
             }
 
-            if (Global.drinks.Count < 4)
+            if (Global.enableDrinks)
             {
-                drinkTimer--;
-                if (drinkTimer <= 0)
-                    SpawnDrink();
+                foreach (GameObject d in Global.drinks)
+                {
+                    d.GetComponent<Drink>().Update();
+                }
+
+                if (Global.drinks.Count < 4)
+                {
+                    drinkTimer--;
+                    if (drinkTimer <= 0)
+                        SpawnDrink();
+                }
             }
         }
 
 	}
 
-    public void GameWon(int controllerNumber)
+    public void GameWon(int controllerNumber, Player.Character chosenCharacter)
     {
+        Global.playerWhoWon = controllerNumber;
+        Global.characterThatWon = chosenCharacter;
+        Application.LoadLevel(Global.Screen_WinScreen);
+
         print("Player " + controllerNumber.ToString() + " won!");
     }
 
