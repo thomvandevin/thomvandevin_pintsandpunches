@@ -42,4 +42,8 @@ public class BottleBehaviour : MonoBehaviour {
         Global.environmentGlasses.Remove(gameObject);
         Destroy(gameObject, 1f);
     }
+
+    public void BottleHop()
+    {
+    }
 }

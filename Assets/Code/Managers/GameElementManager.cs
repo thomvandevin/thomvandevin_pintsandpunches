@@ -9,10 +9,12 @@ public class GameElementManager : MonoBehaviour {
     public int maxShakiness = 200;
     public float shakeDivider = 100;
 
+    private ClockBehaviour clock;
+
 	// Use this for initialization
 	void Start () 
     {
-	
+        clock = GameObject.Find("Clock").GetComponent<ClockBehaviour>();
 	}
 	
 	// Update is called once per frame
@@ -23,6 +25,12 @@ public class GameElementManager : MonoBehaviour {
             if (Global.environmentGlasses.Count > 0 || Global.environmentPaintings.Count > 0)
             {
                 KnockGlassOrPaintingOff();
+                int rnd = Random.Range(100, 150);
+                AddShakiness(-rnd);
+            }
+            else
+            {
+                clock.ClockSpin(); 
                 int rnd = Random.Range(100, 150);
                 AddShakiness(-rnd);
             }
@@ -41,21 +49,23 @@ public class GameElementManager : MonoBehaviour {
 
     public void KnockGlassOrPaintingOff()
     {
-        int rnd = Random.Range(1, 8);
-        if (rnd <= 5)
+        int rnd = Random.Range(1, 20);
+        if (rnd <= 13)
         {
             if (Global.environmentGlasses.Count > 0)
                 KnockOffGlass();
             else if (Global.environmentPaintings.Count > 0)
                 KnockOffPainting();
         }
-        else
+        else if (rnd > 13 && rnd <= 18)
         {
             if (Global.environmentPaintings.Count > 0)
                 KnockOffPainting();
             else if (Global.environmentGlasses.Count > 0)
                 KnockOffGlass();
         }
+        else
+            clock.ClockSpin();
     }
 
     public void KnockOffPainting()
@@ -81,5 +91,10 @@ public class GameElementManager : MonoBehaviour {
             }
 
         }
+    }
+
+    public void SpinClock()
+    {
+
     }
 }
