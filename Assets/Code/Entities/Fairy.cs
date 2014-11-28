@@ -53,7 +53,7 @@ public class Fairy : Entity
 
 
 
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
         if (!IsDead)
         {

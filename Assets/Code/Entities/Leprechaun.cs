@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using GamepadInput;
 using System;
 
-public class Leprechaun : Entity {
+public class Leprechaun : Entity 
+{
     
     
     public Leprechaun()
@@ -52,7 +53,7 @@ public class Leprechaun : Entity {
 
 
 
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
         if(!IsDead)
         {

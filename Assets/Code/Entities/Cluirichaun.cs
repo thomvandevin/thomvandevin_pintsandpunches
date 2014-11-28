@@ -53,7 +53,7 @@ public class Cluirichaun : Entity
 
 
 
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
         if (!IsDead)
         {

@@ -87,7 +87,7 @@ public class GameElementManager : MonoBehaviour {
             if (rnd2 > 80 && Global.environmentGlasses.Count > 0)
             {
                 int rnd3 = Random.Range(0, Global.environmentGlasses.Count + 1);
-                Global.environmentGlasses[rnd].GetComponent<BottleBehaviour>().KnockBottleOff();
+                Global.environmentGlasses[rnd3].GetComponent<BottleBehaviour>().KnockBottleOff();
             }
 
         }

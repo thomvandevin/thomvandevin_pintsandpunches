@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AdvancedCamera : MonoBehaviour {
+public class AdvancedCamera : MonoBehaviour
+{
 
     public GameObject cameraLead;
     //public float moveHardness = 1.5f;
     //public float scaleHardness = .5f;
+
+    public bool asleep = false;
 
     public float xMargin = 1f;
     public float yMargin = 1f;
@@ -14,19 +17,24 @@ public class AdvancedCamera : MonoBehaviour {
     public Vector2 maxXAndY;
     public Vector2 minXAndY;
 
+    public float zoomHarndess = 1;
+    public int holdTime;
+    private int zoomTimer = 0;
     private bool on = true;
-    private Vector2 currentPosition, previousPosition;
+    private bool zoomIn = false, zoomOut = false;
+    private Vector2 currentPosition, previousPosition, newPosition;
+    private float currentScale, previousScale, newScale;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
 
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        if(on)
+        if (on)
         {
             //Vector3 pp = Vector3.MoveTowards(transform.position, cameraLead.transform.position, moveHardness * Time.deltaTime);
             //pp.z = -10;
@@ -36,8 +44,22 @@ public class AdvancedCamera : MonoBehaviour {
             TrackPlayerMiddle();
         }
 
-            
-	}
+    }
+
+    void Update()
+    {
+
+        if (zoomIn || zoomOut)
+        {
+            if (zoomIn)
+                ZoomIn();
+            else if (zoomOut)
+                ZoomOut();
+
+            transform.position = new Vector3(currentPosition.x, currentPosition.y, transform.position.z);
+            Camera.main.orthographicSize = currentScale;
+        }
+    }
 
     private void TrackPlayerMiddle()
     {
@@ -75,22 +97,99 @@ public class AdvancedCamera : MonoBehaviour {
         on = state;
     }
 
-    public void Zoom(Vector2 target)
+    public void ZoomWithDelay(Vector2 target, float delay)
     {
-        previousPosition = transform.position;
-        ZoomIn(target);
-        Invoke("ZoomOut", .1f);
-        
+        Invoke("Zoom", delay);
+        newPosition = target;
     }
 
-    private void ZoomIn(Vector2 target)
+    public void Zoom(Vector2 target)
     {
-        Camera.main.orthographicSize = 3;
+        currentPosition = transform.position;
+        currentScale = Camera.main.orthographicSize;
+
+        previousPosition = currentPosition;
+        previousScale = currentScale;
+
+        newPosition = target;
+        newScale = 3;
+        zoomTimer = 0;
+
+        Toggle(false);
+        zoomIn = true;
+
+        SleepOn();
+    }
+
+    public void Zoom()
+    {
+        currentPosition = transform.position;
+        currentScale = Camera.main.orthographicSize;
+
+        previousPosition = currentPosition;
+        previousScale = currentScale;
+
+        newScale = 3;
+        zoomTimer = 0;
+
+        Toggle(false);
+        zoomIn = true;
+
+        SleepOn();
+    }
+
+    private void ZoomIn()
+    {
+        float d1 = Vector2.Distance(currentPosition, newPosition);
+        float d2 = currentScale - newScale;
+        if (Mathf.Abs(d1) > .01f || Mathf.Abs(d2) > 0.01f || zoomTimer < holdTime)
+        {
+            zoomTimer++;
+            currentPosition = Vector2.Lerp(currentPosition, newPosition, zoomTimer * zoomHarndess);
+            currentScale = Mathf.Lerp(currentScale, newScale, zoomTimer * zoomHarndess);
+        }
+        else
+        {
+            currentPosition = newPosition;
+            currentScale = newScale;
+            zoomIn = false;
+            zoomOut = true;
+            zoomTimer = 0;
+        }
+
+
     }
 
     private void ZoomOut()
     {
-        Camera.main.orthographicSize = 4;
+        float d1 = Vector2.Distance(currentPosition, previousPosition);
+        float d2 = currentScale - previousScale;
+        if (Mathf.Abs(d1) > .01f || Mathf.Abs(d2) > 0.01f)
+        {
+            zoomTimer++;
+            currentPosition = Vector2.Lerp(currentPosition, previousPosition, zoomTimer * zoomHarndess);
+            currentScale = Mathf.Lerp(currentScale, previousScale, zoomTimer * zoomHarndess);
+        }
+        else
+        {
+            currentPosition = previousPosition;
+            currentScale = previousScale;
+            zoomOut = false;
+            SleepOff();
+            Toggle(true);
+        }
+    }
+
+    public void SleepOn()
+    {
+        Time.timeScale = 0;
+        asleep = true;
+    }
+
+    public void SleepOff()
+    {
+        Time.timeScale = 1;
+        asleep = false;
     }
 }
 

@@ -6,7 +6,6 @@ public class BottleBehaviour : MonoBehaviour {
     private SpriteRenderer sprite;
     private Sprite randomSprite;
     private int bottleNumber;
-    private bool doOnce = true;
 
     public int NumberOfDifferentBottles = 16;
 

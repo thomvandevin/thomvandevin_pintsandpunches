@@ -53,7 +53,7 @@ public class Leprechaun_USA : Entity
 
 
 
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
         if (!IsDead)
         {

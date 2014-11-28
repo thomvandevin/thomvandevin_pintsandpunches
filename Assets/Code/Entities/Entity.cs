@@ -72,6 +72,7 @@ public class Entity : MonoBehaviour {
     public string hitDirection, playerStateString;
 
     protected Animator top_animator, bottom_animator;
+    private AdvancedCamera advancedCamera;
     public GameObject playerObject, respawnButton;
     public GameObject groundCheck, punchCheck, bodyCheck, wallCheck;
     public GameObject dustParticle;
@@ -139,6 +140,7 @@ public class Entity : MonoBehaviour {
         groundLayer = playerObject.GetComponent<LayerMaskPass>().GetLayerMask();
 
         respawnButtonPos = new Vector2(transform.position.x, transform.position.y - 40);
+        advancedCamera = Camera.main.GetComponent<AdvancedCamera>();
 
         SetDictionary();
     }
@@ -159,8 +161,10 @@ public class Entity : MonoBehaviour {
         if (health <= 0)
             isDead = true;
 
-        if (GamePad.GetButtonDown(GamePad.Button.Back, gamePadIndex))
-            Camera.main.GetComponent<AdvancedCamera>().Zoom(new Vector2(0, 0));
+        //if (GamePad.GetButtonDown(GamePad.Button.Back, gamePadIndex))
+        //{
+        //    Camera.main.GetComponent<AdvancedCamera>().Zoom(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y));
+        //}
 
         if (gameObject.transform.parent.gameObject.GetComponent<Player>().kills >= 5)
         {
@@ -168,7 +172,7 @@ public class Entity : MonoBehaviour {
             //Global.WorldObject.winnerIndex = chosenPlayerIndex;
         }
 
-        if (!IsDead && !isDrinking)
+        if (!IsDead && !isDrinking && !advancedCamera.asleep)
         {
             #region ATTACKING CODE
 
@@ -403,7 +407,8 @@ public class Entity : MonoBehaviour {
         else if (IsDead && deathCounter == 2)
         {
             RespawnButton();
-
+            Camera.main.GetComponent<AdvancedCamera>().ZoomWithDelay (new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), .2f);
+        
             deathCounter++;
         }
         else if (IsDead && deathCounter == 3)
@@ -417,7 +422,7 @@ public class Entity : MonoBehaviour {
 
 	}
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
 
     }
@@ -453,7 +458,16 @@ public class Entity : MonoBehaviour {
             canDoubleJump = true;
 
         if (!previousGround && onGround)
+        {
             PunchShake(new Vector2(0, jumpShakeHardness), jumpShakeHardness, .5f, false);
+            GameObject jumpDust;
+            jumpDust = GameObject.Instantiate(Resources.Load("Prefabs/Entities/FX/Dust_jump"), gameObject.transform.position, Quaternion.identity) as GameObject;
+            if(chosenCharacter == Player.Character.CLUIRICHAUN)
+                jumpDust = GameObject.Instantiate(Resources.Load("Prefabs/Entities/FX/Dust_jump_Cluirichaun"), gameObject.transform.position, Quaternion.identity) as GameObject;
+            if(chosenCharacter == Player.Character.FAIRY)
+                jumpDust.SetActive(false);
+            Destroy(jumpDust, 1f);
+        }
 
         SetAnimation("vSpeed", playerObject.rigidbody2D.velocity.y);
 
