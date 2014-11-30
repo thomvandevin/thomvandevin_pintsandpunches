@@ -462,8 +462,11 @@ public class Entity : MonoBehaviour {
             PunchShake(new Vector2(0, jumpShakeHardness), jumpShakeHardness, .5f, false);
             GameObject jumpDust;
             jumpDust = GameObject.Instantiate(Resources.Load("Prefabs/Entities/FX/Dust_jump"), gameObject.transform.position, Quaternion.identity) as GameObject;
-            if(chosenCharacter == Player.Character.CLUIRICHAUN)
+            if (chosenCharacter == Player.Character.CLUIRICHAUN)
+            {
+                Destroy(jumpDust);
                 jumpDust = GameObject.Instantiate(Resources.Load("Prefabs/Entities/FX/Dust_jump_Cluirichaun"), gameObject.transform.position, Quaternion.identity) as GameObject;
+            }
             if(chosenCharacter == Player.Character.FAIRY)
                 jumpDust.SetActive(false);
             Destroy(jumpDust, 1f);

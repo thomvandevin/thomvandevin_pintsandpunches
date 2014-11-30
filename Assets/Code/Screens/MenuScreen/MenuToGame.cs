@@ -26,21 +26,7 @@ public class MenuToGame : MonoBehaviour {
         {
             if (Application.loadedLevel == Global.Screen_CharacterSelect)
             {
-                Global.EarlyStart();
-                int players = 0;
-                for (int i = 0; i < playerCharacter.Count; i++)
-                {
-                    if (playerCharacter[i] != 0)
-                        players++;
-
-                    Global.AddSelectedCharacter(playerCharacter[i]);
-                }
-
-                Global.SetNumberOfPlayers(players);
-
-                Application.LoadLevel(Global.Screen_MainGame);
-
-                //print(playerCharacter[0].ToString() + " " +playerCharacter[1].ToString() + " " +playerCharacter[2].ToString());
+                LoadMainGame();
             }
             else if (Application.loadedLevel == Global.Screen_MainGame)
             {
@@ -56,6 +42,25 @@ public class MenuToGame : MonoBehaviour {
         }
 
 	}
+
+    public void LoadMainGame()
+    {
+        Global.EarlyStart();
+        int players = 0;
+        for (int i = 0; i < playerCharacter.Count; i++)
+        {
+            if (playerCharacter[i] != 0)
+                players++;
+
+            Global.AddSelectedCharacter(playerCharacter[i]);
+        }
+
+        Global.SetNumberOfPlayers(players);
+
+        Application.LoadLevel(Global.Screen_MainGame);
+
+        //print(playerCharacter[0].ToString() + " " +playerCharacter[1].ToString() + " " +playerCharacter[2].ToString());
+    }
 
 
 
