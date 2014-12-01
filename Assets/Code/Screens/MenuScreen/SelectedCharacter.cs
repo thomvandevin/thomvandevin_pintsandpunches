@@ -4,7 +4,8 @@ using GamepadInput;
 using System;
 using System.Linq;
 
-public class SelectedCharacter : MonoBehaviour {
+public class SelectedCharacter : MonoBehaviour
+{
 
     public Vector2 offset = new Vector2(0, 0);
     public Vector2 scale = new Vector2(.2f, 1);
@@ -23,12 +24,16 @@ public class SelectedCharacter : MonoBehaviour {
     private ColorFlash colorFlash;
     private GameObject selectButton;
 
+    private MPUController mpuController;
+    private string tempCom;
+    public bool useMPU = false;
+
     //private Animator anim;
     private int selectedCharacter, joystickCounter;
     private Material sprite;
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
         selectedCharacter = UnityEngine.Random.Range(1, 5);
         joystickCounter = selectedCharacter;
@@ -36,6 +41,8 @@ public class SelectedCharacter : MonoBehaviour {
         offset_temp = new Vector2((1 / numberOfCharacters) * selectedCharacter, 0);
         scale_temp = new Vector2((1 / numberOfCharacters), 1);
         startPos = gameObject.transform.position;
+
+        playerIndexInt = GamePad.IndexToInt(player);
 
         sprite = gameObject.renderer.material;
         sprite.mainTexture.wrapMode = TextureWrapMode.Repeat;
@@ -47,30 +54,12 @@ public class SelectedCharacter : MonoBehaviour {
         selectButton.transform.parent = gameObject.transform.parent;
         selectButton.SetActive(false);
 
-        switch (player)
-        {
-            case GamePad.Index.Any:
-                playerIndexInt = 0;
-                break;
-            case GamePad.Index.One:
-                playerIndexInt = 1;
-                break;
-            case GamePad.Index.Two:
-                playerIndexInt = 2;
-                break;
-            case GamePad.Index.Three:
-                playerIndexInt = 3;
-                break;
-            case GamePad.Index.Four:
-                playerIndexInt = 4;
-                break;
-            default:
-                playerIndexInt = 0;
-                break;
-        }
+        tempCom = gameObject.transform.parent.GetComponent<COMParser>().com;
+        mpuController = gameObject.AddComponent<MPUController>();
+        mpuController.controllerNumber = playerIndexInt;
 
         Invoke("AddPlayerCharacter", 0.01f);
-	}
+    }
 
     private void AddPlayerCharacter()
     {
@@ -79,14 +68,30 @@ public class SelectedCharacter : MonoBehaviour {
         else
             GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter.Add(0);
     }
-	
-	// Update is called once per frame
-	void Update () 
+
+    // Update is called once per frame
+    void Update()
     {
-        if (!characterSelected)
+        if (!characterSelected && tempCom != "COM0")
         {
-            //if (!resettingPos && !resettingScale)
-            //{
+            //print(mpuController.GetSensorValue(MPUController.Axis.X));
+
+
+            if(useMPU)
+            {
+                if (mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.POSITIVE) && !pressOnce)
+                {
+                    NextCharacter(-1);
+                }
+                else if (mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.NEGATIVE) && !pressOnce)
+                {
+                    NextCharacter(1);
+                }
+                else if (!mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.NEGATIVE) && !mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.POSITIVE) && pressOnce)
+                    pressOnce = false;
+            } 
+            else
+            {
                 if (GamePad.GetAxis(GamePad.Axis.LeftStick, player).x < -.3f && !pressOnce)
                 {
                     NextCharacter(-1);
@@ -97,10 +102,12 @@ public class SelectedCharacter : MonoBehaviour {
                 }
                 else if (GamePad.GetAxis(GamePad.Axis.LeftStick, player).x > -.3f && GamePad.GetAxis(GamePad.Axis.LeftStick, player).x < .3f && pressOnce)
                     pressOnce = false;
+            }
 
-                if (GamePad.GetButtonDown(GamePad.Button.A, player))
-                    SelectCharacter();
-            //}
+
+
+            if (GamePad.GetButtonDown(GamePad.Button.A, player))
+                SelectCharacter();
 
             if (offset != offset_temp)
             {
@@ -136,20 +143,20 @@ public class SelectedCharacter : MonoBehaviour {
         {
             selectButton.SetActive(false);
             characterSelected = false;
-            GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt-1] = 0;
+            GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt - 1] = 0;
 
-        
+
         }
 
         sprite.mainTextureOffset = offset;
         sprite.mainTextureScale = scale;
-	}
+    }
 
     private void NextCharacter(int side)
     {
         pressOnce = true;
-        offset_temp.x += side*(1 / numberOfCharacters);
-        gameObject.PunchPosition(new Vector3(side*1.5f, 0, 0), .2f, 0);
+        offset_temp.x += side * (1 / numberOfCharacters);
+        gameObject.PunchPosition(new Vector3(side * 1.5f, 0, 0), .2f, 0);
         Invoke("ResetPosition", .2f);
 
         selectedCharacter += side;
@@ -163,7 +170,7 @@ public class SelectedCharacter : MonoBehaviour {
 
     private void SelectCharacter()
     {
-        GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt-1] = selectedCharacter;
+        GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt - 1] = selectedCharacter;
         scale_temp = new Vector2((1 / numberOfCharacters) - .05f, .6f);
         offset_temp = new Vector2(offset.x + .025f, offset.y + .3f);
         colorFlash.FlashToColor(new Color(2000, 2000, 2000, 1000), 0.0f, .1f);
@@ -201,7 +208,7 @@ public class SelectedCharacter : MonoBehaviour {
         //}
         //else
         //    offset_temp = new Vector2((1 / numberOfCharacters) * selectedCharacter, 0);
-        offset_temp = new Vector2(((1/numberOfCharacters) * joystickCounter), 0);
+        offset_temp = new Vector2(((1 / numberOfCharacters) * joystickCounter), 0);
         resettingPos = true;
     }
 

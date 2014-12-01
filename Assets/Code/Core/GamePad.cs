@@ -35,6 +35,38 @@ namespace GamepadInput
             return Input.GetKey(code);
         }
 
+        public static int IndexToInt(Index index)
+        {
+            if (index == Index.Any)
+                return 0;
+            else if (index == Index.One)
+                return 1;
+            else if (index == Index.Two)
+                return 2;
+            else if (index == Index.Three)
+                return 3;
+            else if (index == Index.Four)
+                return 4;
+            else
+                return 0;
+        }
+
+        public static Index IntToIndex(int index)
+        {
+            if (index == 0)
+                return Index.Any;
+            else if (index == 1)
+                return Index.One;
+            else if (index == 2)
+                return Index.Two;
+            else if (index == 3)
+                return Index.Three;
+            else if (index == 4)
+                return Index.Four;
+            else
+                return Index.Any;
+        }
+
         /// <summary>
         /// returns a specified axis
         /// </summary>
