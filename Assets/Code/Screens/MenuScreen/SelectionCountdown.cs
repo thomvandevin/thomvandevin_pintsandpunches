@@ -4,7 +4,7 @@ using System.Collections;
 public class SelectionCountdown : MonoBehaviour
 {
 
-    public int maxWaitingTime = 5000;
+    public int maxWaitingTime = 2000;
 
     public int timer;
     private MenuToGame menuScript;
@@ -13,7 +13,7 @@ public class SelectionCountdown : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        timer = 0;
+        timer = 1;
         menuScript = GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>();
         anim = gameObject.GetComponent<Animator>();
     }
@@ -24,7 +24,8 @@ public class SelectionCountdown : MonoBehaviour
         if (timer < maxWaitingTime)
         {
             timer++;
-            anim.SetInteger("timer", timer);
+            float tfloat = ((float)timer)/maxWaitingTime;
+            anim.SetFloat("timer", tfloat);
         }
         else if (timer >= maxWaitingTime)
             menuScript.LoadMainGame();

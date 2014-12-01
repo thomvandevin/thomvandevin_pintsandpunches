@@ -57,7 +57,13 @@ public class MenuToGame : MonoBehaviour {
 
         Global.SetNumberOfPlayers(players);
 
-        Application.LoadLevel(Global.Screen_MainGame);
+        if (players == 0)
+        {
+            Application.LoadLevel(Global.Screen_CharacterSelect);
+            Global.Reset();
+        }
+        else
+            Application.LoadLevel(Global.Screen_MainGame);
 
         //print(playerCharacter[0].ToString() + " " +playerCharacter[1].ToString() + " " +playerCharacter[2].ToString());
     }
