@@ -54,9 +54,12 @@ public class SelectedCharacter : MonoBehaviour
         selectButton.transform.parent = gameObject.transform.parent;
         selectButton.SetActive(false);
 
-        tempCom = gameObject.transform.parent.GetComponent<COMParser>().com;
-        mpuController = gameObject.AddComponent<MPUController>();
-        mpuController.controllerNumber = playerIndexInt;
+        if (useMPU)
+        {
+            tempCom = gameObject.transform.parent.GetComponent<COMParser>().com;
+            mpuController = gameObject.AddComponent<MPUController>();
+            mpuController.controllerNumber = playerIndexInt;
+        }
 
         Invoke("AddPlayerCharacter", 0.01f);
     }
@@ -72,12 +75,12 @@ public class SelectedCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!characterSelected && tempCom != "COM0")
+        if (!characterSelected)
         {
             //print(mpuController.GetSensorValue(MPUController.Axis.X));
 
 
-            if(useMPU)
+            if (useMPU && tempCom != "COM0")
             {
                 if (mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.POSITIVE) && !pressOnce)
                 {
@@ -89,6 +92,11 @@ public class SelectedCharacter : MonoBehaviour
                 }
                 else if (!mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.NEGATIVE) && !mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.POSITIVE) && pressOnce)
                     pressOnce = false;
+
+                if(mpuController.GetDigital(9))
+                    SelectCharacter();
+
+                print(mpuController.GetDigital(9));
             } 
             else
             {
@@ -102,12 +110,11 @@ public class SelectedCharacter : MonoBehaviour
                 }
                 else if (GamePad.GetAxis(GamePad.Axis.LeftStick, player).x > -.3f && GamePad.GetAxis(GamePad.Axis.LeftStick, player).x < .3f && pressOnce)
                     pressOnce = false;
+
+                if (GamePad.GetButtonDown(GamePad.Button.A, player))
+                    SelectCharacter();
             }
-
-
-
-            if (GamePad.GetButtonDown(GamePad.Button.A, player))
-                SelectCharacter();
+                
 
             if (offset != offset_temp)
             {
@@ -139,13 +146,18 @@ public class SelectedCharacter : MonoBehaviour
                 selectedCharacter = 5;
 
         }
+        else if (useMPU && mpuController.GetDigital(9))
+        {
+            selectButton.SetActive(false);
+            characterSelected = false;
+            GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt - 1] = 0;
+            
+        }
         else if (GamePad.GetButtonDown(GamePad.Button.A, player) || GamePad.GetButtonDown(GamePad.Button.B, player))
         {
             selectButton.SetActive(false);
             characterSelected = false;
             GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt - 1] = 0;
-
-
         }
 
         sprite.mainTextureOffset = offset;

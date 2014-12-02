@@ -109,4 +109,6 @@ function Update()
 function WriteValues() 
 {
     Manager.analogInputs = LocalAnalogArray;
+    Manager.digitalInputs = LocalDigitalArray;
+    //print(LocalDigitalArray.length);
 }

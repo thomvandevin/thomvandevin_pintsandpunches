@@ -339,7 +339,7 @@ public class GuiArduinoSerialScript : MonoBehaviour
             }
             else
             {
-                print("GetInOutPut:  incommingdata is longer as expected! (" + converteddata.Length + ") !<= " + countInputOutput);
+                //+++++ print("GetInOutPut:  incommingdata is longer as expected! (" + converteddata.Length + ") !<= " + countInputOutput);
                 arrayprinter(converteddata, "converteddata, length:" + converteddata.Length);
             }
             //arrayprinter(retValue, "retValue");
@@ -602,7 +602,7 @@ public class GuiArduinoSerialScript : MonoBehaviour
             }
         }
         finalstring += "]";
-        print("int-arrayprinter: " + sayalso + " " + finalstring);
+        //+++++ print("int-arrayprinter: " + sayalso + " " + finalstring);
     }
 
     //print the BYTE array

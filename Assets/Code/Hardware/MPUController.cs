@@ -89,4 +89,23 @@ public class MPUController : MonoBehaviour {
         else
             return false;
     }
+
+    public int GetDigitalValue(int port)
+    {
+        if (port == 9)
+            return mpuData.GetDigitalValue(port);
+        else
+            return 999;
+    }
+
+    public bool GetDigital(int port)
+    {
+        if (port == 9)
+            if (mpuData.GetDigitalValue(port) == 0)
+                return true;
+            else
+                return false;
+        else
+            return false;
+    }
 }
