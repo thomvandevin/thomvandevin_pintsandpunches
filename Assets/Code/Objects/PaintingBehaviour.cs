@@ -3,33 +3,42 @@ using System.Collections;
 
 public class PaintingBehaviour : MonoBehaviour {
 
+    public bool usingAnimation = false;
+    public bool interactable = true;
     public int delayfrom, delaytill;
 
-    public int randomDelay, timer = 0;
+    private int randomDelay, timer = 0;
     private Animator anim;
     private bool triggerOnce = false;
 
 
 	void Start () 
     {
-        randomDelay = Random.Range(delayfrom, delaytill);
-        anim = gameObject.GetComponent<Animator>();
+        if(usingAnimation)
+        {
+            randomDelay = Random.Range(delayfrom, delaytill);
+            anim = gameObject.GetComponent<Animator>();
+        }
 
 	}
 	
 	void Update () 
     {
-        if (timer >= randomDelay)
+        if(usingAnimation)
         {
-            StartAnimation("startAnimation");
-            randomDelay = Random.Range(delayfrom, delaytill);
-            timer = 0;
-        }
-        else
-            timer++;
+            if (timer >= randomDelay)
+            {
+                StartAnimation("startAnimation");
+                randomDelay = Random.Range(delayfrom, delaytill);
+                timer = 0;
+            }
+            else
+                timer++;
 
-        if (triggerOnce && anim.IsInTransition(0))
-            ResetBool("startAnimation");
+            if (triggerOnce && anim.IsInTransition(0))
+                ResetBool("startAnimation");
+        }
+
 
 	}
 

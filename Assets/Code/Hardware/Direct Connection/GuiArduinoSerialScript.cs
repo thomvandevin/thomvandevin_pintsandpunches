@@ -113,7 +113,7 @@ public class GuiArduinoSerialScript : MonoBehaviour
                 _SerialPort.Open();
                 //sets the timeout value (how long it takes before timeout error occurs)
                 //zet de timeout niet te hoog, dit vertraagd Unity enorm en kan zelfs voor crashes zorgen.
-                _SerialPort.ReadTimeout = 100;
+                _SerialPort.ReadTimeout = 1;
                 portopen = true;
                 if (Errorhandling)
                 {

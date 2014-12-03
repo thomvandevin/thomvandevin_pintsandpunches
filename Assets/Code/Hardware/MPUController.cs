@@ -22,6 +22,8 @@ public class MPUController : MonoBehaviour {
     private MPUInputCollector mpuData;
     private float threshold = .6f;
 
+    private bool prevState9 = false;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -34,8 +36,13 @@ public class MPUController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-
+        
 	}
+
+    void LateUpdate()
+    {
+        prevState9 = GetDigital(9);
+    }
 
     public float GetSensorValue(Axis axis)
     {
@@ -107,5 +114,14 @@ public class MPUController : MonoBehaviour {
                 return false;
         else
             return false;
+    }
+
+    public bool GetDigitalPressed(int port)
+    {
+        if (port == 9 && prevState9 != GetDigital(9) && GetDigital(9) == true)
+            return true;
+        else 
+            return false;
+
     }
 }
