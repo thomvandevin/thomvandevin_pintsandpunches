@@ -96,7 +96,7 @@ public class SelectedCharacter : MonoBehaviour
                 if(mpuController.GetDigitalPressed(9))
                     SelectCharacter();
 
-                print(mpuController.GetDigitalPressed(9));
+                //print(mpuController.GetDigital(9));
             } 
             else
             {
@@ -146,7 +146,7 @@ public class SelectedCharacter : MonoBehaviour
                 selectedCharacter = 5;
 
         }
-        else if (useMPU && mpuController.GetDigital(9))
+        else if (useMPU && mpuController.GetDigitalPressed(9))
         {
             selectButton.SetActive(false);
             characterSelected = false;

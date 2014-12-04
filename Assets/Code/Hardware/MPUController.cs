@@ -108,7 +108,7 @@ public class MPUController : MonoBehaviour {
     public bool GetDigital(int port)
     {
         if (port == 9)
-            if (mpuData.GetDigitalValue(port) == 0)
+            if (mpuData.GetDigitalValue(port) == 1)
                 return true;
             else
                 return false;
