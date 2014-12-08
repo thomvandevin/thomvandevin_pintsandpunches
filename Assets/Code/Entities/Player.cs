@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     private string loadCharacterString;
 
     public int controllerNumber, kills;
-    public bool RESET;
+    public bool RESET, useMpu = false;
     public Vector2 playerStartPosition;
 
     //private RespawnFlare respawnFlare;
@@ -39,13 +39,14 @@ public class Player : MonoBehaviour
 
     public GameObject playerIndicatorObject;
     public PlayerIndicator playerIndicatorScript;
+    public MPUController mpuController;
 
     public Player()
     {
 
     }
 
-    public void SetPlayer(int controlNumber, Character chosenChar)
+    public void SetPlayer(int controlNumber, Character chosenChar, bool mpu)
     {
         controllerNumber = controlNumber;
         chosenCharacter = chosenChar;
@@ -73,6 +74,11 @@ public class Player : MonoBehaviour
         }
 
         RESET = false;
+        useMpu = mpu;
+        if (useMpu)
+        {
+            mpuController = gameObject.AddComponent<MPUController>();
+        }
         kills = 0;
 
         playerStartPosition = new Vector3(-10 + (4 * controllerNumber),0 , (-.1f * controllerNumber));

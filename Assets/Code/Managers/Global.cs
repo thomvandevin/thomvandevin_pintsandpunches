@@ -21,6 +21,7 @@ public class Global : MonoBehaviour {
     public static List<GameObject> leprechauns;
     public static List<GameObject> drinks;
     public static List<int> playerCharacter;
+    public static bool[] useMpus;
 
     public static List<GameObject> environmentGlasses;
     public static List<GameObject> environmentPaintings;
@@ -67,6 +68,7 @@ public class Global : MonoBehaviour {
     public static void EarlyStart()
     {        
         playerCharacter = new List<int>();
+        useMpus = new bool[4];
     }
     
     static public void Reset()
@@ -85,6 +87,11 @@ public class Global : MonoBehaviour {
     static public void AddSelectedCharacter(int i)
     {
         Global.playerCharacter.Add(i);
+    }
+
+    static public void SetMPUs(bool[] mpus)
+    {
+
     }
 
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)

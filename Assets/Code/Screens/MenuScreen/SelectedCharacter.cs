@@ -26,7 +26,8 @@ public class SelectedCharacter : MonoBehaviour
 
     private MPUController mpuController;
     private string tempCom;
-    public bool useMPU = false;
+    private bool useMPU = false;
+    public bool getMPU { get { return useMPU; } set { useMPU = value; } }
 
     //private Animator anim;
     private int selectedCharacter, joystickCounter;
@@ -53,6 +54,8 @@ public class SelectedCharacter : MonoBehaviour
         selectButton = Instantiate(Resources.Load("Prefabs/Screens/MenuScreen/Character_Select_SelectButton"), new Vector3(transform.position.x, transform.position.y, -.5f), Quaternion.identity) as GameObject;
         selectButton.transform.parent = gameObject.transform.parent;
         selectButton.SetActive(false);
+
+        useMPU = GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().mpus[playerIndexInt - 1];
 
         if (useMPU)
         {

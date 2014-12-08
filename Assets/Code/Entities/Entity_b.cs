@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
 
-public class Entity : MonoBehaviour {
+public class Entity_b: MonoBehaviour {
 
     [HideInInspector]
 
@@ -40,7 +40,7 @@ public class Entity : MonoBehaviour {
     public float gravity, gravityCorrection, resistance, damageMultiplayer, groundRadius, jumpShakeHardness, punchShakeHardness;
     public Vector2 startingPosition, velocity, maxVelocity, drunkVelocity;
     #endregion
-
+    
 
     public Player playerScript;
     public Player.Character chosenCharacter;
@@ -59,7 +59,6 @@ public class Entity : MonoBehaviour {
     public bool mirrored, attackDone, playerStateBool, maxDrunk, checkDrunkTimer, dustOnce, canDoubleJump;
     public bool isDashCooldown, skipNextMove, fallTroughBar, underBar, collidingWithWall;
     public bool onGround, previousGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
-    public bool useMpu = false;
 
     protected int maxHealth, health;
     public int GetHealth { get { return health; } set { health = value; } }
@@ -78,10 +77,9 @@ public class Entity : MonoBehaviour {
     public GameObject groundCheck, punchCheck, bodyCheck, wallCheck;
     public GameObject dustParticle;
     public LayerMask groundLayer;
-    public MPUController mpuController;
 
 	// Use this for initialization
-	public Entity () 
+	public Entity_b () 
     {
 
 	}
@@ -107,7 +105,6 @@ public class Entity : MonoBehaviour {
         dustOnce = false;
         maxDrunk = false;
         checkDrunkTimer = true;
-        useMpu = playerScript.useMpu;
         if (chosenCharacter == Player.Character.FAIRY)
             canDoubleJump = true;
         else
@@ -144,10 +141,8 @@ public class Entity : MonoBehaviour {
 
         respawnButtonPos = new Vector2(transform.position.x, transform.position.y - 40);
         advancedCamera = Camera.main.GetComponent<AdvancedCamera>();
-        this.mpuController = playerScript.mpuController;
 
         SetDictionary();
-        print(useMpu);
     }
 
     public void SetDictionary()
@@ -181,8 +176,7 @@ public class Entity : MonoBehaviour {
         {
             #region ATTACKING CODE
 
-            if ((GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) ||
-                (useMpu && mpuController.GetDigitalPressed(9)))
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex)
                 && onGround && !isDrinking)
             {
                 foreach (GameObject d in Global.drinks.ToArray())
@@ -207,8 +201,7 @@ public class Entity : MonoBehaviour {
             }
 
 
-            if ((GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) ||
-                (useMpu && mpuController.GetDigitalPressed(9))) && onGround &&
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) && onGround &&
                 attackOnce == -1 && !isDrinking && attackCooldown == 0)
             {
                 //playerState = PlayerStates.ATTACKING;
@@ -420,8 +413,7 @@ public class Entity : MonoBehaviour {
         }
         else if (IsDead && deathCounter == 3)
         {
-            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) ||
-                (useMpu && mpuController.GetDigitalPressed(9)))
+            if (GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex))
             {
                 respawnButton.GetComponent<RespawnButton>().RemoveRespawnButton();
                 playerScript.ResetPlayer(gameObject);
@@ -486,21 +478,10 @@ public class Entity : MonoBehaviour {
 
         if (!isHit && !collidingWithWall && !isBlocking)
         {
-            if (useMpu)
-            {
-                if (mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.POSITIVE))
-                    move = -1;
-                else if(mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.NEGATIVE))
-                    move = 1;
-            }
-            else
-            {
-                if (GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x > .3f)
-                    move = 1;
-                else if (GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x < -.3f)
-                    move = -1;
-            }
-
+            if (GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x > .3f)
+                move = 1;
+            else if (GamePad.GetAxis(GamePad.Axis.LeftStick, gamePadIndex).x < -.3f)
+                move = -1;
 
             if(Mathf.Abs(move) >= 1)
             {

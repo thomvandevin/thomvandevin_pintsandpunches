@@ -6,6 +6,9 @@ using GamepadInput;
 
 public class MenuToGame : MonoBehaviour {
 
+    public bool useMPU1, useMPU2, useMPU3, useMPU4;
+    public bool[] mpus = new bool[4];
+
     public List<int> playerCharacter;
 
     void Awake()
@@ -17,6 +20,11 @@ public class MenuToGame : MonoBehaviour {
 	void Start () 
     {
         playerCharacter = new List<int>();
+
+        mpus[0] = useMPU1;
+        mpus[1] = useMPU2;
+        mpus[2] = useMPU3;
+        mpus[3] = useMPU4;
 	}
 	
 	// Update is called once per frame
@@ -56,6 +64,7 @@ public class MenuToGame : MonoBehaviour {
         }
 
         Global.SetNumberOfPlayers(players);
+        Global.SetMPUs(mpus);
 
         if (players == 0)
         {
