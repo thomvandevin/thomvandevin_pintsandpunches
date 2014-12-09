@@ -72,7 +72,16 @@ public class GameElementManager : MonoBehaviour {
     {
         if (Global.environmentPaintings.Count > 0)
         {
+            float rndmf = Random.Range(.9f, 1.5f);
+            int rnd = Random.Range(0, Global.environmentPaintings.Count + 1);
+            Global.environmentPaintings[rnd].GetComponent<PaintingBehaviour>().KnockPainting(rndmf);
 
+            int rnd2 = Random.Range(0, 100);
+            if (rnd2 > 80 && Global.environmentPaintings.Count > 0)
+            {
+                int rnd3 = Random.Range(0, Global.environmentPaintings.Count + 1);
+                Global.environmentPaintings[rnd3].GetComponent<PaintingBehaviour>().KnockPainting();
+            }
         }
     }
 
@@ -93,8 +102,4 @@ public class GameElementManager : MonoBehaviour {
         }
     }
 
-    public void SpinClock()
-    {
-
-    }
 }

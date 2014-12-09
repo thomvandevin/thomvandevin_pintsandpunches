@@ -12,6 +12,10 @@ public class PaintingBehaviour : MonoBehaviour {
     private Animator anim;
     private bool triggerOnce = false;
 
+    private bool startRotating = false;
+    private float hardness = 1;
+    private int numberOfHits, side = 1;
+
 	void Start () 
     {
         if(usingAnimation)
@@ -23,12 +27,15 @@ public class PaintingBehaviour : MonoBehaviour {
         if(interactable)
         {
             Global.environmentPaintings.Add(gameObject);
+            numberOfHits = Random.Range(1, 5);
         }
 
         if (pivot != null)
         {
             pivot.transform.parent = GameObject.FindGameObjectWithTag("Paintings").gameObject.transform;
             gameObject.transform.parent = pivot.transform;
+            if(Mathf.Abs(Vector3.Distance(gameObject.transform.position, pivot.transform.position)) > 1)
+                side = -1;
         }
 
 	}
@@ -51,6 +58,14 @@ public class PaintingBehaviour : MonoBehaviour {
         }
 
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (pivot != null)
+                KnockPainting();
+        }
+
+        if (startRotating)
+            StartRotating();
 	}
 
     private void StartAnimation(string booleann)
@@ -63,6 +78,32 @@ public class PaintingBehaviour : MonoBehaviour {
     {
         anim.SetBool(booleann, false);
         triggerOnce = false;
+    }
+    
+    public void KnockPainting()
+    {
+        if (numberOfHits > 1)
+        {
+            startRotating = true;
+            this.hardness = 1;
+            Invoke("StopRotating", .05f);
+            numberOfHits--;
+        }
+        else
+            KnockPaintingOff();
+    }
+
+    public void KnockPainting(float hardness)
+    {
+        if (numberOfHits > 1)
+        {
+            startRotating = true;
+            this.hardness = hardness;
+            Invoke("StopRotating", .05f);
+            numberOfHits--;
+        }
+        else
+            KnockPaintingOff();
     }
 
     public void KnockPaintingOff()
@@ -78,5 +119,16 @@ public class PaintingBehaviour : MonoBehaviour {
         gameObject.rigidbody2D.AddTorque(rndT);
         Global.environmentPaintings.Remove(gameObject);
         Destroy(gameObject, 1f);
+    }
+
+    private void StartRotating()
+    {
+        gameObject.transform.RotateAround(pivot.transform.position, Vector3.forward, Time.deltaTime * -200f * side);
+        gameObject.transform.parent.gameObject.PunchRotation(-Vector3.forward * side * 20 * hardness, .5f, 0f);
+    }
+
+    private void StopRotating()
+    {
+        startRotating = false;
     }
 }
