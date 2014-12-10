@@ -17,8 +17,8 @@ public class AdvancedCamera : MonoBehaviour
     public Vector2 maxXAndY;
     public Vector2 minXAndY;
 
-    public float zoomHardness = 1;
-    public int holdTime;
+    public float zoomHardness = 1.0f;
+    public int holdTime = 33;
     private int zoomTimer = 0;
     private bool on = true;
     private bool zoomIn = false, zoomOut = false;
@@ -48,7 +48,6 @@ public class AdvancedCamera : MonoBehaviour
 
     void Update()
     {
-
         if (zoomIn || zoomOut)
         {
             if (zoomIn)
@@ -59,6 +58,7 @@ public class AdvancedCamera : MonoBehaviour
             transform.position = new Vector3(currentPosition.x, currentPosition.y, transform.position.z);
             Camera.main.orthographicSize = currentScale;
         }
+
     }
 
     private void TrackPlayerMiddle()
@@ -119,6 +119,9 @@ public class AdvancedCamera : MonoBehaviour
         zoomIn = true;
 
         SleepOn();
+
+
+        print(currentScale + " : " + previousScale + " : " + newScale);
     }
 
     public void Zoom()
@@ -129,6 +132,7 @@ public class AdvancedCamera : MonoBehaviour
         previousPosition = currentPosition;
         previousScale = currentScale;
 
+        newPosition = currentPosition;
         newScale = 3;
         zoomTimer = 0;
 
@@ -145,8 +149,9 @@ public class AdvancedCamera : MonoBehaviour
         if (Mathf.Abs(d1) > .01f || Mathf.Abs(d2) > 0.01f || zoomTimer < holdTime)
         {
             zoomTimer++;
-            currentPosition = Vector2.Lerp(currentPosition, newPosition, zoomTimer * zoomHardness);
-            currentScale = Mathf.Lerp(currentScale, newScale, zoomTimer * zoomHardness);
+            float t = 1 - (1f/zoomTimer)*zoomHardness;
+            currentPosition = Vector2.Lerp(currentPosition, newPosition, t);
+            currentScale = Mathf.Lerp(currentScale, newScale, t);
         }
         else
         {
@@ -158,6 +163,7 @@ public class AdvancedCamera : MonoBehaviour
         }
 
 
+        //print(currentPosition + " : " + previousPosition + " : " + newPosition);
     }
 
     private void ZoomOut()
@@ -167,8 +173,9 @@ public class AdvancedCamera : MonoBehaviour
         if (Mathf.Abs(d1) > .01f || Mathf.Abs(d2) > 0.01f)
         {
             zoomTimer++;
-            currentPosition = Vector2.Lerp(currentPosition, previousPosition, zoomTimer * zoomHardness);
-            currentScale = Mathf.Lerp(currentScale, previousScale, zoomTimer * zoomHardness);
+            float t = 1 - (1f / zoomTimer) * zoomHardness;
+            currentPosition = Vector2.Lerp(currentPosition, previousPosition, t);
+            currentScale = Mathf.Lerp(currentScale, previousScale, t);
         }
         else
         {
@@ -178,6 +185,9 @@ public class AdvancedCamera : MonoBehaviour
             SleepOff();
             Toggle(true);
         }
+
+
+        print(currentScale);
     }
 
     public void SleepOn()

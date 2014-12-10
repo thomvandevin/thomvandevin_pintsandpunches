@@ -37,8 +37,6 @@ public class PaintingBehaviour : MonoBehaviour {
             gameObject.transform.parent = pivot.transform;
             if ((gameObject.transform.position.x - pivot.transform.position.x) < 1)
                 side = -1;
-
-            print(gameObject.transform.position.x - pivot.transform.position.x);
         }
 
 	}

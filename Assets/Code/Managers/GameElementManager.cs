@@ -23,7 +23,7 @@ public class GameElementManager : MonoBehaviour {
         acamera = Camera.main.GetComponent<AdvancedCamera>();
         bigEventTimer = 0;
         //bigEventMaxTimer = Random.Range(8000, 10000);
-        bigEventMaxTimer = Random.Range(50, 100);
+        bigEventMaxTimer = Random.Range(200, 400);
 	}
 	
 	// Update is called once per frame
@@ -53,8 +53,8 @@ public class GameElementManager : MonoBehaviour {
         {
             if (bigEventTimer < bigEventMaxTimer)
                 bigEventTimer++;
-            //else if (bigEventTimer >= bigEventMaxTimer)
-                //BigEvent();
+            else if (bigEventTimer >= bigEventMaxTimer)
+                BigEvent();
         }
 
 
@@ -124,13 +124,11 @@ public class GameElementManager : MonoBehaviour {
     {
         bigEvent = true;
         acamera.Zoom();
-        //Sleep.SleepOn();
     }
 
     public void ResetBigEvent()
     {
         bigEvent = false;
-        //Sleep.SleepOff();
         bigEventTimer = 0;
 
     }
