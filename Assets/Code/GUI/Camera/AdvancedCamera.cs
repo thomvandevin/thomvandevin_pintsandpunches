@@ -17,7 +17,7 @@ public class AdvancedCamera : MonoBehaviour
     public Vector2 maxXAndY;
     public Vector2 minXAndY;
 
-    public float zoomHarndess = 1;
+    public float zoomHardness = 1;
     public int holdTime;
     private int zoomTimer = 0;
     private bool on = true;
@@ -145,8 +145,8 @@ public class AdvancedCamera : MonoBehaviour
         if (Mathf.Abs(d1) > .01f || Mathf.Abs(d2) > 0.01f || zoomTimer < holdTime)
         {
             zoomTimer++;
-            currentPosition = Vector2.Lerp(currentPosition, newPosition, zoomTimer * zoomHarndess);
-            currentScale = Mathf.Lerp(currentScale, newScale, zoomTimer * zoomHarndess);
+            currentPosition = Vector2.Lerp(currentPosition, newPosition, zoomTimer * zoomHardness);
+            currentScale = Mathf.Lerp(currentScale, newScale, zoomTimer * zoomHardness);
         }
         else
         {
@@ -167,8 +167,8 @@ public class AdvancedCamera : MonoBehaviour
         if (Mathf.Abs(d1) > .01f || Mathf.Abs(d2) > 0.01f)
         {
             zoomTimer++;
-            currentPosition = Vector2.Lerp(currentPosition, previousPosition, zoomTimer * zoomHarndess);
-            currentScale = Mathf.Lerp(currentScale, previousScale, zoomTimer * zoomHarndess);
+            currentPosition = Vector2.Lerp(currentPosition, previousPosition, zoomTimer * zoomHardness);
+            currentScale = Mathf.Lerp(currentScale, previousScale, zoomTimer * zoomHardness);
         }
         else
         {
@@ -182,13 +182,13 @@ public class AdvancedCamera : MonoBehaviour
 
     public void SleepOn()
     {
-        Time.timeScale = 0;
+        Sleep.SleepOn();
         asleep = true;
     }
 
     public void SleepOff()
     {
-        Time.timeScale = 1;
+        Sleep.SleepOff();
         asleep = false;
     }
 }

@@ -6,7 +6,7 @@ public class PaintingBehaviour : MonoBehaviour {
     public bool usingAnimation = false;
     public bool interactable = true;
     public int delayfrom, delaytill;
-    public GameObject pivot;
+    private GameObject pivot;
 
     private int randomDelay, timer = 0;
     private Animator anim;
@@ -30,12 +30,15 @@ public class PaintingBehaviour : MonoBehaviour {
             numberOfHits = Random.Range(1, 5);
         }
 
+        pivot = Global.getChildGameObject(gameObject, "Pivot");
         if (pivot != null)
         {
             pivot.transform.parent = GameObject.FindGameObjectWithTag("Paintings").gameObject.transform;
             gameObject.transform.parent = pivot.transform;
-            if(Mathf.Abs(Vector3.Distance(gameObject.transform.position, pivot.transform.position)) > 1)
+            if ((gameObject.transform.position.x - pivot.transform.position.x) < 1)
                 side = -1;
+
+            print(gameObject.transform.position.x - pivot.transform.position.x);
         }
 
 	}

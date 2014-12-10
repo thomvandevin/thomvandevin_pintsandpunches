@@ -10,11 +10,20 @@ public class GameElementManager : MonoBehaviour {
     public float shakeDivider = 100;
 
     private ClockBehaviour clock;
+    private AdvancedCamera acamera;
+
+    private int bigEventTimer, bigEventMaxTimer;
+    private bool bigEvent = false;
 
 	// Use this for initialization
 	void Start () 
     {
         clock = GameObject.Find("Clock").GetComponent<ClockBehaviour>();
+
+        acamera = Camera.main.GetComponent<AdvancedCamera>();
+        bigEventTimer = 0;
+        //bigEventMaxTimer = Random.Range(8000, 10000);
+        bigEventMaxTimer = Random.Range(50, 100);
 	}
 	
 	// Update is called once per frame
@@ -39,6 +48,15 @@ public class GameElementManager : MonoBehaviour {
             shakiness -= shakiness / shakeDivider;
         else
             shakiness = 0;
+
+        if(!bigEvent)
+        {
+            if (bigEventTimer < bigEventMaxTimer)
+                bigEventTimer++;
+            //else if (bigEventTimer >= bigEventMaxTimer)
+                //BigEvent();
+        }
+
 
 	}
 
@@ -100,6 +118,21 @@ public class GameElementManager : MonoBehaviour {
             }
 
         }
+    }
+
+    public void BigEvent()
+    {
+        bigEvent = true;
+        acamera.Zoom();
+        //Sleep.SleepOn();
+    }
+
+    public void ResetBigEvent()
+    {
+        bigEvent = false;
+        //Sleep.SleepOff();
+        bigEventTimer = 0;
+
     }
 
 }
