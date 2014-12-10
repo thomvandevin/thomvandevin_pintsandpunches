@@ -5,6 +5,7 @@ using GamepadInput;
 public class SelectionScreen : MonoBehaviour {
 
     public GamePad.Index playerIndex;
+    public bool useKeyboard = false;
 
 	// Use this for initialization
 	void Start () 
@@ -13,6 +14,7 @@ public class SelectionScreen : MonoBehaviour {
         characterImage.transform.parent = gameObject.transform;
         SelectedCharacter sChar = characterImage.GetComponent<SelectedCharacter>();
         sChar.player = playerIndex;
+        sChar.useKeyboard = this.useKeyboard;
 
 	}
 	

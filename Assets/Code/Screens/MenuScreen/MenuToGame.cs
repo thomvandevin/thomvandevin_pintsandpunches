@@ -30,7 +30,7 @@ public class MenuToGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if(GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
+        if(GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One) || Input.GetKeyDown(KeyCode.Return))
         {
             if (Application.loadedLevel == Global.Screen_CharacterSelect)
             {

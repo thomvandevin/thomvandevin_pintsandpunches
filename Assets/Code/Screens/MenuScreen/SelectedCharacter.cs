@@ -33,6 +33,8 @@ public class SelectedCharacter : MonoBehaviour
     private int selectedCharacter, joystickCounter;
     private Material sprite;
 
+    public bool useKeyboard = false;
+
     // Use this for initialization
     void Start()
     {
@@ -100,7 +102,24 @@ public class SelectedCharacter : MonoBehaviour
                     SelectCharacter();
 
                 //print(mpuController.GetDigital(9));
-            } 
+            }
+            else if (useKeyboard)
+            {
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    NextCharacter(-1);
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    NextCharacter(1);
+                }
+                
+                if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) && pressOnce)
+                    pressOnce = false;
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                    SelectCharacter();
+            }
             else
             {
                 if (GamePad.GetAxis(GamePad.Axis.LeftStick, player).x < -.3f && !pressOnce)
@@ -155,6 +174,12 @@ public class SelectedCharacter : MonoBehaviour
             characterSelected = false;
             GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt - 1] = 0;
             
+        }
+        else if (useKeyboard && Input.GetKeyDown(KeyCode.Space))
+        {
+            selectButton.SetActive(false);
+            characterSelected = false;
+            GameObject.FindGameObjectWithTag("Global").GetComponent<MenuToGame>().playerCharacter[playerIndexInt - 1] = 0;
         }
         else if (GamePad.GetButtonDown(GamePad.Button.A, player) || GamePad.GetButtonDown(GamePad.Button.B, player))
         {
