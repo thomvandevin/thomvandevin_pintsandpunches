@@ -59,12 +59,6 @@ public class PaintingBehaviour : MonoBehaviour {
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (pivot != null)
-                KnockPainting();
-        }
-
         if (startRotating)
             StartRotating();
 	}

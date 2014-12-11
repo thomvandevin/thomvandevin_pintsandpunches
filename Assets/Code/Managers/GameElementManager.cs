@@ -11,6 +11,7 @@ public class GameElementManager : MonoBehaviour {
 
     private ClockBehaviour clock;
     private AdvancedCamera acamera;
+    private GameObject bigEventObject;
 
     private int bigEventTimer, bigEventMaxTimer;
     private bool bigEvent = false;
@@ -22,8 +23,8 @@ public class GameElementManager : MonoBehaviour {
 
         acamera = Camera.main.GetComponent<AdvancedCamera>();
         bigEventTimer = 0;
-        //bigEventMaxTimer = Random.Range(8000, 10000);
         bigEventMaxTimer = Random.Range(200, 400);
+        bigEventObject = Global.getChildGameObject(Camera.main.gameObject, "Clash Event");
 	}
 	
 	// Update is called once per frame
@@ -31,18 +32,7 @@ public class GameElementManager : MonoBehaviour {
     {
         if (shakiness > maxShakiness)
         {
-            if (Global.environmentGlasses.Count > 0 || Global.environmentPaintings.Count > 0)
-            {
-                KnockGlassOrPaintingOff();
-                int rnd = Random.Range(100, 150);
-                AddShakiness(-rnd);
-            }
-            else
-            {
-                clock.ClockSpin(); 
-                int rnd = Random.Range(100, 150);
-                AddShakiness(-rnd);
-            }
+            SmallEvent();
         }
         else if (shakiness > 1)
             shakiness -= shakiness / shakeDivider;
@@ -55,14 +45,32 @@ public class GameElementManager : MonoBehaviour {
                 bigEventTimer++;
             else if (bigEventTimer >= bigEventMaxTimer)
                 BigEvent();
+        } else
+        {
+            UpdateBigEvent();
         }
-
-
+        
 	}
 
     public void AddShakiness(float shake)
     {
         shakiness += shake;
+    }
+
+    public void SmallEvent()
+    {
+        if (Global.environmentGlasses.Count > 0 || Global.environmentPaintings.Count > 0)
+        {
+            KnockGlassOrPaintingOff();
+            int rnd = Random.Range(100, 150);
+            AddShakiness(-rnd);
+        }
+        else
+        {
+            clock.ClockSpin();
+            int rnd = Random.Range(100, 150);
+            AddShakiness(-rnd);
+        }
     }
 
     public void KnockGlassOrPaintingOff()
@@ -123,14 +131,34 @@ public class GameElementManager : MonoBehaviour {
     public void BigEvent()
     {
         bigEvent = true;
-        acamera.Zoom();
+        acamera.ZoomOnly();
+        bigEventObject.SetActive(true);
+    }
+
+    public void UpdateBigEvent()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            ResetBigEvent();
     }
 
     public void ResetBigEvent()
     {
         bigEvent = false;
         bigEventTimer = 0;
+        bigEventMaxTimer = Random.Range(20000, 30000);
+        acamera.ZoomOutOnly();
+        bigEventObject.SetActive(false);
+        BigEventEffect();
+    }
 
+    public void BigEventEffect()
+    {
+        int rnd = Random.Range(5, 15);
+        for (int i = 0; i < rnd; i++)
+        {
+            SmallEvent();
+        }
+        acamera.ScreenShake(rnd / 5);
     }
 
 }

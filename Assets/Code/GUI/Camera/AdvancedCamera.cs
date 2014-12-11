@@ -21,7 +21,7 @@ public class AdvancedCamera : MonoBehaviour
     public int holdTime = 33;
     private int zoomTimer = 0;
     private bool on = true;
-    private bool zoomIn = false, zoomOut = false;
+    private bool zoomIn = false, zoomOut = false, zoomHold = false;
     private Vector2 currentPosition, previousPosition, newPosition;
     private float currentScale, previousScale, newScale;
 
@@ -48,10 +48,15 @@ public class AdvancedCamera : MonoBehaviour
 
     void Update()
     {
-        if (zoomIn || zoomOut)
+        if (zoomIn || zoomOut || zoomHold)
         {
             if (zoomIn)
-                ZoomIn();
+            {
+                if(zoomHold)
+                    ZoomInOnly();
+                else
+                    ZoomIn();
+            }
             else if (zoomOut)
                 ZoomOut();
 
@@ -97,10 +102,34 @@ public class AdvancedCamera : MonoBehaviour
         on = state;
     }
 
+    public void ScreenShake(float multiplier)
+    {
+        gameObject.ShakePosition(new Vector3(1, 1, 0) * multiplier, .35f, 0);
+    }
+
     public void ZoomWithDelay(Vector2 target, float delay)
     {
         Invoke("Zoom", delay);
         newPosition = target;
+    }
+    
+    public void Zoom()
+    {
+        currentPosition = transform.position;
+        currentScale = Camera.main.orthographicSize;
+
+        previousPosition = currentPosition;
+        previousScale = currentScale;
+
+        newPosition = currentPosition;
+        newScale = 3;
+        zoomTimer = 0;
+
+        Toggle(false);
+        zoomIn = true;
+        zoomHold = true;
+
+        SleepOn();
     }
 
     public void Zoom(Vector2 target)
@@ -120,11 +149,8 @@ public class AdvancedCamera : MonoBehaviour
 
         SleepOn();
 
-
-        print(currentScale + " : " + previousScale + " : " + newScale);
     }
-
-    public void Zoom()
+    public void ZoomOnly()
     {
         currentPosition = transform.position;
         currentScale = Camera.main.orthographicSize;
@@ -138,9 +164,31 @@ public class AdvancedCamera : MonoBehaviour
 
         Toggle(false);
         zoomIn = true;
+        zoomHold = true;
 
         SleepOn();
     }
+
+    public void ZoomOnly(Vector2 target)
+    {
+        currentPosition = transform.position;
+        currentScale = Camera.main.orthographicSize;
+
+        previousPosition = currentPosition;
+        previousScale = currentScale;
+
+        newPosition = target;
+        newScale = 3;
+        zoomTimer = 0;
+
+        Toggle(false);
+        zoomIn = true;
+        zoomHold = true;
+
+        SleepOn();
+
+    }
+
 
     private void ZoomIn()
     {
@@ -166,6 +214,26 @@ public class AdvancedCamera : MonoBehaviour
         //print(currentPosition + " : " + previousPosition + " : " + newPosition);
     }
 
+    private void ZoomInOnly()
+    {
+        float d1 = Vector2.Distance(currentPosition, newPosition);
+        float d2 = currentScale - newScale;
+        if (Mathf.Abs(d1) > .01f || Mathf.Abs(d2) > 0.01f)
+        {
+            zoomTimer++;
+            float t = 1 - (1f / zoomTimer) * zoomHardness;
+            currentPosition = Vector2.Lerp(currentPosition, newPosition, t);
+            currentScale = Mathf.Lerp(currentScale, newScale, t);
+        }
+        else if(zoomIn)
+        {
+            currentPosition = newPosition;
+            currentScale = newScale;
+            zoomIn = false;
+            zoomTimer = 0;
+        }
+    }
+
     private void ZoomOut()
     {
         float d1 = Vector2.Distance(currentPosition, previousPosition);
@@ -186,8 +254,11 @@ public class AdvancedCamera : MonoBehaviour
             Toggle(true);
         }
 
+    }
 
-        print(currentScale);
+    public void ZoomOutOnly()
+    {
+        zoomOut = true;
     }
 
     public void SleepOn()
