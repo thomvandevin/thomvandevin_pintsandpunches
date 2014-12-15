@@ -22,21 +22,22 @@ public class GuiArduinoSerialScript : MonoBehaviour
     public static string lastpressed = "";
 
     public static string[] pinConfig =
-	{		
-		// COPY-PASTE PIN CONFIGURATION BELOW ALSO TO ARDUINO --
-		"i",  // Pin 2  'i' for in 'o' for out
-		"i",  // Pin 3  'i' for in 'o' for out or 'p' for pwm
-		"i",  // Pin 4  'i' for in 'o' for out
-		"i",  // Pin 5  'i' for in 'o' for out or 'p' for pwm
-		"i",  // Pin 6  'i' for in 'o' for out or 'p' for pwm
-		"i",  // Pin 7  'i' for in 'o' for out
-		"o",  // Pin 8  'i' for in 'o' for out
-		"o",  // Pin 9  'i' for in 'o' for out or 'p' for pwm
-		"o",  // Pin 10 'i' for in 'o' for out or 'p' for pwm
-		"o",  // Pin 11 'i' for in 'o' for out or 'p' for pwm
-		"o",  // Pin 12 'i' for in 'o' for out
-		"o"   // Pin 13 LedPin 'i' for in 'o' for out 
-	};
+    {		
+        // COPY-PASTE PIN CONFIGURATION BELOW ALSO TO ARDUINO --
+        "i",  // Pin 2  'i' for in 'o' for out
+        "i",  // Pin 3  'i' for in 'o' for out or 'p' for pwm
+        "i",  // Pin 4  'i' for in 'o' for out
+        "i",  // Pin 5  'i' for in 'o' for out or 'p' for pwm
+        "i",  // Pin 6  'i' for in 'o' for out or 'p' for pwm
+        "i",  // Pin 7  'i' for in 'o' for out
+        "o",  // Pin 8  'i' for in 'o' for out
+        "o",  // Pin 9  'i' for in 'o' for out or 'p' for pwm
+        "o",  // Pin 10 'i' for in 'o' for out or 'p' for pwm
+        "o",  // Pin 11 'i' for in 'o' for out or 'p' for pwm
+        "o",  // Pin 12 'i' for in 'o' for out
+        "o"   // Pin 13 LedPin 'i' for in 'o' for out 
+    };
+
 
     public static int inputcount = 0;//Digital inputs
     public static int outputcount = 0;//Digital outputs
