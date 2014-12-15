@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
         }
 
         RESET = false;
+        print(mpu);
         useMpu = mpu;
         if (useMpu)
         {

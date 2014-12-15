@@ -50,18 +50,7 @@ public class Global : MonoBehaviour {
         
         if (Application.loadedLevel == Screen_MainGame)
         {
-            players = new List<GameObject>();
-            leprechauns = new List<GameObject>();
-            drinks = new List<GameObject>();
-            environmentGlasses = new List<GameObject>();
-            environmentPaintings = new List<GameObject>();
-
-            lepGOlepScript = new Dictionary<GameObject, string>();
-
-            WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
-            GameElements = GameObject.FindGameObjectWithTag("Global").AddComponent<GameElementManager>();
-
-            LATE_START = true;
+            StartMainGame();
         }
     }
 
@@ -77,6 +66,37 @@ public class Global : MonoBehaviour {
         GAME_END = false;
         LATE_START = false;
         
+    }
+
+    public static void StartMainGame()
+    {
+        players = new List<GameObject>();
+        leprechauns = new List<GameObject>();
+        drinks = new List<GameObject>();
+        environmentGlasses = new List<GameObject>();
+        environmentPaintings = new List<GameObject>();
+
+        lepGOlepScript = new Dictionary<GameObject, string>();
+
+        WorldObject = GameObject.FindGameObjectWithTag("Global").AddComponent<World>();
+        GameElements = GameObject.FindGameObjectWithTag("Global").AddComponent<GameElementManager>();
+
+        LATE_START = true;
+    }
+
+    public static void StartMainGameWOPlayers()
+    {
+        players = new List<GameObject>();
+        leprechauns = new List<GameObject>();
+        drinks = new List<GameObject>();
+        environmentGlasses = new List<GameObject>();
+        environmentPaintings = new List<GameObject>();
+
+        lepGOlepScript = new Dictionary<GameObject, string>();
+
+        //GameElements = GameObject.FindGameObjectWithTag("Global").AddComponent<GameElementManager>();
+
+        LATE_START = true;
     }
 
     static public void SetNumberOfPlayers(int nr)
