@@ -34,7 +34,12 @@ var pinConfig : Array =
 
 function Start()
 {	//set 'Cconnect' to be used as connector to the C# script.
-    tempCom = gameObject.transform.parent.parent.GetComponent("COMParser").com;
+    if (gameObject.GetComponent("COMParser") != null)
+        tempCom = gameObject.GetComponent("COMParser").com;
+    else if (gameObject.transform.parent.GetComponent("COMParser") != null)
+        COMPort = gameObject.transform.parent.GetComponent("COMParser").com;
+    else
+        tempCom = gameObject.transform.parent.parent.GetComponent("COMParser").com;
 
     if(tempCom != "COM0")
     {

@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetPlayer(int controlNumber, Character chosenChar, bool mpu)
+    public void SetPlayer(int controlNumber, Character chosenChar, bool mpu, string com)
     {
         controllerNumber = controlNumber;
         chosenCharacter = chosenChar;
@@ -74,10 +74,11 @@ public class Player : MonoBehaviour
         }
 
         RESET = false;
-        print(mpu);
         useMpu = mpu;
         if (useMpu)
         {
+            COMParser compars = gameObject.AddComponent<COMParser>();
+            compars.com = com;
             mpuController = gameObject.AddComponent<MPUController>();
         }
         kills = 0;

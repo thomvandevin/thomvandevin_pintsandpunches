@@ -1,14 +1,6 @@
 fileFormatVersion: 2
 guid: a82bfee9308cca64688b5bd61a111e15
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Top_Walk_Dash_Back_0
-    21300002: Animation_Leprechaun2_Top_Walk_Dash_Back_1
-    21300004: Animation_Leprechaun2_Top_Walk_Dash_Back_2
-    21300006: Animation_Leprechaun2_Top_Walk_Dash_Back_3
-    21300008: Animation_Leprechaun2_Top_Walk_Dash_Back_4
-    21300010: Animation_Leprechaun2_Top_Walk_Dash_Back_5
-    21300012: Animation_Leprechaun2_Top_Walk_Dash_Back_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

@@ -7,7 +7,11 @@ using GamepadInput;
 public class MenuToGame : MonoBehaviour {
 
     public bool useMPU1, useMPU2, useMPU3, useMPU4;
+    public string stringMPU1, stringMPU2, stringMPU3, stringMPU4;
     public bool[] mpus = new bool[4];
+    public string[] coms = new string[4];
+
+    public List<GuiArduinoSerialScript> serials;
 
     public List<int> playerCharacter;
 
@@ -25,6 +29,10 @@ public class MenuToGame : MonoBehaviour {
         mpus[1] = useMPU2;
         mpus[2] = useMPU3;
         mpus[3] = useMPU4;
+        coms[0] = stringMPU1;
+        coms[1] = stringMPU2;
+        coms[2] = stringMPU3;
+        coms[3] = stringMPU4;
 	}
 	
 	// Update is called once per frame
@@ -64,7 +72,7 @@ public class MenuToGame : MonoBehaviour {
         }
 
         Global.SetNumberOfPlayers(players);
-        Global.SetMPUs(mpus);
+        Global.SetMPUs(mpus, coms);
 
         if (players == 0)
         {
@@ -75,6 +83,23 @@ public class MenuToGame : MonoBehaviour {
             Application.LoadLevel(Global.Screen_MainGame);
 
         //print(playerCharacter[0].ToString() + " " +playerCharacter[1].ToString() + " " +playerCharacter[2].ToString());
+    }
+
+    public void LoadMainGameOnce()
+    {
+        Global.EarlyStart();
+        int players = 0;
+        for (int i = 0; i < playerCharacter.Count; i++)
+        {
+            if (playerCharacter[i] != 0)
+                players++;
+
+            Global.AddSelectedCharacter(playerCharacter[i]);
+        }
+
+        Global.SetNumberOfPlayers(players);
+        Global.SetMPUs(mpus, coms);
+
     }
 
 

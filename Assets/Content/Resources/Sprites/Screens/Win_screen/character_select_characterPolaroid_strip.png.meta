@@ -1,12 +1,6 @@
 fileFormatVersion: 2
 guid: b96af769e3cc0614fb7857597b8c423f
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: character_select_characterPolaroid_strip_0
-    21300002: character_select_characterPolaroid_strip_1
-    21300004: character_select_characterPolaroid_strip_2
-    21300006: character_select_characterPolaroid_strip_3
-    21300008: character_select_characterPolaroid_strip_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

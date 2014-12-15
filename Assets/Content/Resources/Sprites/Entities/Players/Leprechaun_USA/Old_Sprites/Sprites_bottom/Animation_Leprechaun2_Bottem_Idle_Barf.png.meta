@@ -1,17 +1,6 @@
 fileFormatVersion: 2
 guid: a5f39b4e92d9bb543bfa56221933c42d
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Idle_Barf_0
-    21300002: Animation_Leprechaun2_Bottem_Idle_Barf_1
-    21300004: Animation_Leprechaun2_Bottem_Idle_Barf_2
-    21300006: Animation_Leprechaun2_Bottem_Idle_Barf_3
-    21300008: Animation_Leprechaun2_Bottem_Idle_Barf_4
-    21300010: Animation_Leprechaun2_Bottem_Idle_Barf_5
-    21300012: Animation_Leprechaun2_Bottem_Idle_Barf_6
-    21300014: Animation_Leprechaun2_Bottem_Idle_Barf_7
-    21300016: Animation_Leprechaun2_Bottem_Idle_Barf_8
-    21300018: Animation_Leprechaun2_Bottem_Idle_Barf_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

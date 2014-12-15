@@ -22,6 +22,7 @@ public class Global : MonoBehaviour {
     public static List<GameObject> drinks;
     public static List<int> playerCharacter;
     public static bool[] useMpus;
+    public static string[] comMpus;
 
     public static List<GameObject> environmentGlasses;
     public static List<GameObject> environmentPaintings;
@@ -109,9 +110,10 @@ public class Global : MonoBehaviour {
         Global.playerCharacter.Add(i);
     }
 
-    static public void SetMPUs(bool[] mpus)
+    static public void SetMPUs(bool[] mpus, string[] coms)
     {
-
+        Global.useMpus = mpus;
+        Global.comMpus = coms;
     }
 
     static public GameObject getChildGameObject(GameObject fromGameObject, string withName)

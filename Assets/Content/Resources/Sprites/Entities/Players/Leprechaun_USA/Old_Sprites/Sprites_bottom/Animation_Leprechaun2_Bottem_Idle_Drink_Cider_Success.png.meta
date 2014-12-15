@@ -1,13 +1,6 @@
 fileFormatVersion: 2
 guid: 03e77bc92758f874295bc5083f68b1ae
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Idle_Drink_Cider_Success_0
-    21300002: Animation_Leprechaun2_Bottem_Idle_Drink_Cider_Success_1
-    21300004: Animation_Leprechaun2_Bottem_Idle_Drink_Cider_Success_2
-    21300006: Animation_Leprechaun2_Bottem_Idle_Drink_Cider_Success_3
-    21300008: Animation_Leprechaun2_Bottem_Idle_Drink_Cider_Success_4
-    21300010: Animation_Leprechaun2_Bottem_Idle_Drink_Cider_Success_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

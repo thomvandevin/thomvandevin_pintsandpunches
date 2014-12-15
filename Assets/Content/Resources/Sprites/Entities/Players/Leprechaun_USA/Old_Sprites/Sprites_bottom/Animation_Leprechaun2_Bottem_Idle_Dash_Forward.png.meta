@@ -1,15 +1,6 @@
 fileFormatVersion: 2
 guid: b67e978bc9c2ffa43bc2c22fc3b7a4f1
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_0
-    21300002: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_1
-    21300004: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_2
-    21300006: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_3
-    21300008: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_4
-    21300010: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_5
-    21300012: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_6
-    21300014: Animation_Leprechaun2_Bottem_Idle_Dash_Forward_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

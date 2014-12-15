@@ -1,10 +1,6 @@
 fileFormatVersion: 2
 guid: ed29a890b7933494da13431e21d8551d
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Drink_Ale_Loop_0
-    21300002: Animation_Leprechaun2_Bottem_Drink_Ale_Loop_1
-    21300004: Animation_Leprechaun2_Bottem_Drink_Ale_Loop_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

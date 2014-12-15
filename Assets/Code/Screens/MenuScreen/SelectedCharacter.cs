@@ -98,7 +98,7 @@ public class SelectedCharacter : MonoBehaviour
                 else if (!mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.NEGATIVE) && !mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.POSITIVE) && pressOnce)
                     pressOnce = false;
 
-                if(mpuController.GetDigitalPressed(9))
+                if (mpuController.GetDigitalPressed(9))
                     SelectCharacter();
 
                 //print(mpuController.GetDigital(9));

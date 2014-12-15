@@ -1,15 +1,6 @@
 fileFormatVersion: 2
 guid: 3e8667ff20d604d4683bc2c5ccaec2d8
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Pickup_Drink_Stout_0
-    21300002: Pickup_Drink_Stout_1
-    21300004: Pickup_Drink_Stout_2
-    21300006: Pickup_Drink_Stout_3
-    21300008: Pickup_Drink_Stout_4
-    21300010: Pickup_Drink_Stout_5
-    21300012: Pickup_Drink_Stout_6
-    21300014: Pickup_Drink_Stout_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

@@ -1,27 +1,6 @@
 fileFormatVersion: 2
 guid: c3917a0487c3e9442b1b95fbeb5351d4
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: HUD_Loading_0
-    21300002: HUD_Loading_1
-    21300004: HUD_Loading_2
-    21300006: HUD_Loading_3
-    21300008: HUD_Loading_4
-    21300010: HUD_Loading_5
-    21300012: HUD_Loading_6
-    21300014: HUD_Loading_7
-    21300016: HUD_Loading_8
-    21300018: HUD_Loading_9
-    21300020: HUD_Loading_10
-    21300022: HUD_Loading_11
-    21300024: HUD_Loading_12
-    21300026: HUD_Loading_13
-    21300028: HUD_Loading_14
-    21300030: HUD_Loading_15
-    21300032: HUD_Loading_16
-    21300034: HUD_Loading_17
-    21300036: HUD_Loading_18
-    21300038: HUD_Loading_19
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

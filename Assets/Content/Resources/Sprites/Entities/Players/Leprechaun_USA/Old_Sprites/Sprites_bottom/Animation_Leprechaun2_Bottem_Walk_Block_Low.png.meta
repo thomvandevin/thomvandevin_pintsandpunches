@@ -1,9 +1,6 @@
 fileFormatVersion: 2
 guid: 69c38bb125444944c9a18e7413a87651
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Walk_Block_Low_0
-    21300002: Animation_Leprechaun2_Bottem_Walk_Block_Low_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

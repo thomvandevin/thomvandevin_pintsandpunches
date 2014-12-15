@@ -1,11 +1,6 @@
 fileFormatVersion: 2
 guid: 6385c7be74c04674795de72a6c8e0ed7
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Top_Walk_Hit_Back_0
-    21300002: Animation_Leprechaun2_Top_Walk_Hit_Back_1
-    21300004: Animation_Leprechaun2_Top_Walk_Hit_Back_2
-    21300006: Animation_Leprechaun2_Top_Walk_Hit_Back_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

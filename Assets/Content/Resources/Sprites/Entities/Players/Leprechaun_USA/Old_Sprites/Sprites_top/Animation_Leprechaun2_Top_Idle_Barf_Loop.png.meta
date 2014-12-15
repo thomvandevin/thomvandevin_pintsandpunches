@@ -1,13 +1,6 @@
 fileFormatVersion: 2
 guid: 41752b0ea6423924680793cdf4cd33fc
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Top_Idle_Barf_Loop_0
-    21300002: Animation_Leprechaun2_Top_Idle_Barf_Loop_1
-    21300004: Animation_Leprechaun2_Top_Idle_Barf_Loop_2
-    21300006: Animation_Leprechaun2_Top_Idle_Barf_Loop_3
-    21300008: Animation_Leprechaun2_Top_Idle_Barf_Loop_4
-    21300010: Animation_Leprechaun2_Top_Idle_Barf_Loop_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

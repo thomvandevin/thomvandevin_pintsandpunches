@@ -1,15 +1,6 @@
 fileFormatVersion: 2
 guid: 0a425c91a4d01474a9e95378ed2b2041
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun1_Top_Run_0
-    21300002: Animation_Leprechaun1_Top_Run_1
-    21300004: Animation_Leprechaun1_Top_Run_2
-    21300006: Animation_Leprechaun1_Top_Run_3
-    21300008: Animation_Leprechaun1_Top_Run_4
-    21300010: Animation_Leprechaun1_Top_Run_5
-    21300012: Animation_Leprechaun1_Top_Run_6
-    21300014: Animation_Leprechaun1_Top_Run_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

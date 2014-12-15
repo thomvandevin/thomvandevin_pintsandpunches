@@ -17,10 +17,12 @@ public class MPUController : MonoBehaviour {
     }
 
     public int controllerNumber = 0;
-
+    
     private GameObject hardware;
     private MPUInputCollector mpuData;
-    private float threshold = .6f;
+    private float thresholdX = .5f;
+    private float thresholdY = .65f;
+    private float thresholdZ = .5f;
 
     private bool prevState9 = false;
 
@@ -68,27 +70,27 @@ public class MPUController : MonoBehaviour {
     {
         if (axis == Axis.X)
         {
-            if (side == Side.POSITIVE && GetSensorValue(axis) >= threshold)
+            if (side == Side.POSITIVE && GetSensorValue(axis) >= thresholdX)
                 return true;
-            else if (side == Side.NEGATIVE && GetSensorValue(axis) <= -threshold)
+            else if (side == Side.NEGATIVE && GetSensorValue(axis) <= -thresholdX)
                 return true;
             else
                 return false;
         }
         else if (axis == Axis.Y)
         {
-            if (side == Side.POSITIVE && GetSensorValue(axis) >= threshold)
+            if (side == Side.POSITIVE && GetSensorValue(axis) >= thresholdY)
                 return true;
-            else if (side == Side.NEGATIVE && GetSensorValue(axis) <= -threshold)
+            else if (side == Side.NEGATIVE && GetSensorValue(axis) <= -thresholdY)
                 return true;
             else
                 return false;
         }
         else if (axis == Axis.Z)
         {
-            if (side == Side.POSITIVE && GetSensorValue(axis) >= threshold)
+            if (side == Side.POSITIVE && GetSensorValue(axis) >= thresholdZ)
                 return true;
-            else if (side == Side.NEGATIVE && GetSensorValue(axis) <= threshold)
+            else if (side == Side.NEGATIVE && GetSensorValue(axis) <= thresholdZ)
                 return true;
             else
                 return false;

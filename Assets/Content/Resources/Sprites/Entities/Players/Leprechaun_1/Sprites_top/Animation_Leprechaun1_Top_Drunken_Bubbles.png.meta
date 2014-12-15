@@ -1,12 +1,6 @@
 fileFormatVersion: 2
 guid: 8aac9d3f1288ecb44a1f62aa5d7ae514
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun1_Top_Drunken_Bubbles_0
-    21300002: Animation_Leprechaun1_Top_Drunken_Bubbles_1
-    21300004: Animation_Leprechaun1_Top_Drunken_Bubbles_2
-    21300006: Animation_Leprechaun1_Top_Drunken_Bubbles_3
-    21300008: Animation_Leprechaun1_Top_Drunken_Bubbles_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

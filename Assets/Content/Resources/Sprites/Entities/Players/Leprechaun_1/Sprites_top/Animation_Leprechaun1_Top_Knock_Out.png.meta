@@ -1,10 +1,6 @@
 fileFormatVersion: 2
 guid: 1b91ab0582522954c9ac2701c584d9ef
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun1_Top_Knock_Out_0
-    21300002: Animation_Leprechaun1_Top_Knock_Out_1
-    21300004: Animation_Leprechaun1_Top_Knock_Out_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

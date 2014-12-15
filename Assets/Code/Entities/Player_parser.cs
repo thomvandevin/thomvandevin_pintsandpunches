@@ -20,7 +20,7 @@ public class Player_parser : MonoBehaviour {
 	void Start () 
     {
         p = gameObject.AddComponent<Player>();
-        p.SetPlayer(controllerNumber, character, mpu);
+        p.SetPlayer(controllerNumber, character, mpu, com);
 
         p.gameObject.layer = 7 + controllerNumber;
         p.gameObject.name = "Player " + controllerNumber.ToString();

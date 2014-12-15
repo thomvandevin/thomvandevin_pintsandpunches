@@ -1,12 +1,6 @@
 fileFormatVersion: 2
 guid: b4834abaed44a5048aea9a40296d207d
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Walk_Drunk_Walk_0
-    21300002: Animation_Leprechaun2_Bottem_Walk_Drunk_Walk_1
-    21300004: Animation_Leprechaun2_Bottem_Walk_Drunk_Walk_2
-    21300006: Animation_Leprechaun2_Bottem_Walk_Drunk_Walk_3
-    21300008: Animation_Leprechaun2_Bottem_Walk_Drunk_Walk_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

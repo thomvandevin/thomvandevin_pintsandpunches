@@ -1,15 +1,6 @@
 fileFormatVersion: 2
 guid: fb1913a659c061545a3d59b04fe76440
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Pickup_Drink_Whiskey_0
-    21300002: Pickup_Drink_Whiskey_1
-    21300004: Pickup_Drink_Whiskey_2
-    21300006: Pickup_Drink_Whiskey_3
-    21300008: Pickup_Drink_Whiskey_4
-    21300010: Pickup_Drink_Whiskey_5
-    21300012: Pickup_Drink_Whiskey_6
-    21300014: Pickup_Drink_Whiskey_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

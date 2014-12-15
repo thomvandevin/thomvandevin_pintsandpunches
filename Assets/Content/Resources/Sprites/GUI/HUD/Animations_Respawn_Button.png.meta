@@ -1,10 +1,6 @@
 fileFormatVersion: 2
 guid: 87b299f0198a74c4f901b5d39e2e3e04
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animations_Respawn_Button_0
-    21300002: Animations_Respawn_Button_1
-    21300004: Animations_Respawn_Button_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

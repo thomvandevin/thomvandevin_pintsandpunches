@@ -62,7 +62,13 @@ public class GuiArduinoSerialScript : MonoBehaviour
     void Start()
     {
         //start the serial connection.
-        COMPort = gameObject.transform.parent.parent.GetComponent<COMParser>().com;
+        if (gameObject.GetComponent<COMParser>() != null)
+            COMPort = gameObject.GetComponent<COMParser>().com;
+        else if (gameObject.transform.parent.GetComponent<COMParser>() != null)
+            COMPort = gameObject.transform.parent.GetComponent<COMParser>().com;
+        else
+            COMPort = gameObject.transform.parent.parent.GetComponent<COMParser>().com;
+
         if (COMPort != "COM0")
         {
             _SerialPort = new SerialPort(COMPort, 9600);

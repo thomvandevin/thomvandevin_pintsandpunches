@@ -1,16 +1,6 @@
 fileFormatVersion: 2
 guid: 56fc34da604b513488e4798f92599850
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Level_Pubcounter_Painting_029_276x164_0
-    21300002: Level_Pubcounter_Painting_029_276x164_1
-    21300004: Level_Pubcounter_Painting_029_276x164_2
-    21300006: Level_Pubcounter_Painting_029_276x164_3
-    21300008: Level_Pubcounter_Painting_029_276x164_4
-    21300010: Level_Pubcounter_Painting_029_276x164_5
-    21300012: Level_Pubcounter_Painting_029_276x164_6
-    21300014: Level_Pubcounter_Painting_029_276x164_7
-    21300016: Level_Pubcounter_Painting_029_276x164_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

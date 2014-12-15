@@ -1,13 +1,6 @@
 fileFormatVersion: 2
 guid: e6411665508235948bcd100e8c2a3897
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Drink_Whiskey_Succes_0
-    21300002: Animation_Leprechaun2_Bottem_Drink_Whiskey_Succes_1
-    21300004: Animation_Leprechaun2_Bottem_Drink_Whiskey_Succes_2
-    21300006: Animation_Leprechaun2_Bottem_Drink_Whiskey_Succes_3
-    21300008: Animation_Leprechaun2_Bottem_Drink_Whiskey_Succes_4
-    21300010: Animation_Leprechaun2_Bottem_Drink_Whiskey_Succes_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

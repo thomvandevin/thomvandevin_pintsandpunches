@@ -1,15 +1,6 @@
 fileFormatVersion: 2
 guid: c86d2899e5580c04f92ce83c1387c91c
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Pickup_Drink_Ale_0
-    21300002: Pickup_Drink_Ale_1
-    21300004: Pickup_Drink_Ale_2
-    21300006: Pickup_Drink_Ale_3
-    21300008: Pickup_Drink_Ale_4
-    21300010: Pickup_Drink_Ale_5
-    21300012: Pickup_Drink_Ale_6
-    21300014: Pickup_Drink_Ale_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

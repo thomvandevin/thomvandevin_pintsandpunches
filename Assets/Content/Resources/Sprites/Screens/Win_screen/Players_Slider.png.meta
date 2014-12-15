@@ -1,11 +1,6 @@
 fileFormatVersion: 2
 guid: 202ebe870527d454eb5cba1e52cba218
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Players_Slider_0
-    21300002: Players_Slider_1
-    21300004: Players_Slider_2
-    21300006: Players_Slider_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

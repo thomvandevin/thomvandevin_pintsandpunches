@@ -1,10 +1,6 @@
 fileFormatVersion: 2
 guid: a5159946c6f7fc849b6ed2a2c9d43d80
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Animation_Leprechaun2_Bottem_Idle_Knock_Out_0
-    21300002: Animation_Leprechaun2_Bottem_Idle_Knock_Out_1
-    21300004: Animation_Leprechaun2_Bottem_Idle_Knock_Out_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

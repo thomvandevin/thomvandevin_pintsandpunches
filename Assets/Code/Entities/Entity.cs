@@ -305,17 +305,17 @@ public class Entity : MonoBehaviour {
 
             #region BLOCKING CODE
 
-            if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isDashing && !isAttacking && !isDrinking)
-            {
-                isBlocking = true;
-                SetAnimation("isBlocking", true);
-            }
+            //if (GamePad.GetButtonDown(GamePad.Button.B, gamePadIndex) && !isDashing && !isAttacking && !isDrinking)
+            //{
+            //    isBlocking = true;
+            //    SetAnimation("isBlocking", true);
+            //}
 
-            if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
-            {
-                isBlocking = false;
-                SetAnimation("isBlocking", false);
-            }
+            //if (GamePad.GetButtonUp(GamePad.Button.B, gamePadIndex))
+            //{
+            //    isBlocking = false;
+            //    SetAnimation("isBlocking", false);
+            //}
 
             #endregion
 
@@ -353,14 +353,34 @@ public class Entity : MonoBehaviour {
 
             #region JUMPING CODE
 
-            if (onGround && (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space)) && !isAttacking && !isHit)
+            if (onGround && useMpu && !isAttacking && !isHit)
+            {
+                if (mpuController.GetSensor(MPUController.Axis.Y, MPUController.Side.NEGATIVE))
+                {
+                    SetAnimation("grounded", false);
+                    playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y)/5);
+                }
+            }
+            else if (onGround && (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space)) && !isAttacking && !isHit)
             {
                 SetAnimation("grounded", false);
                 playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y));
-
             }
 
-            if(!onGround && chosenCharacter == Player.Character.FAIRY && canDoubleJump && GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) && !isAttacking && !isHit)
+            if (!onGround && chosenCharacter == Player.Character.FAIRY && canDoubleJump && useMpu && !isAttacking && !isHit)
+            {
+                if (mpuController.GetSensor(MPUController.Axis.Y, MPUController.Side.NEGATIVE))
+                {
+                    Vector3 vel = playerObject.rigidbody2D.velocity;
+                    vel.y = 0;
+                    playerObject.rigidbody2D.velocity = vel;
+                    playerObject.rigidbody2D.AddForce(new Vector2(0, maxVelocity.y / 1.2f));
+                    canDoubleJump = false;
+                }
+            }
+            else if (!onGround && chosenCharacter == Player.Character.FAIRY && canDoubleJump && 
+                (GamePad.GetButtonDown(GamePad.Button.A, gamePadIndex) || GamePad.GetKeyboardKeyDown(KeyCode.Space))
+                && !isAttacking && !isHit)
             {
                 Vector3 vel = playerObject.rigidbody2D.velocity;
                 vel.y = 0;
@@ -489,9 +509,9 @@ public class Entity : MonoBehaviour {
             if (useMpu)
             {
                 if (mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.POSITIVE))
-                    move = -1;
-                else if(mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.NEGATIVE))
                     move = 1;
+                else if(mpuController.GetSensor(MPUController.Axis.X, MPUController.Side.NEGATIVE))
+                    move = -1;
             }
             else
             {
