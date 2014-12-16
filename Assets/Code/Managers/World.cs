@@ -77,9 +77,15 @@ public class World : MonoBehaviour {
     {
         Global.playerWhoWon = controllerNumber;
         Global.characterThatWon = chosenCharacter;
+        Camera.main.GetComponent<AdvancedCamera>().Zoom(Vector2.zero);
         Application.LoadLevel(Global.Screen_WinScreen);
 
         print("Player " + controllerNumber.ToString() + " won!");
+    }
+
+    private void LoadWinScreen()
+    {
+        Application.LoadLevel(Global.Screen_WinScreen);
     }
 
     public void SpawnDrink()
