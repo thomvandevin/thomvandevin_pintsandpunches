@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
 
     public GameObject playerIndicatorObject;
     public PlayerIndicator playerIndicatorScript;
+    public GameObject healthHUD;
     public MPUController mpuController;
 
     public Player()
@@ -131,6 +132,11 @@ public class Player : MonoBehaviour
         playerIndicatorObject = Instantiate(Resources.Load("Prefabs/Objects/HUD/Controller_indicator"), playerIndPos, Quaternion.identity) as GameObject;
         playerIndicatorScript = playerIndicatorObject.GetComponent<PlayerIndicator>();
         playerIndicatorScript.SetIndicator(gameObject, controllerNumber);
+
+        healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_Health"), new Vector3(-10 + (4 * controllerNumber), -3.5f, -9), Quaternion.identity) as GameObject;
+        healthHUD.transform.parent = Camera.main.transform;
+        healthHUD.GetComponentInChildren<HealthHUD>().SetHealthHud(
+
 
         //gridPos = leprechaun.GetGridPosition();
         //respawnFlare = new RespawnFlare(leprechaun.GetPosition, controllerNumber);

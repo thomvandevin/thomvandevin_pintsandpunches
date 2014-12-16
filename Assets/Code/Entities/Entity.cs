@@ -61,7 +61,7 @@ public class Entity : MonoBehaviour {
     public bool onGround, previousGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
     public bool useMpu = false;
 
-    protected int maxHealth, health;
+    protected int maxHealth, health, prevHealth;
     public int GetHealth { get { return health; } set { health = value; } }
     public int drinkAnimCounter, drunkness, drunkWalkTimer, drunkRandomSide;
     public int controllerNumber, dashTimer, deathCounter, playerStateTimer, jumpOnce, attackOnce, attackCooldown;
@@ -79,6 +79,7 @@ public class Entity : MonoBehaviour {
     public GameObject dustParticle;
     public LayerMask groundLayer;
     public MPUController mpuController;
+    private HealthHUD healthHud;
 
 	// Use this for initialization
 	public Entity () 
@@ -144,6 +145,7 @@ public class Entity : MonoBehaviour {
 
         respawnButtonPos = new Vector2(transform.position.x, transform.position.y - 40);
         advancedCamera = Camera.main.GetComponent<AdvancedCamera>();
+        healthHud = playerScript.healthHUD.GetComponentInChildren<HealthHUD>();
         this.mpuController = playerScript.mpuController;
 
         SetDictionary();
@@ -420,6 +422,7 @@ public class Entity : MonoBehaviour {
             dustParticle.GetComponent<Animator>().SetBool("triggerOnce", false);
             gameObject.Stab(Resources.Load("Audio/SFX/Knockout") as AudioClip, 1f, 1f, 0f);
 
+            healthHud.SetHealth(0);
             deathCounter++;
         }
         else if (IsDead && deathCounter == 1 &&
@@ -448,6 +451,11 @@ public class Entity : MonoBehaviour {
             }
         }
 
+        if (prevHealth != health)
+        {
+            healthHud.SetHealth((float)health);
+        }
+
 	}
 
     public virtual void FixedUpdate()
@@ -458,6 +466,7 @@ public class Entity : MonoBehaviour {
     public void LateUpdate()
     {
         previousGround = onGround;
+        prevHealth = health;
     }
      
     public virtual void Move(Vector2 pos)
