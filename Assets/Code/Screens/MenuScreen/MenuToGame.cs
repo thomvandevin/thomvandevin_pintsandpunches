@@ -61,6 +61,8 @@ public class MenuToGame : MonoBehaviour {
 
     public void LoadMainGame()
     {
+        GameObject.FindGameObjectWithTag("Hardware").GetComponent<GuiArduinoSerialScript>().getSerialPort.Close();
+
         Global.EarlyStart();
         int players = 0;
         for (int i = 0; i < playerCharacter.Count; i++)

@@ -9,6 +9,7 @@ public class GuiArduinoSerialScript : MonoBehaviour
 
     public static bool portopen = false; //if port is open or not
     public static SerialPort _SerialPort; //COM port and baudrate
+    public SerialPort getSerialPort { get { return _SerialPort; } }
 
     public static bool Errorhandling = false;
     public static bool UseData = false;
