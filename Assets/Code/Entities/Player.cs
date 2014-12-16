@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     public GameObject playerIndicatorObject;
     public PlayerIndicator playerIndicatorScript;
     public GameObject healthHUD;
+    public HealthHUD healthHUDScript;
     public MPUController mpuController;
 
     public Player()
@@ -55,21 +56,51 @@ public class Player : MonoBehaviour
         {
             case Character.LEPRECHAUN_01:
                 loadCharacterString = "Prefabs/Entities/Leprechaun_01";
+                
+                healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_health_leprechaun01"), new Vector3(-10 + (4 * controllerNumber), -3, -9), Quaternion.identity) as GameObject;
+                healthHUD.transform.parent = Camera.main.transform;
+                healthHUDScript = healthHUD.GetComponentInChildren<HealthHUD>();
+                healthHUDScript.SetHealthHud(controllerNumber);
                 break;
             case Character.LEPRECHAUN_USA:
                 loadCharacterString = "Prefabs/Entities/Leprechaun_usa";
+                
+                healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_health_leprechaunusa"), new Vector3(-10 + (4 * controllerNumber), -3, -9), Quaternion.identity) as GameObject;
+                healthHUD.transform.parent = Camera.main.transform;
+                healthHUDScript = healthHUD.GetComponentInChildren<HealthHUD>();
+                healthHUDScript.SetHealthHud(controllerNumber);
                 break;
             case Character.CLUIRICHAUN:
                 loadCharacterString = "Prefabs/Entities/Cluirichaun";
+                
+                healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_health_cluirichaun"), new Vector3(-10 + (4 * controllerNumber), -3, -9), Quaternion.identity) as GameObject;
+                healthHUD.transform.parent = Camera.main.transform;
+                healthHUDScript = healthHUD.GetComponentInChildren<HealthHUD>();
+                healthHUDScript.SetHealthHud(controllerNumber);
                 break;
             case Character.FAR_DARRIG:
                 loadCharacterString = "Prefabs/Entities/FarDarrig";
+                
+                healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_health_fardarrig"), new Vector3(-10 + (4 * controllerNumber), -3, -9), Quaternion.identity) as GameObject;
+                healthHUD.transform.parent = Camera.main.transform;
+                healthHUDScript = healthHUD.GetComponentInChildren<HealthHUD>();
+                healthHUDScript.SetHealthHud(controllerNumber);
                 break;
             case Character.FAIRY:
                 loadCharacterString = "Prefabs/Entities/Fairy";
+                
+                healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_health_fairy"), new Vector3(-10 + (4 * controllerNumber), -3, -9), Quaternion.identity) as GameObject;
+                healthHUD.transform.parent = Camera.main.transform;
+                healthHUDScript = healthHUD.GetComponentInChildren<HealthHUD>();
+                healthHUDScript.SetHealthHud(controllerNumber);
                 break;
             default:
                 loadCharacterString = "Prefabs/Entities/Leprechaun_01";
+                
+                healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_health_leprechaun01"), new Vector3(-10 + (5 * controllerNumber), -3, -9), Quaternion.identity) as GameObject;
+                healthHUD.transform.parent = Camera.main.transform;
+                healthHUDScript = healthHUD.GetComponentInChildren<HealthHUD>();
+                healthHUDScript.SetHealthHud(controllerNumber);
                 print("You done goofed hard.");
                 break;
         }
@@ -84,7 +115,9 @@ public class Player : MonoBehaviour
         }
         kills = 0;
 
-        playerStartPosition = new Vector3(-10 + (4 * controllerNumber),0 , (-.1f * controllerNumber));
+
+
+        playerStartPosition = new Vector3(-10 + (4 * controllerNumber), 0, (-.1f * controllerNumber));
         gameObject.transform.position = playerStartPosition;
 
         leprechaunObject = Instantiate(Resources.Load(loadCharacterString), transform.position, Quaternion.identity) as GameObject;
@@ -133,9 +166,6 @@ public class Player : MonoBehaviour
         playerIndicatorScript = playerIndicatorObject.GetComponent<PlayerIndicator>();
         playerIndicatorScript.SetIndicator(gameObject, controllerNumber);
 
-        healthHUD = Instantiate(Resources.Load("Prefabs/Objects/HUD/HUD_Health"), new Vector3(-10 + (4 * controllerNumber), -3.5f, -9), Quaternion.identity) as GameObject;
-        healthHUD.transform.parent = Camera.main.transform;
-        healthHUD.GetComponentInChildren<HealthHUD>().SetHealthHud(
 
 
         //gridPos = leprechaun.GetGridPosition();

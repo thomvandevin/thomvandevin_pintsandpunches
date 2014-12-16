@@ -7,46 +7,43 @@ public class HealthHUD : MonoBehaviour {
     private SpriteRenderer sprite;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
     {
-        anim = gameObject.GetComponent<Animator>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
+        anim = gameObject.GetComponent<Animator>();
+
+        print("done");
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-	    
 	}
 
-    public void SetHealthHud(int character, int controller, float health)
+    public void SetHealthHud(int controller)
     {
-        SetCharacter(character);
-        SetHealth(health);
 
+        SetHealth(0);
+        
         switch (controller)
         {
             case 1:
-                sprite.color = Color.blue;
+                sprite.color = new Color(0, 0, 255, 200);
                 break;
             case 2:
-                sprite.color = Color.red;
+                sprite.color = new Color(255, 0, 0, 200);
                 break;
             case 3:
-                sprite.color = Color.green;
+                sprite.color = new Color(0, 255, 0, 200);
                 break;
             case 4:
-                sprite.color = Color.yellow;
+                sprite.color = new Color(255, 255, 0, 200);
                 break;
             default:
+                sprite.color = new Color(0, 0, 255, 255);
                 break;
         }
 
-    }
-
-    public void SetCharacter(int character)
-    {
-        anim.SetFloat("Character", character);
     }
 
     public void SetHealth(float health)

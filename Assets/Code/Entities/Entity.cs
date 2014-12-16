@@ -61,7 +61,7 @@ public class Entity : MonoBehaviour {
     public bool onGround, previousGround, isHit, isBlocking, isDashing, isAttacking, isDrinking;
     public bool useMpu = false;
 
-    protected int maxHealth, health, prevHealth;
+    protected int maxHealth, health;
     public int GetHealth { get { return health; } set { health = value; } }
     public int drinkAnimCounter, drunkness, drunkWalkTimer, drunkRandomSide;
     public int controllerNumber, dashTimer, deathCounter, playerStateTimer, jumpOnce, attackOnce, attackCooldown;
@@ -142,12 +142,14 @@ public class Entity : MonoBehaviour {
         wallCheck = Global.getChildGameObject(gameObject, "WallCheck");
         dustParticle = Global.getChildGameObject(gameObject, "Dust particle");
         groundLayer = playerObject.GetComponent<LayerMaskPass>().GetLayerMask();
-
+        
         respawnButtonPos = new Vector2(transform.position.x, transform.position.y - 40);
-        advancedCamera = Camera.main.GetComponent<AdvancedCamera>();
         healthHud = playerScript.healthHUD.GetComponentInChildren<HealthHUD>();
-        this.mpuController = playerScript.mpuController;
+        healthHud.SetHealth(health);
 
+        advancedCamera = Camera.main.GetComponent<AdvancedCamera>();
+        this.mpuController = playerScript.mpuController;
+        
         SetDictionary();
         print(useMpu);
     }
@@ -167,6 +169,8 @@ public class Entity : MonoBehaviour {
 	public virtual void Update () {
         if (health <= 0)
             isDead = true;
+
+        healthHud.SetHealth((float)health);
 
         //if (GamePad.GetButtonDown(GamePad.Button.Back, gamePadIndex))
         //{
@@ -451,10 +455,6 @@ public class Entity : MonoBehaviour {
             }
         }
 
-        if (prevHealth != health)
-        {
-            healthHud.SetHealth((float)health);
-        }
 
 	}
 
@@ -466,7 +466,6 @@ public class Entity : MonoBehaviour {
     public void LateUpdate()
     {
         previousGround = onGround;
-        prevHealth = health;
     }
      
     public virtual void Move(Vector2 pos)
@@ -570,6 +569,8 @@ public class Entity : MonoBehaviour {
 
         if (health < 0)
             health = 0;
+        
+        healthHud.SetHealth((float)health);
     }
 
     public void Dash()

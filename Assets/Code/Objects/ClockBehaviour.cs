@@ -51,7 +51,6 @@ public class ClockBehaviour : MonoBehaviour {
                 hours.RotateBy(new Vector3(0, 0, hourRotation), 0, 0);
                 minutes.RotateBy(new Vector3(0, 0, minuteRotation), 0, 0);
 
-                print(hourRotation);
             }
 
         } else
