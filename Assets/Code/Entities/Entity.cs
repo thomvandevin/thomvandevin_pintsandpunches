@@ -193,7 +193,8 @@ public class Entity : MonoBehaviour {
             {
                 if (playerScript.usePunchbag)
                 {
-                    if (punchCheck.collider2D.bounds.Intersects(playerScript.punchBag.GetComponent<BoxCollider2D>().bounds))
+                    playerScript.punchBag.GetComponent<Punchbag>().Hit(gameObject.transform.position);
+                    if (punchCheck.collider2D.bounds.Intersects(playerScript.punchBag.collider2D.bounds))
                     {
                         playerScript.punchBag.GetComponent<Punchbag>().Hit(gameObject.transform.position);
                         print("check");
