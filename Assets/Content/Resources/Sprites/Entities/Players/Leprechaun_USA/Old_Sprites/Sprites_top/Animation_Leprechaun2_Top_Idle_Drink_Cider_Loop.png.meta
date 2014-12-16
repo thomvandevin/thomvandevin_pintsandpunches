@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: 1ecf5f7165aceef47b2c5722b2ade338
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Idle_Drink_Cider_Loop_0
+    21300002: Animation_Leprechaun2_Top_Idle_Drink_Cider_Loop_1
+    21300004: Animation_Leprechaun2_Top_Idle_Drink_Cider_Loop_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

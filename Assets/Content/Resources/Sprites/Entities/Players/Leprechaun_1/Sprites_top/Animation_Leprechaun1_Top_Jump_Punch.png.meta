@@ -1,6 +1,12 @@
 fileFormatVersion: 2
 guid: 4bca657fb03eae44aa2bf35496137b9a
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun1_Top_Jump_Punch_0
+    21300002: Animation_Leprechaun1_Top_Jump_Punch_1
+    21300004: Animation_Leprechaun1_Top_Jump_Punch_2
+    21300006: Animation_Leprechaun1_Top_Jump_Punch_3
+    21300008: Animation_Leprechaun1_Top_Jump_Punch_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

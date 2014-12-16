@@ -1,6 +1,15 @@
 fileFormatVersion: 2
 guid: a9ef4cbaef439b44b8273f4354d9765f
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_0
+    21300002: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_1
+    21300004: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_2
+    21300006: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_3
+    21300008: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_4
+    21300010: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_5
+    21300012: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_6
+    21300014: Animation_Leprechaun2_Top_Idle_Drink_Whiskey_Succes_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

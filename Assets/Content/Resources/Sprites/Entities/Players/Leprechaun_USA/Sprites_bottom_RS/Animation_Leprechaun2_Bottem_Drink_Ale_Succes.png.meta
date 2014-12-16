@@ -1,6 +1,13 @@
 fileFormatVersion: 2
 guid: e0ca1dde1197fa146b848b0d388f13dc
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Bottem_Drink_Ale_Succes_0
+    21300002: Animation_Leprechaun2_Bottem_Drink_Ale_Succes_1
+    21300004: Animation_Leprechaun2_Bottem_Drink_Ale_Succes_2
+    21300006: Animation_Leprechaun2_Bottem_Drink_Ale_Succes_3
+    21300008: Animation_Leprechaun2_Bottem_Drink_Ale_Succes_4
+    21300010: Animation_Leprechaun2_Bottem_Drink_Ale_Succes_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

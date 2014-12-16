@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 53a9f2e42f90a6240ab490c2bd5118d9
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Hit_FlyBack_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

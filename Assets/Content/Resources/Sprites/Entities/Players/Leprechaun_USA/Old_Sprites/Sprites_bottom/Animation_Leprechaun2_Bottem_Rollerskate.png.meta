@@ -1,6 +1,27 @@
 fileFormatVersion: 2
 guid: 45168e7cd2d30514b95d4a854378a7a9
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Bottem_Rollerskate_0
+    21300002: Animation_Leprechaun2_Bottem_Rollerskate_1
+    21300004: Animation_Leprechaun2_Bottem_Rollerskate_2
+    21300006: Animation_Leprechaun2_Bottem_Rollerskate_3
+    21300008: Animation_Leprechaun2_Bottem_Rollerskate_4
+    21300010: Animation_Leprechaun2_Bottem_Rollerskate_5
+    21300012: Animation_Leprechaun2_Bottem_Rollerskate_6
+    21300014: Animation_Leprechaun2_Bottem_Rollerskate_7
+    21300016: Animation_Leprechaun2_Bottem_Rollerskate_8
+    21300018: Animation_Leprechaun2_Bottem_Rollerskate_9
+    21300020: Animation_Leprechaun2_Bottem_Rollerskate_10
+    21300022: Animation_Leprechaun2_Bottem_Rollerskate_11
+    21300024: Animation_Leprechaun2_Bottem_Rollerskate_12
+    21300026: Animation_Leprechaun2_Bottem_Rollerskate_13
+    21300028: Animation_Leprechaun2_Bottem_Rollerskate_14
+    21300030: Animation_Leprechaun2_Bottem_Rollerskate_15
+    21300032: Animation_Leprechaun2_Bottem_Rollerskate_16
+    21300034: Animation_Leprechaun2_Bottem_Rollerskate_17
+    21300036: Animation_Leprechaun2_Bottem_Rollerskate_18
+    21300038: Animation_Leprechaun2_Bottem_Rollerskate_19
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

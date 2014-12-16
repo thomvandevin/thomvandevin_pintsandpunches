@@ -1,6 +1,15 @@
 fileFormatVersion: 2
 guid: 3b60b8e1ed8295f4a9c8d0043f35b887
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Pickup_Drink_Cider_0
+    21300002: Pickup_Drink_Cider_1
+    21300004: Pickup_Drink_Cider_2
+    21300006: Pickup_Drink_Cider_3
+    21300008: Pickup_Drink_Cider_4
+    21300010: Pickup_Drink_Cider_5
+    21300012: Pickup_Drink_Cider_6
+    21300014: Pickup_Drink_Cider_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

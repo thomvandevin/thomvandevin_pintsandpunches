@@ -169,7 +169,7 @@ public class Entity : MonoBehaviour {
         if (health <= 0)
             isDead = true;
 
-        healthHud.SetHealth((float)health);
+        healthHud.SetHealth(health);
 
         //if (GamePad.GetButtonDown(GamePad.Button.Back, gamePadIndex))
         //{
@@ -451,8 +451,7 @@ public class Entity : MonoBehaviour {
         else if (IsDead && deathCounter == 2)
         {
             RespawnButton();
-            Camera.main.GetComponent<AdvancedCamera>().ZoomWithDelay (new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), .2f);
-        
+            Camera.main.GetComponent<AdvancedCamera>().ZoomWithDelay (new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), .1f);        
             deathCounter++;
         }
         else if (IsDead && deathCounter == 3)
@@ -580,7 +579,7 @@ public class Entity : MonoBehaviour {
         if (health < 0)
             health = 0;
         
-        healthHud.SetHealth((float)health);
+        healthHud.SetHealth(health);
     }
 
     public void Dash()

@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 68cbb66737a2f074ba4ed121f2020bdd
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Idle_Hit2_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

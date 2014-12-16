@@ -1,6 +1,15 @@
 fileFormatVersion: 2
 guid: ca9a6bb68812e2b49aad36db6bba2007
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_0
+    21300002: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_1
+    21300004: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_2
+    21300006: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_3
+    21300008: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_4
+    21300010: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_5
+    21300012: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_6
+    21300014: Animation_Leprechaun2_Top_Idle_Drink_Cider_Success_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

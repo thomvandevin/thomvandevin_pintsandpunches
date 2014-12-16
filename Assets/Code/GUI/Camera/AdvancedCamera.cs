@@ -121,13 +121,13 @@ public class AdvancedCamera : MonoBehaviour
         previousPosition = currentPosition;
         previousScale = currentScale;
 
-        newPosition = currentPosition;
+        //newPosition = currentPosition;
         newScale = 3;
         zoomTimer = 0;
 
         Toggle(false);
         zoomIn = true;
-        zoomHold = true;
+        //zoomHold = true;
 
         SleepOn();
     }

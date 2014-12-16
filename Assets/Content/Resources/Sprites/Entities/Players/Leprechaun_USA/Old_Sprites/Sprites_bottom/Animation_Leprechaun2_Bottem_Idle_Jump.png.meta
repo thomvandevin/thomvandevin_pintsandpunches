@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: 0cadfdee06e00cb478ce41ff2ddc4bdc
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Bottem_Idle_Jump_0
+    21300002: Animation_Leprechaun2_Bottem_Idle_Jump_1
+    21300004: Animation_Leprechaun2_Bottem_Idle_Jump_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

@@ -1,6 +1,15 @@
 fileFormatVersion: 2
 guid: 5deb11fd5d1043f4f80121650bc8b834
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Level_Pubcounter_Barkeep_0
+    21300002: Level_Pubcounter_Barkeep_1
+    21300004: Level_Pubcounter_Barkeep_2
+    21300006: Level_Pubcounter_Barkeep_3
+    21300008: Level_Pubcounter_Barkeep_4
+    21300010: Level_Pubcounter_Barkeep_5
+    21300012: Level_Pubcounter_Barkeep_6
+    21300014: Level_Pubcounter_Barkeep_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

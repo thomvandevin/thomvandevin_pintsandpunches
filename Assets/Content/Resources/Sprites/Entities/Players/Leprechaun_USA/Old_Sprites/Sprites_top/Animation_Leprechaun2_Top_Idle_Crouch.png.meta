@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 18efb87bfefb8d344b8ab8d6a15e24c9
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Idle_Crouch_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

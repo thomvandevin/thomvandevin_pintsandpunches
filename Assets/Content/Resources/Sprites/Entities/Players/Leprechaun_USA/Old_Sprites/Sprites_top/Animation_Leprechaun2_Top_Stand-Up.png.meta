@@ -1,6 +1,15 @@
 fileFormatVersion: 2
 guid: faed2083c0d61a74cb98a9050e244af4
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Top_Stand-Up_0
+    21300002: Animation_Leprechaun2_Top_Stand-Up_1
+    21300004: Animation_Leprechaun2_Top_Stand-Up_2
+    21300006: Animation_Leprechaun2_Top_Stand-Up_3
+    21300008: Animation_Leprechaun2_Top_Stand-Up_4
+    21300010: Animation_Leprechaun2_Top_Stand-Up_5
+    21300012: Animation_Leprechaun2_Top_Stand-Up_6
+    21300014: Animation_Leprechaun2_Top_Stand-Up_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

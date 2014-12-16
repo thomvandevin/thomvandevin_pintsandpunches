@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: 508a3b00b0861b64aa7adc51a77218f5
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Bottem_Drink_Stout_Loop_0
+    21300002: Animation_Leprechaun2_Bottem_Drink_Stout_Loop_1
+    21300004: Animation_Leprechaun2_Bottem_Drink_Stout_Loop_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

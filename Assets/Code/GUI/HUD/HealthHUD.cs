@@ -45,8 +45,8 @@ public class HealthHUD : MonoBehaviour {
 
     }
 
-    public void SetHealth(float health)
+    public void SetHealth(int health)
     {
-        anim.SetFloat("Health", health);
+        anim.SetInteger("Health", health);
     }
 }

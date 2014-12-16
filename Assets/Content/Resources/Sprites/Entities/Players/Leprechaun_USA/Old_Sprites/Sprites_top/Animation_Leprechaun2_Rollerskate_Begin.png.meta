@@ -1,6 +1,12 @@
 fileFormatVersion: 2
 guid: 84cb48a621e72764e9ec0a384206595a
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Rollerskate_Begin_0
+    21300002: Animation_Leprechaun2_Rollerskate_Begin_1
+    21300004: Animation_Leprechaun2_Rollerskate_Begin_2
+    21300006: Animation_Leprechaun2_Rollerskate_Begin_3
+    21300008: Animation_Leprechaun2_Rollerskate_Begin_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

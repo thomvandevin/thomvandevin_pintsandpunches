@@ -44,7 +44,8 @@ public class GameElementManager : MonoBehaviour {
             if (bigEventTimer < bigEventMaxTimer)
                 bigEventTimer++;
             else if (bigEventTimer >= bigEventMaxTimer)
-                BigEvent();
+            { }
+                //BigEvent();
         } else
         {
             UpdateBigEvent();

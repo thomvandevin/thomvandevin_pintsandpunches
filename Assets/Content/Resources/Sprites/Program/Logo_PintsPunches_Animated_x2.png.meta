@@ -1,6 +1,16 @@
 fileFormatVersion: 2
 guid: ad7dc1536dbcb1248ba9d43877e63591
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Logo_PintsPunches_Animated_x2_0
+    21300002: Logo_PintsPunches_Animated_x2_1
+    21300004: Logo_PintsPunches_Animated_x2_2
+    21300006: Logo_PintsPunches_Animated_x2_3
+    21300008: Logo_PintsPunches_Animated_x2_4
+    21300010: Logo_PintsPunches_Animated_x2_5
+    21300012: Logo_PintsPunches_Animated_x2_6
+    21300014: Logo_PintsPunches_Animated_x2_7
+    21300016: Logo_PintsPunches_Animated_x2_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

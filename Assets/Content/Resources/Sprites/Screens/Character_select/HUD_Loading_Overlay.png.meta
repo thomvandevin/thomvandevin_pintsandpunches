@@ -1,6 +1,13 @@
 fileFormatVersion: 2
 guid: 1e8b4e2ee8791e24bb868b80c298ee5f
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: HUD_Loading_Overlay_0
+    21300002: HUD_Loading_Overlay_1
+    21300004: HUD_Loading_Overlay_2
+    21300006: HUD_Loading_Overlay_3
+    21300008: HUD_Loading_Overlay_4
+    21300010: HUD_Loading_Overlay_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

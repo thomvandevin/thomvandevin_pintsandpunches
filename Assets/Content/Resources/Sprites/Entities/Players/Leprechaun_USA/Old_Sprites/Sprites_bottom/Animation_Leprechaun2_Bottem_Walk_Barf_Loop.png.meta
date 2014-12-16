@@ -1,6 +1,13 @@
 fileFormatVersion: 2
 guid: 44d1bc8f574f39a42aa2a096177f3af7
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Animation_Leprechaun2_Bottem_Walk_Barf_Loop_0
+    21300002: Animation_Leprechaun2_Bottem_Walk_Barf_Loop_1
+    21300004: Animation_Leprechaun2_Bottem_Walk_Barf_Loop_2
+    21300006: Animation_Leprechaun2_Bottem_Walk_Barf_Loop_3
+    21300008: Animation_Leprechaun2_Bottem_Walk_Barf_Loop_4
+    21300010: Animation_Leprechaun2_Bottem_Walk_Barf_Loop_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
