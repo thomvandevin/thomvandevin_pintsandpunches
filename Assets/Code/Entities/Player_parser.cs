@@ -7,6 +7,7 @@ public class Player_parser : MonoBehaviour {
     public Player.Character character;
     public bool mpu = false;
     public string com;
+    public GameObject punchBag;
 
     private Player p;
 
@@ -25,6 +26,9 @@ public class Player_parser : MonoBehaviour {
         p.gameObject.layer = 7 + controllerNumber;
         p.gameObject.name = "Player " + controllerNumber.ToString();
         Global.players.Add(p.gameObject);
+
+        p.usePunchbag = true;
+        p.punchBag = punchBag;
 	}
 	
 	// Update is called once per frame

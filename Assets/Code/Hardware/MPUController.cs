@@ -20,7 +20,7 @@ public class MPUController : MonoBehaviour {
     
     private GameObject hardware;
     private MPUInputCollector mpuData;
-    private float thresholdX = .5f;
+    private float thresholdX = .35f;
     private float thresholdY = .65f;
     private float thresholdZ = .5f;
 

@@ -43,9 +43,11 @@ public class Player : MonoBehaviour
     public HealthHUD healthHUDScript;
     public MPUController mpuController;
 
+    public bool usePunchbag = false;
+    public GameObject punchBag;
+
     public Player()
     {
-
     }
 
     public void SetPlayer(int controlNumber, Character chosenChar, bool mpu, string com)

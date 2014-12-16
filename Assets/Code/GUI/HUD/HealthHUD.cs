@@ -12,7 +12,6 @@ public class HealthHUD : MonoBehaviour {
         sprite = gameObject.GetComponent<SpriteRenderer>();
         anim = gameObject.GetComponent<Animator>();
 
-        print("done");
 	}
 	
 	// Update is called once per frame

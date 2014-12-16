@@ -151,7 +151,6 @@ public class Entity : MonoBehaviour {
         this.mpuController = playerScript.mpuController;
         
         SetDictionary();
-        print(useMpu);
     }
 
     public void SetDictionary()
@@ -187,10 +186,20 @@ public class Entity : MonoBehaviour {
         {
             #region ATTACKING CODE
 
+
             if ((GamePad.GetButtonDown(GamePad.Button.X, gamePadIndex) ||
                 (useMpu && mpuController.GetDigitalPressed(9)))
                 && onGround && !isDrinking)
             {
+                if (playerScript.usePunchbag)
+                {
+                    if (punchCheck.collider2D.bounds.Intersects(playerScript.punchBag.GetComponent<BoxCollider2D>().bounds))
+                    {
+                        playerScript.punchBag.GetComponent<Punchbag>().Hit(gameObject.transform.position);
+                        print("check");
+                    }
+                }
+
                 foreach (GameObject d in Global.drinks.ToArray())
                 {
                     Drink drinkScript = d.GetComponent<Drink>();
